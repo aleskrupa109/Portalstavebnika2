@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portál stavebníka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: white;
+            color: #1a1a1a;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HLAVIČKA ===== */
+        .header {
+            background: white;
+            padding: 12px 40px;
+            flex-shrink: 0;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header-logo {
+            height: 36px;
+            width: auto;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2362a2;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* ===== HERO SEKCE ===== */
+        .hero-card {
+            background: linear-gradient(135deg, #2362a2 0%, #1a5a9e 40%, #1a4a7a 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            align-items: stretch;
+            min-height: 200px;
+            flex-shrink: 0;
+        }
+
+        .hero-content {
+            flex: 0 0 55%;
+            padding: 32px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 500;
+            color: white;
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+
+        .hero-subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            max-width: 360px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn-login {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            background: #f5a623;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+        }
+
+        .btn-login:hover {
+            background: #e6950f;
+            transform: translateY(-1px);
+        }
+
+        .btn-login svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-help {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .btn-help:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-image-container {
+            flex: 0 0 45%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .hero-image {
+            position: relative;
+            right: -20px;
+            width: auto;
+            height: 100%;
+            max-height: 220px;
+            object-fit: contain;
+        }
+
+        /* ===== UPOZORNĚNÍ ===== */
+        .alert {
+            margin: 16px 0;
+            flex-shrink: 0;
+        }
+
+        .alert-box {
+            background: #FCCCCC;
+            border-radius: 8px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-icon {
+            flex-shrink: 0;
+        }
+
+        .alert-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: #d84315;
+        }
+
+        .alert-text {
+            font-size: 13px;
+            color: #333;
+        }
+
+        /* ===== FEATURES SEKCE ===== */
+        .features {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .features-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 14px;
+            flex-shrink: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .feature-card {
+            border-radius: 12px;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .feature-card.large {
+            grid-row: span 2;
+            background: linear-gradient(180deg, #E5EEF9 0%, #FBECED 100%);
+        }
+
+        .feature-card.orange {
+            background: linear-gradient(180deg, #E5EEF9 0%, #FBECED 100%);
+        }
+
+        .feature-card.peach {
+            background: linear-gradient(180deg, #E5EEF9 0%, #FBECED 100%);
+        }
+
+        .feature-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            flex: 1;
+        }
+
+        .feature-card .link {
+            display: inline-block;
+            color: #2362a2;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: auto;
+        }
+
+        .feature-card .link:hover {
+            text-decoration: underline;
+        }
+
+        .feature-image {
+            margin: 12px 0;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 0;
+        }
+
+        .feature-image img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            object-fit: contain;
+        }
+
+        /* Carousel dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 10px;
+            flex-shrink: 0;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #c5d5e5;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .carousel-dot.active {
+            background: #2362a2;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #555;
+            padding: 12px 0;
+            flex-shrink: 0;
+        }
+
+        .footer-line {
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            html, body {
+                overflow: auto;
+            }
+            .hero-card {
+                flex-direction: column;
+            }
+            .hero-content {
+                flex: none;
+                padding: 24px;
+            }
+            .hero-image-container {
+                flex: none;
+                height: 180px;
+            }
+            .hero-image {
+                right: 0;
+                width: 100%;
+                height: auto;
+                max-height: none;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-card.large {
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-height: 800px) {
+            .hero-content {
+                padding: 24px 32px;
+            }
+            .hero-title {
+                font-size: 28px;
+            }
+            .hero-subtitle {
+                font-size: 14px;
+                margin-bottom: 16px;
+            }
+            .feature-card {
+                padding: 16px 20px;
+            }
+            .feature-card h3 {
+                font-size: 14px;
+                margin-bottom: 6px;
+            }
+            .feature-card p {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hlavička -->
+    <header class="header">
+        <div class="header-content">
+            <img src="images/logo-lev.png" alt="Státní znak" class="header-logo">
+            <span class="header-title">Portál stavebníka 1.1</span>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <!-- Hero sekce -->
+        <div class="hero-card">
+            <div class="hero-content">
+                <h1 class="hero-title">Přehledně a digitálně</h1>
+                <p class="hero-subtitle">Vše pro váš stavební záměr a komunikaci s úřady na jednom místě.</p>
+                <div class="hero-actions">
+                    <a href="pages/reza_implicitni.html" class="btn-login">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                        Přihlásit se Identitou občana
+                    </a>
+                    <a href="https://chcidatovku.gov.cz/identita-obcana" target="_blank" class="btn-help" title="Nevím, jak se přihlásit">?</a>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <img src="images/hero-image.png" alt="Stavební plány na tabletu" class="hero-image">
+            </div>
+        </div>
+
+        <!-- Upozornění -->
+        <div class="alert">
+            <div class="alert-box">
+                <span class="alert-icon">
+                    <svg viewBox="0 0 16 16">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg>
+                </span>
+                <span class="alert-text">Verze Portálu stavebníka 1.1 s administrací a aplikací REZA, novou strukturou dokumentace a dokladové části a hromadnou žádostí na DO.</span>
+            </div>
+        </div>
+
+        <!-- Features sekce -->
+        <section class="features">
+            <h2 class="features-title">Co nabízí Portál stavebníka 1.1?</h2>
+            
+            <div class="features-grid">
+                <!-- Levá velká karta -->
+                <div class="feature-card large">
+                    <h3>Vyzkoušejte si administraci a fungování REZA</h3>
+                    <p>Po simulovaném přihlášení vyberete pro uživatele postavení, ve kterém bude dál pokračovat na Portálu stavebníka. Jeho dostupná postavení načte implicitní REZA z rejstříků. Podle vybraného postavení se následně zobrazí přehled záměrů, ke kterým má uživatel přístup jako jejich vlastník, zástupce či pověřená osoba.
+                    Postavení je možné měnit (vpravo nahoře) a tím se mění i zobrazované záměry.
+                    Pod volbou PLNÉ MOCI v horizontálním menu se skrývá kompletní administrace plných mocí - založení, žádost o PM, správa obdržených a udělených PM.</p>
+                    
+                    <div class="feature-image">
+                        <img src="images/portal-screenshot.png" alt="Ukázka Portálu stavebníka">
+                        <div class="carousel-dots">
+                            <span class="carousel-dot active"></span>
+                            <span class="carousel-dot"></span>
+                            <span class="carousel-dot"></span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="link">Pokračujte na další simulace funkcí Portál stavebníka 1.1</a>
+                </div>
+
+                <!-- Pravá horní karta -->
+                <div class="feature-card orange">
+                    <h3>Volba Nová žádost</h3>
+                    <p>Vyzkoušejte krok Identifikace osoby, která Vás provede určením role, kterou přihlášení uživatel ve svém zvoleném postavení v procesu zadávání žádosti má. Proces simuluje jak použití REZA (načtení plných mocí), tak postup s použitím papírové plné moci.</p>
+                    <a href="#" class="link">Pokračujte výběrem žádosti Povolení stavby</a>
+                </div>
+
+                <!-- Pravá dolní karta -->
+                <div class="feature-card peach">
+                    <h3>Žádost Povolení stavby</h3>
+                    <p>V žádosti je na základě předchozích kroků již identifikovaný žadatel. Následně vyzkoušejte nahrát novou strukturu dokumentace (včetně vložení složek) a dokladové části.
+                    Zkuste znovu Novou žádost, tentokrát žádost o závazné stanovisko DO.</p>
+                    <a href="#" class="link">Zkuste žádost Stanoviska DO</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-line"></div>
+    </footer>
+</body>
+</html>
