@@ -81,7 +81,7 @@
         .gov-main { flex: 1; min-width: 0; }
         .gov-sidebar { width: 320px; flex-shrink: 0; position: sticky; top: 120px; }
 
-        /* ===== SIDEBAR ===== */
+        /* ===== SIDEBAR SUMMARY ===== */
         .gov-summary { background: #fff; border-radius: var(--gov-radius-lg); padding: 20px; }
         .gov-summary-title { font-size: 13px; font-weight: 600; color: var(--gov-primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
         .gov-summary-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--gov-neutral-100); font-size: 13px; }
@@ -537,77 +537,6 @@
   line-height: 1.5;
 }
 /* ===== STEPPER ===== */
-.gov-stepper {
-  position: sticky;
-  top: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 16px 20px;
-  background: var(--gov-neutral-0);
-  border: 1px solid var(--gov-neutral-100);
-  border-radius: var(--gov-radius-lg);
-  min-width: 200px;
-}
-.gov-stepper-item {
-  display: flex;
-  gap: 12px;
-  padding: 12px 0;
-  position: relative;
-}
-.gov-stepper-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: 13px;
-  top: 36px;
-  bottom: -12px;
-  width: 2px;
-  background: var(--gov-neutral-200);
-}
-.gov-stepper-item.completed:not(:last-child)::after {
-  background: var(--gov-primary-600);
-}
-.gov-stepper-number {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  background: var(--gov-neutral-100);
-  color: var(--gov-neutral-500);
-  flex-shrink: 0;
-  position: relative;
-  z-index: 1;
-}
-.gov-stepper-item.active .gov-stepper-number {
-  background: var(--gov-primary-600);
-  color: var(--gov-neutral-0);
-}
-.gov-stepper-item.completed .gov-stepper-number {
-  background: var(--gov-primary-600);
-  color: var(--gov-neutral-0);
-}
-.gov-stepper-content {
-  padding-top: 4px;
-}
-.gov-stepper-title {
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  color: var(--gov-neutral-500);
-  margin: 0;
-}
-.gov-stepper-item.active .gov-stepper-title,
-.gov-stepper-item.completed .gov-stepper-title {
-  color: var(--gov-neutral-900);
-}
-.gov-stepper-desc {
-  font-size: 11px !important;
-  color: var(--gov-neutral-400);
-  margin-top: 2px;
-}
 /* ===== BUTTONS ===== */
 .gov-btn {
   padding: 12px 24px;
@@ -1818,51 +1747,6 @@
         </div>
       </div>
     </div>
-    <!-- Stepper -->
-    <div class="gov-stepper">
-      <div class="completed gov-stepper-item">
-        <div class="gov-stepper-number">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" style="width:16px;height:16px">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-          </svg>
-        </div>
-        <div class="gov-stepper-content">
-          <p class="gov-stepper-title">Identifikace osoby</p>
-          <p class="gov-stepper-desc">Zástupce stavebníka</p>
-        </div>
-      </div>
-      <div class="completed gov-stepper-item">
-        <div class="gov-stepper-number">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" style="width:16px;height:16px">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-          </svg>
-        </div>
-        <div class="gov-stepper-content">
-          <p class="gov-stepper-title">Typ stavby</p>
-          <p class="gov-stepper-desc">Rodinný dům</p>
-        </div>
-      </div>
-      <div class="completed gov-stepper-item">
-        <div class="gov-stepper-number">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" style="width:16px;height:16px">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-          </svg>
-        </div>
-        <div class="gov-stepper-content">
-          <p class="gov-stepper-title">Pozemky a subjekty</p>
-          <p class="gov-stepper-desc">7 parcel, 14 subjektů</p>
-        </div>
-      </div>
-      <div class="active gov-stepper-item">
-        <div class="gov-stepper-number">4</div>
-        <div class="gov-stepper-content">
-          <p class="gov-stepper-title">Shrnutí</p>
-          <p class="gov-stepper-desc">Kontrola a potvrzení</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Save Draft Bar -->
 <div class="save-draft-bar">
   <div class="save-draft-content">
