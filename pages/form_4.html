@@ -89,6 +89,69 @@
         .gov-summary-label { color: var(--gov-neutral-500); }
         .gov-summary-value { color: var(--gov-neutral-900); font-weight: 500; text-align: right; max-width: 180px; }
 
+        
+        /* ===== CONTACT SECTION ===== */
+        .gov-contact-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gov-neutral-100);
+        }
+        .gov-contact-title {
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            color: var(--gov-neutral-900);
+            margin: 0 0 8px 0;
+        }
+        .gov-contact-desc {
+            font-size: 13px !important;
+            color: var(--gov-neutral-500);
+            margin: 0 0 16px 0;
+        }
+        .gov-contact-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .gov-contact-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .gov-contact-label {
+            font-size: 13px !important;
+            font-weight: 500 !important;
+            color: var(--gov-neutral-700);
+        }
+        .gov-contact-input {
+            padding: 10px 12px;
+            font-size: 14px !important;
+            font-family: var(--gov-font) !important;
+            border: 1px solid var(--gov-neutral-200);
+            border-radius: var(--gov-radius);
+            background: #fff;
+            color: var(--gov-neutral-900);
+            width: 100%;
+            transition: border-color 0.2s;
+        }
+        .gov-contact-input:focus {
+            outline: none;
+            border-color: var(--gov-primary-600);
+            box-shadow: 0 0 0 3px rgba(35, 98, 162, 0.1);
+        }
+        .gov-contact-input::placeholder {
+            color: var(--gov-neutral-400);
+        }
+        .gov-contact-hint {
+            font-size: 12px !important;
+            color: var(--gov-neutral-400);
+            margin-top: 4px;
+        }
+        .gov-contact-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
         /* ===== FORM_4 SPECIFIC STYLES ===== */
 /* ===== ZÁMĚR NUMBER BADGE ===== */
 .gov-zamer-number {
@@ -1689,6 +1752,8 @@
               <select id="obec" class="gov-input gov-select" onchange="loadKatastry()">
                 <option value="">Vyberte obec</option>
                 <option value="538094">Radonice</option>
+                <option value="554782">Praha</option>
+                <option value="532053">Lysá nad Labem</option>
               </select>
             </div>
             <div class="gov-form-group">
@@ -2121,19 +2186,19 @@
         
         <!-- Tabs pro výběr způsobu zadání -->
         <div class="gov-tabs">
-          <button type="button" class="active gov-tab" data-tab="sousedni-manual" onclick="switchTab('sousedni-manual')">
+          <button type="button" class="active gov-tab" data-tab="sousedni-manual" onclick="switchSousedniTab('manual')">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
             </svg>
             Ruční zadání
           </button>
-          <button type="button" class="gov-tab" data-tab="sousedni-csv" onclick="switchTab('sousedni-csv')">
+          <button type="button" class="gov-tab" data-tab="sousedni-csv" onclick="switchSousedniTab('csv')">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
             Import CSV
           </button>
-          <button type="button" class="gov-tab" data-tab="sousedni-map" onclick="switchTab('sousedni-map')">
+          <button type="button" class="gov-tab" data-tab="sousedni-map" onclick="switchSousedniTab('map')">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
             </svg>
@@ -2148,6 +2213,8 @@
               <select id="sousedniObec" class="gov-input gov-select" onchange="loadSousedniKatastry()">
                 <option value="">Vyberte obec</option>
                 <option value="538094">Radonice</option>
+                <option value="554782">Praha</option>
+                <option value="532053">Lysá nad Labem</option>
               </select>
             </div>
             <div class="gov-form-group">
@@ -4515,9 +4582,12 @@ var availableParcels = {
 };
 // Aktualizace dropdownů při změně druhu parcely
 function updateParcelyDropdowns() {
+  var druhSelect = document.getElementById('druhParcely');
   var cisloSelect = document.getElementById('parcelaCislo');
   var podlomeniSelect = document.getElementById('parcelaPodlomeni');
   
+  // Reset všech dropdownů
+  druhSelect.value = '';
   cisloSelect.innerHTML = '<option value="">Vyberte číslo</option>';
   podlomeniSelect.innerHTML = '<option value="">—</option>';
 }
@@ -4786,18 +4856,45 @@ function addSousedniParcel() {
 }
 // Přepínání tabů
 function switchTab(tabId) {
-  // Deaktivovat všechny taby
-  document.querySelectorAll('.gov-tab').forEach(function(tab) {
-    tab.classList.remove('active');
-  });
-  document.querySelectorAll('.gov-tab-content').forEach(function(content) {
-    content.classList.remove('active');
-  });
+  // Deaktivovat všechny taby v sekci pozemků
+  var section = document.getElementById('sectionPozemky');
+  if (section) {
+    section.querySelectorAll('.gov-tab').forEach(function(tab) {
+      tab.classList.remove('active');
+    });
+    section.querySelectorAll('.gov-tab-content').forEach(function(content) {
+      content.classList.remove('active');
+    });
+  }
   
   // Aktivovat vybraný tab
-  document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
-  document.getElementById('tab-' + tabId).classList.add('active');
+  var tabBtn = document.querySelector('#sectionPozemky [data-tab="' + tabId + '"]');
+  var tabContent = document.getElementById('tab-' + tabId);
+  
+  if (tabBtn) tabBtn.classList.add('active');
+  if (tabContent) tabContent.classList.add('active');
 }
+
+// Přepínání tabů pro sousední pozemky
+function switchSousedniTab(tabId) {
+  var section = document.getElementById('sectionSousedni');
+  if (section) {
+    section.querySelectorAll('.gov-tab').forEach(function(tab) {
+      tab.classList.remove('active');
+    });
+    section.querySelectorAll('.gov-tab-content').forEach(function(content) {
+      content.classList.remove('active');
+    });
+  }
+  
+  // Hledat tab s data-tab="sousedni-{tabId}"
+  var tabBtn = document.querySelector('#sectionSousedni [data-tab="sousedni-' + tabId + '"]');
+  var tabContent = document.getElementById('tab-sousedni-' + tabId);
+  
+  if (tabBtn) tabBtn.classList.add('active');
+  if (tabContent) tabContent.classList.add('active');
+}
+
 // Přepínání vrstev TI/DI na mapě
 function toggleLayer(layerId, show) {
   var layer = document.getElementById('layer' + layerId);
@@ -5218,7 +5315,7 @@ function confirmStep1() {
       }
       
       // Přepnout na tab "Ruční zadání" jako výchozí
-      switchTab('sousedni-manual');
+      switchSousedniTab('manual');
       
       // Scrollovat k sekci
       setTimeout(function() {
@@ -5455,7 +5552,7 @@ function handleSousedniCsvUpload(input) {
     
     renderSousedniParcels();
     alert('Importováno ' + imported + ' sousedních parcel');
-    switchTab('sousedni-manual');
+    switchSousedniTab('manual');
   };
   reader.readAsText(file);
 }
@@ -6402,7 +6499,7 @@ function expandSection(sectionId) {
     defaultTab = 'manual';
   } else if (sectionId === 'sectionSousedni') {
     summaryId = 'sousedniSummary';
-    defaultTab = 'sousedni-manual';
+    defaultTab = 'manual';
   }
   
   var summaryEl = document.getElementById(summaryId);
@@ -6412,7 +6509,11 @@ function expandSection(sectionId) {
   
   // Přepnout na výchozí tab (Ruční zadání)
   if (defaultTab) {
-    switchTab(defaultTab);
+    if (sectionId === 'sectionSousedni') {
+      switchSousedniTab('manual');
+    } else {
+      switchTab(defaultTab);
+    }
   }
   
   // Scroll k sekci s malým zpožděním pro jistotu renderingu
@@ -6745,13 +6846,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Při přepnutí na mapu sousedních - aktualizovat zobrazení pozemků záměru
-  var originalSwitchTab = window.switchTab;
-  if (originalSwitchTab) {
-    window.switchTab = function(tabId) {
-      originalSwitchTab(tabId);
+  var originalSwitchSousedniTab = window.switchSousedniTab;
+  if (originalSwitchSousedniTab) {
+    window.switchSousedniTab = function(tabId) {
+      originalSwitchSousedniTab(tabId);
       
       // Aktualizovat mapu sousedních s vybranými pozemky záměru
-      if (tabId === 'sousedni-map') {
+      if (tabId === 'map') {
         updateSousedniMapWithZamerParcels();
       }
     };
