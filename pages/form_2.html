@@ -3,352 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dokumentace | Žádost o povolení stavby | Portál stavebníka</title>
+    <title>Kategorie záměru | Portál stavebníka 2.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gov-primary: #2c5a8c;
-            --gov-primary-light: #3a7ab8;
-            --gov-primary-700: #1e5086;
-            --gov-primary-100: #e5eef9;
-            --gov-primary-50: #f3f7fc;
-            --gov-text-light: #ffffff;
-            --gov-neutral-0: #ffffff;
-            --gov-neutral-50: #f6f6f6;
-            --gov-neutral-100: #e7e7e7;
-            --gov-neutral-200: #d1d1d1;
-            --gov-neutral-300: #b0b0b0;
-            --gov-neutral-400: #888888;
-            --gov-neutral-500: #6d6d6d;
-            --gov-neutral-600: #5a5a5a;
-            --gov-neutral-700: #4f4f4f;
-            --gov-neutral-900: #3b3b3b;
-            --gov-success-600: #2e7d32;
-            --gov-success-100: #e2f6e3;
-            --gov-success-50: #f0faf0;
-            --gov-warning-600: #ca8504;
-            --gov-warning-100: #fef7c3;
-            --gov-warning-50: #fffbeb;
-            --gov-error-600: #c62828;
-            --gov-error-100: #fee2e2;
-            --gov-radius: 4px;
-            --gov-radius-lg: 8px;
-            --gov-font: 'Roboto', sans-serif;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--gov-font); background: var(--gov-neutral-50); color: var(--gov-neutral-900); line-height: 1.5; }
-
-        /* ===== HEADER ===== */
-        .gov-header { background: var(--gov-primary); position: sticky; top: 0; z-index: 1000; }
+        .gov-header { background: #2c5a8c; position: sticky; top: 0; z-index: 1000; }
         .gov-header-top { padding: 14px 40px; }
         .gov-header-top-content { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .gov-header-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--gov-text-light); }
+        .gov-header-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; }
         .gov-header-logo { height: 38px; width: auto; }
-        .gov-header-title { font-size: 18px; font-weight: 400; }
+        .gov-header-title { font-size: 18px; font-weight: 400; color: #fff; }
         .gov-header-user { position: relative; }
-        .gov-header-user-btn { display: flex; align-items: center; gap: 10px; padding: 8px 16px; background: transparent; border: 1px solid rgba(255,255,255,0.5); border-radius: 4px; color: #fff; font-size: 13px; cursor: pointer; font-family: var(--gov-font); }
-        .gov-header-user-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.8); }
-        .gov-header-user-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-        .gov-header-user-btn .chevron { width: 12px; height: 12px; transition: transform 0.2s ease; }
-        .gov-header-user-btn.active .chevron { transform: rotate(180deg); }
+        .gov-header-user-btn { display: flex; align-items: center; gap: 10px; padding: 8px 16px; background: transparent; border: 1px solid rgba(255,255,255,0.5); border-radius: 4px; color: #fff; font-size: 13px; cursor: pointer; }
+        .gov-header-user-btn:hover { background: rgba(255,255,255,0.1); }
+        .gov-header-user-btn svg.user-icon { width: 18px; height: 18px; }
+        .gov-header-user-btn .chevron { width: 12px; height: 12px; }
         .gov-header-user-info { display: flex; flex-direction: column; line-height: 1.25; text-align: left; }
         .gov-header-user-name { font-weight: 500; font-size: 13px; }
         .gov-header-user-detail { font-size: 11px; opacity: 0.85; }
-        
-        .gov-header-user-dropdown { position: absolute; top: calc(100% + 8px); right: 0; min-width: 280px; background: white; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s ease; z-index: 100; }
-        .gov-header-user-dropdown.show { opacity: 1; visibility: visible; transform: translateY(0); }
-        .gov-header-user-dropdown-header { padding: 16px; border-bottom: 1px solid #eee; background: #f9fafb; border-radius: 8px 8px 0 0; }
+        .gov-header-user-dropdown { position: absolute; top: calc(100% + 8px); right: 0; min-width: 280px; background: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; z-index: 100; }
+        .gov-header-user-dropdown.show { opacity: 1; visibility: visible; }
+        .gov-header-user-dropdown-header { padding: 16px; border-bottom: 1px solid #eee; background: #f9fafb; }
         .gov-header-user-dropdown-name { font-weight: 600; color: #1a1a1a; font-size: 14px; }
-        .gov-header-user-dropdown-detail { font-size: 12px; color: #666; margin-top: 2px; }
-        .gov-header-user-dropdown-badge { display: inline-block; background: #e8f4fc; color: #2362a2; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; margin-top: 6px; }
-        .gov-header-user-dropdown a { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #333; text-decoration: none; font-size: 14px; transition: background 0.15s ease; }
-        .gov-header-user-dropdown a:last-child { border-radius: 0 0 8px 8px; border-top: 1px solid #eee; color: #c53030; }
+        .gov-header-user-dropdown-detail { font-size: 12px; color: #666; }
+        .gov-header-user-dropdown-badge { display: inline-block; background: #e8f4fc; color: #2362a2; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-top: 6px; }
+        .gov-header-user-dropdown a { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #333; text-decoration: none; font-size: 14px; }
+        .gov-header-user-dropdown a:last-child { border-top: 1px solid #eee; color: #c53030; }
         .gov-header-user-dropdown a:hover { background: #f5f7fa; }
         .gov-header-user-dropdown svg { width: 18px; height: 18px; color: #666; }
         .gov-header-user-dropdown a:last-child svg { color: #c53030; }
-
         .gov-header-nav { padding: 0 40px; }
-        .gov-header-nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; }
-        .gov-nav-menu { display: flex; list-style: none; }
-        .gov-nav-link {
-            position: relative; display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-top: 3px solid transparent; }
+        .gov-header-nav-content { max-width: 1400px; margin: 0 auto; display: flex; }
+        .gov-nav-menu { display: flex; list-style: none; margin: 0; padding: 0; }
+        .gov-nav-link { display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; border-top: 3px solid transparent; }
         .gov-nav-link:hover { background: rgba(255,255,255,0.1); }
-        .gov-nav-link.active { border-top-color: #fff; }
-        .gov-nav-link.disabled { color: rgba(255, 255, 255, 0.4); cursor: default; pointer-events: none; }
-        .gov-nav-link[data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #1a1a2e; color: #fff; padding: 10px 14px; border-radius: 6px; font-size: 12px; font-weight: 400; text-transform: none; letter-spacing: 0; white-space: normal; width: 280px; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-top: 8px; }
-        .gov-nav-link[data-tooltip]:hover::before { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-bottom-color: #1a1a2e; margin-top: -4px; z-index: 1001; }
-        .gov-nav-cta { display: flex; align-items: center; gap: 8px; padding: 8px 16px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; position: relative; }
-        .gov-nav-cta svg { width: 18px; height: 18px; }
-        .gov-nav-cta[data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; top: 100%; right: 0; background: #1a1a2e; color: #fff; padding: 10px 14px; border-radius: 6px; font-size: 12px; font-weight: 400; text-transform: none; letter-spacing: 0; white-space: normal; width: 320px; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-top: 8px; }
-        .gov-nav-cta[data-tooltip]:hover::before { content: ''; position: absolute; top: 100%; right: 20px; border: 6px solid transparent; border-bottom-color: #1a1a2e; margin-top: -4px; z-index: 1001; }
-
-        /* ===== PAGE ===== */
-        .gov-page { max-width: 1400px; margin: 0 auto; padding: 32px 40px; }
-        .gov-page-header { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--gov-neutral-200); }
-        .gov-page-title { font-size: 26px; font-weight: 500; margin-bottom: 12px; }
-        .gov-page-subtitle { font-size: 14px; color: var(--gov-neutral-500); line-height: 1.6; max-width: 700px; }
-        .gov-layout { display: flex; gap: 40px; align-items: flex-start; }
-        .gov-main { flex: 1; min-width: 0; }
-        .gov-sidebar { width: 280px; flex-shrink: 0; position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; }
-        .gov-sidebar::-webkit-scrollbar { width: 6px; }
-        .gov-sidebar::-webkit-scrollbar-track { background: var(--gov-neutral-100); border-radius: 3px; }
-        .gov-sidebar::-webkit-scrollbar-thumb { background: var(--gov-neutral-300); border-radius: 3px; }
-        .gov-sidebar::-webkit-scrollbar-thumb:hover { background: var(--gov-neutral-400); }
-
-        /* ===== SIDEBAR ===== */
-        .gov-autosave { background: #fff; border: 1px solid var(--gov-neutral-200); border-radius: var(--gov-radius-lg); padding: 16px 20px; margin-bottom: 24px; }
-        .gov-autosave-status { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-        .gov-autosave-status svg { width: 20px; height: 20px; color: var(--gov-success-600); }
-        .gov-autosave-title { font-size: 14px; font-weight: 500; }
-        .gov-autosave-time { font-size: 13px; color: var(--gov-neutral-500); margin-bottom: 12px; }
-        .gov-autosave-btn { width: 100%; padding: 10px 16px; background: var(--gov-primary); color: #fff; border: none; border-radius: var(--gov-radius); font-size: 14px; font-weight: 500; cursor: pointer; font-family: var(--gov-font); }
-
-        .gov-osnova { background: #fff; border: 1px solid var(--gov-neutral-200); border-radius: var(--gov-radius-lg); padding: 20px; }
-        .gov-osnova-title { font-size: 15px; font-weight: 600; margin-bottom: 16px; }
-        .gov-osnova-item { display: flex; align-items: flex-start; gap: 12px; position: relative; }
-        .gov-osnova-item:not(:last-child) { padding-bottom: 8px; }
-        .gov-osnova-item:not(:last-child)::after { content: ''; position: absolute; left: 14px; top: 32px; bottom: 0; width: 2px; background: var(--gov-primary-100); }
-        .gov-osnova-item.completed:not(:last-child)::after { background: var(--gov-success-600); }
-        .gov-osnova-number { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; background: var(--gov-neutral-100); color: var(--gov-neutral-500); }
-        .gov-osnova-item.active .gov-osnova-number { background: var(--gov-primary); color: #fff; }
-        .gov-osnova-item.completed .gov-osnova-number { background: var(--gov-success-600); color: #fff; }
-        .gov-osnova-label { font-size: 14px; color: var(--gov-neutral-500); padding-top: 4px; }
-        .gov-osnova-item.active .gov-osnova-label { color: var(--gov-neutral-900); font-weight: 500; }
-        .gov-osnova-toggle { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gov-neutral-100); }
-        .gov-osnova-toggle a { font-size: 13px; color: var(--gov-primary); text-decoration: none; }
-
-        /* ===== STRUKTURA DOKUMENTACE ===== */
-        .gov-struktura { background: #fff; border: 1px solid var(--gov-neutral-200); border-radius: var(--gov-radius-lg); padding: 16px; margin-top: 24px; }
-        .gov-struktura-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-        .gov-struktura-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-        .gov-struktura-title svg { width: 18px; height: 18px; color: var(--gov-primary); }
-        .gov-struktura-controls { display: flex; gap: 4px; }
-        .gov-struktura-btn { width: 24px; height: 24px; border: 1px solid var(--gov-neutral-300); border-radius: 4px; background: #fff; color: var(--gov-neutral-600); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; line-height: 1; }
-        .gov-struktura-btn:hover { border-color: var(--gov-primary); color: var(--gov-primary); background: var(--gov-primary-50); }
-        .gov-struktura-tree { font-size: 12px; line-height: 1.6; max-height: 300px; overflow-y: auto; }
-        .gov-struktura-tree::-webkit-scrollbar { width: 5px; }
-        .gov-struktura-tree::-webkit-scrollbar-track { background: var(--gov-neutral-100); border-radius: 3px; }
-        .gov-struktura-tree::-webkit-scrollbar-thumb { background: var(--gov-neutral-300); border-radius: 3px; }
-        .gov-tree-item { display: flex; align-items: flex-start; gap: 4px; padding: 2px 0; }
-        .gov-tree-item.folder { font-weight: 500; color: var(--gov-neutral-700); cursor: pointer; user-select: none; }
-        .gov-tree-item.folder:hover { color: var(--gov-primary); }
-        .gov-tree-item.file { color: var(--gov-neutral-500); font-weight: 400; }
-        .gov-tree-item.empty { color: var(--gov-neutral-400); font-style: italic; }
-        .gov-tree-icon { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; }
-        .gov-tree-icon.folder-icon { color: var(--gov-warning-600); }
-        .gov-tree-icon.file-icon { color: var(--gov-neutral-400); }
-        .gov-tree-toggle { width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px; color: var(--gov-neutral-400); transition: transform 0.15s ease; }
-        .gov-tree-toggle.collapsed { transform: rotate(-90deg); }
-        .gov-tree-children { margin-left: 18px; border-left: 1px dashed var(--gov-neutral-200); padding-left: 8px; overflow: hidden; transition: max-height 0.2s ease; }
-        .gov-tree-children.has-content { border-left-color: var(--gov-primary-100); }
-        .gov-tree-children.collapsed { max-height: 0 !important; padding-top: 0; padding-bottom: 0; }
-        .gov-tree-count { font-size: 10px; color: var(--gov-neutral-400); margin-left: 4px; font-weight: 400; }
-
-        /* ===== STRUKTURA DOKUMENTACE ===== */
-        .gov-doc-tree { background: #fff; border: 1px solid var(--gov-neutral-200); border-radius: var(--gov-radius-lg); padding: 16px; margin-top: 24px; max-height: 400px; overflow-y: auto; }
-        .gov-doc-tree-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--gov-neutral-700); }
-        .gov-tree { font-size: 12px; line-height: 1.4; }
-        .gov-tree-item { position: relative; padding-left: 16px; }
-        .gov-tree-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--gov-neutral-200); }
-        .gov-tree-item::after { content: ''; position: absolute; left: 0; top: 10px; width: 12px; height: 1px; background: var(--gov-neutral-200); }
-        .gov-tree-item:last-child::before { height: 10px; }
-        .gov-tree-folder { display: flex; align-items: center; gap: 6px; padding: 3px 0; color: var(--gov-neutral-700); font-weight: 500; cursor: pointer; }
-        .gov-tree-folder:hover { color: var(--gov-primary); }
-        .gov-tree-folder svg { width: 14px; height: 14px; color: var(--gov-warning-600); flex-shrink: 0; }
-        .gov-tree-folder.has-files svg { color: var(--gov-success-600); }
-        .gov-tree-file { display: flex; align-items: center; gap: 6px; padding: 2px 0; color: var(--gov-neutral-500); font-size: 11px; }
-        .gov-tree-file svg { width: 12px; height: 12px; color: var(--gov-neutral-400); flex-shrink: 0; }
-        .gov-tree-count { font-size: 10px; color: var(--gov-neutral-400); margin-left: 4px; }
-        .gov-tree-root { padding-left: 0; }
-        .gov-tree-root::before, .gov-tree-root::after { display: none; }
-        .gov-tree-children { margin-left: 4px; }
-        .gov-tree-empty { color: var(--gov-neutral-400); font-style: italic; font-size: 11px; padding: 2px 0 2px 20px; }
-
-        /* ===== FORM SECTION ===== */
-        .gov-form-section { background: #fff; border-radius: var(--gov-radius-lg); padding: 32px; margin-bottom: 24px; }
-        .gov-form-section-title { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
-        .gov-form-section-desc { font-size: 14px; color: var(--gov-neutral-600); margin-bottom: 24px; }
-
-        /* ===== RADIO OPTIONS ===== */
-        .gov-radio-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
-        .gov-radio { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
-        .gov-radio input { display: none; }
-        .gov-radio-circle { width: 20px; height: 20px; border: 2px solid var(--gov-neutral-300); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-        .gov-radio input:checked + .gov-radio-circle { border-color: var(--gov-primary); }
-        .gov-radio input:checked + .gov-radio-circle::after { content: ''; width: 10px; height: 10px; background: var(--gov-primary); border-radius: 50%; }
-        .gov-radio-content { flex: 1; }
-        .gov-radio-label { font-size: 14px; color: var(--gov-neutral-900); }
-        .gov-radio.disabled { cursor: not-allowed; opacity: 0.5; pointer-events: none; }
-        .gov-radio.disabled .gov-radio-circle { border-color: var(--gov-neutral-200); }
-        .gov-radio.disabled .gov-radio-label { color: var(--gov-neutral-400); }
-
-        /* ===== FORM INPUTS ===== */
-        .gov-form-group { margin-bottom: 20px; }
-        .gov-form-label { display: block; font-size: 14px; font-weight: 500; color: var(--gov-neutral-700); margin-bottom: 6px; }
-        .gov-form-input { width: 100%; padding: 10px 14px; font-size: 14px; font-family: var(--gov-font); border: 1px solid var(--gov-neutral-200); border-radius: var(--gov-radius); background: #fff; }
-        .gov-form-input:focus { outline: none; border-color: var(--gov-primary); }
-        .gov-form-hint { font-size: 13px; color: var(--gov-neutral-500); margin-top: 6px; }
-
-        /* ===== ALERT BOXES ===== */
-        .gov-alert { display: flex; gap: 12px; padding: 16px; border-radius: var(--gov-radius-lg); margin-bottom: 24px; }
-        .gov-alert svg { width: 22px; height: 22px; flex-shrink: 0; }
-        .gov-alert-text { font-size: 13px; line-height: 1.5; }
-        .gov-alert-warning { background: var(--gov-warning-50); border: 1px solid var(--gov-warning-100); }
-        .gov-alert-warning svg { color: var(--gov-warning-600); }
-        .gov-alert-warning .gov-alert-text { color: #92400e; }
-        .gov-alert-info { background: var(--gov-primary-50); border: 1px solid var(--gov-primary-100); }
-        .gov-alert-info svg { color: var(--gov-primary); }
-        .gov-alert-info .gov-alert-text { color: var(--gov-neutral-700); }
-        .gov-alert-error { background: var(--gov-error-100); border: 1px solid #fecaca; }
-        .gov-alert-error svg { color: var(--gov-error-600); }
-        .gov-alert-error .gov-alert-text { color: #991b1b; }
-
-        /* ===== DATA LIMIT ===== */
-        .gov-data-limit { font-size: 13px; color: var(--gov-primary); margin-bottom: 24px; }
-        .gov-data-limit a { color: var(--gov-primary); }
-
-        /* ===== DOC PART ===== */
-        .gov-doc-part { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--gov-neutral-200); }
-        .gov-doc-part:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .gov-doc-part-title { font-size: 16px; font-weight: 600; color: var(--gov-neutral-900); margin-bottom: 8px; }
-        .gov-doc-part-desc { font-size: 13px; color: var(--gov-neutral-600); margin-bottom: 16px; font-style: italic; }
-
-        /* ===== UPLOAD ZONE ===== */
-        .gov-upload-section { margin-bottom: 20px; }
-        .gov-upload-section:last-child { margin-bottom: 0; }
-        .gov-upload-label { font-size: 14px; font-weight: 500; color: var(--gov-neutral-700); margin-bottom: 10px; }
-        .gov-upload-zone { border: 2px dashed var(--gov-neutral-300); border-radius: var(--gov-radius-lg); padding: 24px; text-align: center; background: #fff; transition: all 0.2s ease; cursor: pointer; }
-        .gov-upload-zone:hover { border-color: var(--gov-primary); background: var(--gov-primary-50); }
-        .gov-upload-zone.dragover { border-color: var(--gov-primary); background: var(--gov-primary-50); }
-        .gov-upload-text { font-size: 14px; color: var(--gov-neutral-600); margin-bottom: 12px; }
-        .gov-upload-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: #fff; border: 1px solid var(--gov-primary); border-radius: var(--gov-radius); color: var(--gov-primary); font-size: 13px; font-weight: 500; cursor: pointer; }
-        .gov-upload-btn:hover { background: var(--gov-primary-50); }
-        .gov-upload-btn svg { width: 16px; height: 16px; }
-        .gov-upload-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-        .gov-upload-btn-folder { background: var(--gov-primary-50); }
-
-        /* ===== UPLOADED FILES ===== */
-        .gov-uploaded-files { margin-top: 12px; }
-        .gov-uploaded-files-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-        .gov-uploaded-files-count { font-size: 12px; color: var(--gov-neutral-500); }
-        .gov-uploaded-files-clear { padding: 4px 10px; font-size: 11px; font-family: var(--gov-font); border: 1px solid var(--gov-error-600); border-radius: var(--gov-radius); background: #fff; color: var(--gov-error-600); cursor: pointer; display: flex; align-items: center; gap: 4px; }
-        .gov-uploaded-files-clear:hover { background: var(--gov-error-50); }
-        .gov-uploaded-files-clear svg { width: 12px; height: 12px; }
-        .gov-uploaded-file { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--gov-success-50); border: 1px solid var(--gov-success-100); border-radius: var(--gov-radius); margin-bottom: 8px; }
-        .gov-uploaded-file svg { width: 18px; height: 18px; color: var(--gov-success-600); flex-shrink: 0; }
-        .gov-uploaded-file-name { flex: 1; font-size: 13px; color: var(--gov-neutral-700); word-break: break-all; }
-        .gov-uploaded-file-size { font-size: 12px; color: var(--gov-neutral-500); white-space: nowrap; }
-        .gov-uploaded-file-remove { padding: 4px; background: none; border: none; cursor: pointer; color: var(--gov-neutral-400); border-radius: 4px; }
-        .gov-uploaded-file-remove:hover { color: var(--gov-error-600); background: var(--gov-error-50); }
-        .gov-uploaded-file-view { padding: 4px; background: none; border: none; cursor: pointer; color: var(--gov-neutral-400); border-radius: 4px; }
-        .gov-uploaded-file-view:hover { color: var(--gov-primary); background: var(--gov-primary-50); }
-        .gov-uploaded-file-actions { display: flex; gap: 4px; flex-shrink: 0; }
-
-        /* ===== FILE PREVIEW MODAL ===== */
-        .gov-modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.2s ease; }
-        .gov-modal-overlay.show { opacity: 1; visibility: visible; }
-        .gov-modal { background: #fff; border-radius: var(--gov-radius-lg); width: 100%; max-width: 500px; transform: scale(0.95); transition: transform 0.2s ease; overflow: hidden; }
-        .gov-modal-overlay.show .gov-modal { transform: scale(1); }
-        .gov-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--gov-primary); color: #fff; }
-        .gov-modal-title { font-size: 16px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
-        .gov-modal-title svg { width: 20px; height: 20px; }
-        .gov-modal-close { background: none; border: none; color: #fff; cursor: pointer; padding: 4px; border-radius: 4px; }
-        .gov-modal-close:hover { background: rgba(255,255,255,0.2); }
-        .gov-modal-close svg { width: 20px; height: 20px; }
-        .gov-modal-body { padding: 20px; }
-        .gov-modal-preview { background: var(--gov-neutral-100); border-radius: var(--gov-radius); padding: 40px; text-align: center; margin-bottom: 20px; }
-        .gov-modal-preview-icon { width: 64px; height: 64px; color: var(--gov-neutral-400); margin: 0 auto 12px; }
-        .gov-modal-preview-text { font-size: 13px; color: var(--gov-neutral-500); }
-        .gov-modal-info { display: grid; gap: 12px; }
-        .gov-modal-info-row { display: flex; gap: 12px; }
-        .gov-modal-info-label { font-size: 12px; color: var(--gov-neutral-500); min-width: 100px; }
-        .gov-modal-info-value { font-size: 13px; color: var(--gov-neutral-900); word-break: break-all; }
-        .gov-modal-footer { padding: 16px 20px; background: var(--gov-neutral-50); border-top: 1px solid var(--gov-neutral-200); display: flex; justify-content: flex-end; gap: 12px; }
-        .gov-modal-btn { padding: 8px 16px; font-size: 13px; font-weight: 500; font-family: var(--gov-font); border-radius: var(--gov-radius); cursor: pointer; border: none; }
-        .gov-modal-btn-secondary { background: #fff; color: var(--gov-neutral-700); border: 1px solid var(--gov-neutral-300); }
-        .gov-modal-btn-secondary:hover { background: var(--gov-neutral-50); }
-        .gov-modal-btn-primary { background: var(--gov-primary); color: #fff; }
-        .gov-modal-btn-primary:hover { background: var(--gov-primary-700); }
-
-        /* ===== C SECTION SUBPARTS ===== */
-        .gov-subpart { margin-left: 20px; margin-bottom: 16px; }
-        .gov-subpart-label { font-size: 13px; font-weight: 500; color: var(--gov-neutral-600); margin-bottom: 8px; }
-
-        /* ===== D SECTION STRUKTURA ===== */
-        .gov-struktura-img { width: 100%; max-width: 500px; border: 1px solid var(--gov-neutral-200); border-radius: var(--gov-radius-lg); margin: 16px 0; }
-
-        /* ===== OBJEKT BLOCK ===== */
-        .gov-objekt { background: var(--gov-neutral-50); border: 1px solid var(--gov-neutral-200); border-radius: var(--gov-radius-lg); margin-bottom: 16px; }
-        .gov-objekt-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--gov-neutral-100); border-radius: var(--gov-radius-lg) var(--gov-radius-lg) 0 0; }
-        .gov-objekt-title { font-size: 13px; font-weight: 600; color: var(--gov-neutral-900); display: flex; align-items: center; gap: 8px; }
-        .gov-objekt-title svg { width: 16px; height: 16px; color: var(--gov-neutral-500); }
-        .gov-objekt-title-text { cursor: pointer; padding: 2px 4px; border-radius: 3px; margin: -2px -4px; }
-        .gov-objekt-title-text:hover { background: var(--gov-primary-50); color: var(--gov-primary); }
-        .gov-objekt-title-input { font-size: 13px; font-weight: 600; font-family: var(--gov-font); color: var(--gov-neutral-900); border: 1px solid var(--gov-primary); border-radius: 3px; padding: 2px 6px; background: #fff; outline: none; width: 150px; }
-        .gov-objekt-title-input:focus { box-shadow: 0 0 0 2px var(--gov-primary-100); }
-        .gov-objekt-actions { display: flex; gap: 8px; }
-        .gov-objekt-btn { padding: 5px 10px; font-size: 12px; font-family: var(--gov-font); border: 1px solid var(--gov-neutral-300); border-radius: var(--gov-radius); background: #fff; color: var(--gov-neutral-600); cursor: pointer; display: flex; align-items: center; gap: 4px; }
-        .gov-objekt-btn:hover { border-color: var(--gov-primary); color: var(--gov-primary); }
-        .gov-objekt-btn.delete:hover { border-color: var(--gov-error-600); color: var(--gov-error-600); }
-        .gov-objekt-btn svg { width: 14px; height: 14px; }
-        .gov-objekt-body { padding: 16px; }
-
-        /* ===== STAVBA BLOCK ===== */
-        .gov-stavba { background: #fff; border: 2px solid var(--gov-neutral-200); border-radius: var(--gov-radius-lg); margin-bottom: 24px; }
-        .gov-stavba.hlavni { border-color: var(--gov-primary); }
-        .gov-stavba.vedlejsi { border-color: var(--gov-neutral-300); }
-        .gov-stavba-header { padding: 16px 20px; border-bottom: 1px solid var(--gov-neutral-200); }
-        .gov-stavba.hlavni .gov-stavba-header { background: var(--gov-primary-50); border-bottom-color: var(--gov-primary-100); }
-        .gov-stavba.vedlejsi .gov-stavba-header { background: var(--gov-neutral-50); }
-        .gov-stavba-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-        .gov-stavba-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .gov-stavba.hlavni .gov-stavba-badge { background: var(--gov-primary); color: #fff; }
-        .gov-stavba.vedlejsi .gov-stavba-badge { background: var(--gov-neutral-200); color: var(--gov-neutral-600); }
-        .gov-stavba-badge svg { width: 14px; height: 14px; }
-        .gov-stavba-name { display: flex; align-items: center; gap: 12px; }
-        .gov-stavba-name-label { font-size: 13px; color: var(--gov-neutral-600); }
-        .gov-stavba-name-input { flex: 1; max-width: 400px; padding: 8px 12px; font-size: 14px; font-family: var(--gov-font); border: 1px solid var(--gov-neutral-200); border-radius: var(--gov-radius); }
-        .gov-stavba-name-input:focus { outline: none; border-color: var(--gov-primary); }
-        .gov-stavba-body { padding: 20px; }
-        .gov-stavba-info { font-size: 12px; color: var(--gov-neutral-500); margin-bottom: 16px; font-style: italic; }
-
-        /* ===== ADD BUTTONS ===== */
-        .gov-add-objekt { border: 2px dashed var(--gov-neutral-300); border-radius: var(--gov-radius-lg); padding: 16px; margin-top: 16px; }
-        .gov-add-objekt-form { display: flex; gap: 12px; align-items: flex-end; }
-        .gov-add-objekt-form .gov-form-group { margin-bottom: 0; flex: 1; max-width: 250px; }
-        .gov-add-objekt-btn { padding: 8px 14px; background: var(--gov-primary); color: #fff; border: none; border-radius: var(--gov-radius); font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--gov-font); display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-        .gov-add-objekt-btn:hover { background: var(--gov-primary-700); }
-        .gov-add-objekt-btn svg { width: 16px; height: 16px; }
-
-        .gov-add-stavba { border: 2px dashed var(--gov-neutral-300); border-radius: var(--gov-radius-lg); padding: 20px; text-align: center; margin-top: 16px; }
-        .gov-add-stavba-form { display: flex; gap: 12px; align-items: flex-end; justify-content: center; }
-        .gov-add-stavba-form .gov-form-group { margin-bottom: 0; flex: 1; max-width: 300px; text-align: left; }
-        .gov-add-stavba-btn { padding: 10px 20px; background: var(--gov-neutral-600); color: #fff; border: none; border-radius: var(--gov-radius); font-size: 14px; font-weight: 500; cursor: pointer; font-family: var(--gov-font); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-        .gov-add-stavba-btn:hover { background: var(--gov-neutral-700); }
-        .gov-add-stavba-btn svg { width: 18px; height: 18px; }
-
-        /* ===== COLLAPSIBLE ===== */
-        .gov-stavba-toggle { cursor: pointer; user-select: none; }
-        .gov-stavba-toggle svg { width: 20px; height: 20px; transition: transform 0.2s ease; }
-        .gov-stavba-toggle.collapsed svg { transform: rotate(-90deg); }
-        .gov-stavba-body.collapsed { display: none; }
-
-        /* ===== BUTTONS ===== */
-        .gov-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-size: 14px; font-weight: 500; font-family: var(--gov-font); border-radius: var(--gov-radius); cursor: pointer; border: none; text-decoration: none; }
-        .gov-btn svg { width: 18px; height: 18px; }
-        .gov-btn-primary { background: var(--gov-primary); color: #fff; }
-        .gov-btn-primary:hover { background: var(--gov-primary-700); }
-        .gov-btn-secondary { background: #fff; color: var(--gov-primary); border: 1px solid var(--gov-primary); }
-        .gov-btn-secondary:hover { background: var(--gov-primary-50); }
-        .gov-btn-dark { background: var(--gov-neutral-700); color: #fff; }
-        .gov-btn-dark:hover { background: var(--gov-neutral-900); }
-
-        .gov-form-actions { display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid var(--gov-neutral-100); margin-top: 24px; }
-
-        @media (max-width: 1024px) {
-            .gov-layout { flex-direction: column-reverse; }
-            .gov-sidebar { width: 100%; position: static; max-height: none; overflow-y: visible; }
-        }
+        .gov-nav-link.disabled { color: rgba(255,255,255,0.4); pointer-events: none; }
+:root {
+  --gov-primary-600: #2362a2;
+  --gov-primary-700: #1e5086;
+  --gov-primary-200: #c5dbf2;
+  --gov-primary-100: #e5eef9;
+  --gov-primary-50: #f3f7fc;
+  --gov-neutral-0: #ffffff;
+  --gov-neutral-50: #f6f6f6;
+  --gov-neutral-100: #e7e7e7;
+  --gov-neutral-200: #d1d1d1;
+  --gov-neutral-300: #b8b8b8;
+  --gov-neutral-400: #888888;
+  --gov-neutral-500: #6d6d6d;
+  --gov-neutral-700: #4f4f4f;
+  --gov-neutral-800: #3b3b3b;
+  --gov-neutral-900: #2d2d2d;
+  --gov-success-600: #2e7d32;
+  --gov-success-100: #e2f6e3;
+  --gov-warning-600: #ca8504;
+  --gov-warning-100: #fef7c3;
+  --gov-error-600: #c62828;
+  --gov-radius: 4px;
+  --gov-radius-lg: 8px;
+  --gov-font: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+* { box-sizing: border-box; font-style: normal !important; }
+body {
+  font-family: var(--gov-font);
+  background: #f5f5f5;
+  margin: 0;
+  padding: 24px;
+  padding-bottom: 80px;
+  color: var(--gov-neutral-900);
+  line-height: 1.5;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.gov-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.gov-main {
+  max-width: 600px;
+  width: 100%;
+  background: white;
+  border-radius: var(--gov-radius-lg);
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+h1 {
+  font-size: 22px !important;
+  font-weight: 500 !important;
+  margin: 0 0 8px 0 !important;
+  color: var(--gov-neutral-900);
+  text-transform: none !important;
+}
+.subtitle {
+  color: var(--gov-neutral-500);
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  margin: 0 0 24px 0 !important;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gov-neutral-100);
+}
+/* Step label */
+.gov-step-label {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--gov-primary-600);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+/* Section */
+.section {
+  margin-bottom: 32px;
+}
+/* Category cards */
+.category-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.category-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: white;
+  border: 2px solid var(--gov-neutral-200);
+  border-radius: var(--gov-radius-lg);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.category-card:hover {
+  border-color: var(--gov-primary-200);
+  background: var(--gov-primary-50);
+}
+.category-card.selected {
+  border-color: var(--gov-primary-600);
+  background: var(--gov-primary-50);
+}
+.category-card-radio {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--gov-neutral-300);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.category-card.selected .category-card-radio {
+  border-color: var(--gov-primary-600);
+}
+.category-card.selected .category-card-radio::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background: var(--gov-primary-600);
+  border-radius: 50%;
+}
+.category-card-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--gov-primary-50);
+  border-radius: var(--gov-radius);
+}
+.category-card-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--gov-primary-600);
+}
+.category-card.selected .category-card-icon {
+  background: var(--gov-primary-100);
+}
+.category-card-content {
+  flex: 1;
+}
+.category-card-title {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--gov-neutral-800);
+  margin-bottom: 4px;
+}
+.category-card-desc {
+  font-size: 13px !important;
+  color: var(--gov-neutral-500);
+  line-height: 1.5;
+}
+/* Info box */
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--gov-primary-50);
+  border: 1px solid var(--gov-primary-100);
+  border-radius: var(--gov-radius-lg);
+  margin-top: 24px;
+}
+.info-box-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--gov-primary-600);
+}
+.info-box-content {
+  flex: 1;
+}
+.info-box-title {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--gov-primary-700);
+  margin-bottom: 4px;
+}
+.info-box-text {
+  font-size: 13px !important;
+  color: var(--gov-neutral-600);
+  line-height: 1.5;
+}
+/* Buttons */
+.btn-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gov-neutral-100);
+}
+.btn {
+  flex: 1;
+  padding: 14px 24px;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  font-family: var(--gov-font);
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: var(--gov-primary-600);
+  color: white;
+  border: 2px solid var(--gov-primary-600);
+}
+.btn-primary:hover {
+  background: var(--gov-primary-700);
+  border-color: var(--gov-primary-700);
+}
+.btn-primary:disabled {
+  background: var(--gov-neutral-300);
+  border-color: var(--gov-neutral-300);
+  cursor: not-allowed;
+}
+.btn-secondary {
+  background: white;
+  color: var(--gov-neutral-700);
+  border: 2px solid var(--gov-neutral-200);
+}
+.btn-secondary:hover {
+  border-color: var(--gov-neutral-400);
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+/* Horizontal Stepper */
     </style>
 </head>
 <body>
@@ -363,19 +292,18 @@
                     <button class="gov-header-user-btn" onclick="toggleUserMenu()">
                         <svg class="user-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                         <div class="gov-header-user-info">
-                            <span class="gov-header-user-name" id="headerUserName">ALEŠ KRUPA</span>
-                            <span class="gov-header-user-detail" id="headerUserDetail">FO</span>
+                            <span class="gov-header-user-name" id="userDisplayName">ALEŠ KRUPA</span>
+                            <span class="gov-header-user-detail" id="userDisplayDetail">FO · Nar.: 19.04.1968</span>
                         </div>
                         <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
                     <div class="gov-header-user-dropdown" id="userDropdown">
                         <div class="gov-header-user-dropdown-header">
-                            <div class="gov-header-user-dropdown-name" id="dropdownName">Aleš Krupa</div>
-                            <div class="gov-header-user-dropdown-detail" id="dropdownDetail">Nar.: 19.04.1968</div>
-                            <div class="gov-header-user-dropdown-badge" id="dropdownBadge">Fyzická osoba</div>
+                            <div class="gov-header-user-dropdown-name">Aleš Krupa</div>
+                            <div class="gov-header-user-dropdown-detail">Nar.: 19.04.1968</div>
+                            <div class="gov-header-user-dropdown-badge">Fyzická osoba</div>
                         </div>
                         <a href="reza_implicitni.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Změnit postavení</a>
-                        <a href="#"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Nastavení</a>
                         <a href="../index.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>Odhlásit se</a>
                     </div>
                 </div>
@@ -384,1053 +312,225 @@
         <nav class="gov-header-nav">
             <div class="gov-header-nav-content">
                 <ul class="gov-nav-menu">
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Úvod</a></li>
-                    <li class="gov-nav-item"><a href="prehled_zameru.html" class="gov-nav-link">Záměry</a></li>
-                    <li class="gov-nav-item"><a href="reza_setup.html" class="gov-nav-link">Plné moci</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Úvod</a></li>
+                    <li><a href="prehled_zameru.html" class="gov-nav-link">Záměry</a></li>
+                    <li><a href="reza_setup.html" class="gov-nav-link">Plné moci</a></li>
                 </ul>
             </div>
         </nav>
     </header>
-
-    <div class="gov-page">
-        <div class="gov-page-header">
-            <h1 class="gov-page-title">Žádost o povolení stavby nebo zařízení</h1>
-            <p class="gov-page-subtitle">podle ustanovení § 172 odst. 2 ve spojení s § 184, § 200 odst. 2, § 212, § 213, § 216 odst. 2, § 218 odst. 3 a § 228 odst. 2 zákona č. 283/2021 Sb., stavební zákon, ve znění pozdějších předpisů, a § 4 vyhlášky č. 149/2024 Sb., o provedení některých ustanovení stavebního zákona</p>
+    <div class="container">
+      <div class="gov-layout">
+    <div class="gov-main">
+      <h1>Založení záměru</h1>
+      <p class="subtitle">Krok 2 z 5 – Kategorie záměru</p>
+      
+      <div class="section">
+        <p class="gov-step-label">Co chcete řešit?</p>
+        
+        <div class="category-selection">
+          
+          <!-- Povolení stavby -->
+          <div class="category-card" onclick="selectCategory('povoleni-stavby')">
+            <div class="category-card-radio"></div>
+            <div class="category-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"></path>
+              </svg>
+            </div>
+            <div class="category-card-content">
+              <div class="category-card-title">Povolení stavby</div>
+              <div class="category-card-desc">Novostavba, přístavba, nástavba, rekonstrukce nebo stavební úpravy</div>
+            </div>
+          </div>
+          
+          <!-- Dodatečné povolení -->
+          <div class="category-card" onclick="selectCategory('dodatecne-povoleni')">
+            <div class="category-card-radio"></div>
+            <div class="category-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
+              </svg>
+            </div>
+            <div class="category-card-content">
+              <div class="category-card-title">Dodatečné povolení</div>
+              <div class="category-card-desc">Legalizace stavby provedené bez povolení nebo v rozporu s ním</div>
+            </div>
+          </div>
+          
+          <!-- Odstranění stavby -->
+          <div class="category-card" onclick="selectCategory('odstraneni-stavby')">
+            <div class="category-card-radio"></div>
+            <div class="category-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"></path>
+              </svg>
+            </div>
+            <div class="category-card-content">
+              <div class="category-card-title">Odstranění stavby</div>
+              <div class="category-card-desc">Demolice stavby nebo zařízení</div>
+            </div>
+          </div>
+          
+          <!-- Změna užívání -->
+          <div class="category-card" onclick="selectCategory('zmena-uzivani')">
+            <div class="category-card-radio"></div>
+            <div class="category-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"></path>
+              </svg>
+            </div>
+            <div class="category-card-content">
+              <div class="category-card-title">Změna užívání stavby</div>
+              <div class="category-card-desc">Změna účelu užívání existující stavby bez stavebních úprav</div>
+            </div>
+          </div>
+          
+          <!-- Operace s pozemky -->
+          <div class="category-card" onclick="selectCategory('operace-pozemky')">
+            <div class="category-card-radio"></div>
+            <div class="category-card-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"></path>
+              </svg>
+            </div>
+            <div class="category-card-content">
+              <div class="category-card-title">Operace s pozemky</div>
+              <div class="category-card-desc">Dělení, scelení pozemků nebo změna využití území</div>
+            </div>
+          </div>
+          
         </div>
-
-        <div class="gov-layout">
-            <main class="gov-main">
-                <div class="gov-form-section">
-                    <h2 class="gov-form-section-title">3. Dokumentace</h2>
-                    <p class="gov-form-section-desc">Dokumentace pro povolení stavby podle vyhlášky o dokumentaci staveb</p>
-
-                    <div class="gov-alert gov-alert-warning">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                        <div class="gov-alert-text"><strong>Vždy udržujte aktuální nejnovější verzi dokumentace</strong> - buď úpravou stávající, nebo nahráním kompletně nové. Poslední verze je vždy považována za platnou!</div>
-                    </div>
-
-                    <div class="gov-radio-group">
-                        <label class="gov-radio disabled"><input type="radio" name="docSource" value="existujici" disabled><span class="gov-radio-circle"></span><div class="gov-radio-content"><div class="gov-radio-label">použít nejnovější podanou verzi dokumentace</div></div></label>
-                        <label class="gov-radio"><input type="radio" name="docSource" value="nahrat" checked onchange="setDocSource('nahrat')"><span class="gov-radio-circle"></span><div class="gov-radio-content"><div class="gov-radio-label">dokumentaci nahraji zde</div></div></label>
-                        <label class="gov-radio disabled"><input type="radio" name="docSource" value="listinna" disabled><span class="gov-radio-circle"></span><div class="gov-radio-content"><div class="gov-radio-label">dokumentaci doručím na úřad v listinné podobě</div></div></label>
-                    </div>
-
-                    <div class="gov-alert gov-alert-info" style="margin-bottom: 16px;">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <div class="gov-alert-text">Dokumentace pro povolení záměru, která nemusí být zpracovaná projektantem, vloží do Evidence elektronických dokumentací stavební úřad současně s podáním Žádosti stavebníka.</div>
-                    </div>
-
-                    <p class="gov-data-limit">📊 <a href="#">Datový limit dokumentace je 10 GB</a></p>
-
-                    <div id="uploadSections">
-                        <!-- A - Průvodní list -->
-                        <div class="gov-doc-part">
-                            <div class="gov-doc-part-title">A - Průvodní list</div>
-                            <div class="gov-doc-part-desc">Průvodní list musí zpracovat projektant nebo autorizovaná osoba. Zde můžete průvodní list nahrát nebo vytvořit odkaz pro vytvoření Průvodního listu, který projektantovi pošlete.</div>
-                            
-                            <div class="gov-radio-group" style="margin-bottom: 16px;">
-                                <label class="gov-radio"><input type="radio" name="aMethod" value="upload" checked onchange="setAMethod('upload')"><span class="gov-radio-circle"></span><div class="gov-radio-content"><div class="gov-radio-label">nahrát průvodní list v pdf formátu</div></div></label>
-                                <label class="gov-radio"><input type="radio" name="aMethod" value="link" onchange="setAMethod('link')"><span class="gov-radio-circle"></span><div class="gov-radio-content"><div class="gov-radio-label">vytvořit odkaz pro projektanta pro vyplnění průvodního listu</div></div></label>
-                            </div>
-
-                            <div id="aUploadZone">
-                                <div class="gov-upload-zone" ondrop="handleDrop(event, 'A')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="triggerUpload('A')">
-                                    <div class="gov-upload-text">Přetáhněte soubor nebo</div>
-                                    <button class="gov-upload-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>Nahrát ze zařízení</button>
-                                    <input type="file" id="upload-A" style="display: none;" onchange="handleFiles(event, 'A')" accept=".pdf">
-                                </div>
-                                <div class="gov-uploaded-files" id="files-A"></div>
-                            </div>
-
-                            <div class="gov-alert gov-alert-error" style="margin-top: 12px;">
-                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                                <div class="gov-alert-text">Bez průvodního listu nebude možné žádost odeslat</div>
-                            </div>
-                        </div>
-
-                        <!-- B - Souhrnná technická zpráva -->
-                        <div class="gov-doc-part">
-                            <div class="gov-doc-part-title">B - Souhrnná technická zpráva</div>
-                            <div class="gov-doc-part-desc">Komplexní dokument, který stručně popisuje všechny podstatné technické, konstrukční a provozní aspekty navrhované stavby pro potřeby stavebního úřadu a dotčených orgánů.</div>
-                            
-                            <div class="gov-upload-zone" ondrop="handleDrop(event, 'B')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-                                <div class="gov-upload-text">Přetáhněte soubory nebo složky nebo</div>
-                                <div class="gov-upload-btns">
-                                    <button class="gov-upload-btn" onclick="event.stopPropagation(); triggerUpload('B')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Nahrát soubory</button>
-                                    <button class="gov-upload-btn gov-upload-btn-folder" onclick="event.stopPropagation(); triggerFolderUpload('B')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>Nahrát složku</button>
-                                </div>
-                                <input type="file" id="upload-B" multiple style="display: none;" onchange="handleFiles(event, 'B')">
-                                <input type="file" id="upload-B-folder" webkitdirectory style="display: none;" onchange="handleFolderFiles(event, 'B')">
-                            </div>
-                            <div class="gov-uploaded-files" id="files-B"></div>
-                            <p class="gov-form-hint">Můžete nahrát jak jednotlivé soubory, tak celé složky včetně všech podsložek a jejich obsahu.</p>
-                        </div>
-
-                        <!-- C - Situační výkresy -->
-                        <div class="gov-doc-part">
-                            <div class="gov-doc-part-title">C - Situační výkresy</div>
-                            <div class="gov-doc-part-desc">Situační výkresy zobrazují umístění stavby v území od širokého okolí až po detailní napojení na sítě a komunikace.</div>
-                            
-                            <div class="gov-subpart">
-                                <div class="gov-subpart-label">C1 - Situační výkres širších vztahů</div>
-                                <div class="gov-upload-zone" ondrop="handleDrop(event, 'C1')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="triggerUpload('C1')"><div class="gov-upload-text">Přetáhněte soubory nebo</div><button class="gov-upload-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>Nahrát ze zařízení</button><input type="file" id="upload-C1" multiple style="display: none;" onchange="handleFiles(event, 'C1')"></div>
-                                <div class="gov-uploaded-files" id="files-C1"></div>
-                            </div>
-                            <div class="gov-subpart">
-                                <div class="gov-subpart-label">C2 - Katastrální situační výkres</div>
-                                <div class="gov-upload-zone" ondrop="handleDrop(event, 'C2')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="triggerUpload('C2')"><div class="gov-upload-text">Přetáhněte soubory nebo</div><button class="gov-upload-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>Nahrát ze zařízení</button><input type="file" id="upload-C2" multiple style="display: none;" onchange="handleFiles(event, 'C2')"></div>
-                                <div class="gov-uploaded-files" id="files-C2"></div>
-                            </div>
-                            <div class="gov-subpart">
-                                <div class="gov-subpart-label">C3 - Koordinační situační výkres</div>
-                                <div class="gov-upload-zone" ondrop="handleDrop(event, 'C3')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="triggerUpload('C3')"><div class="gov-upload-text">Přetáhněte soubory nebo</div><button class="gov-upload-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>Nahrát ze zařízení</button><input type="file" id="upload-C3" multiple style="display: none;" onchange="handleFiles(event, 'C3')"></div>
-                                <div class="gov-uploaded-files" id="files-C3"></div>
-                            </div>
-                            <div class="gov-subpart">
-                                <div class="gov-subpart-label">C4 - Speciální výkresy</div>
-                                <div class="gov-upload-zone" ondrop="handleDrop(event, 'C4')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="triggerUpload('C4')"><div class="gov-upload-text">Přetáhněte soubory nebo</div><button class="gov-upload-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>Nahrát ze zařízení</button><input type="file" id="upload-C4" multiple style="display: none;" onchange="handleFiles(event, 'C4')"></div>
-                                <div class="gov-uploaded-files" id="files-C4"></div>
-                            </div>
-                            <div class="gov-subpart">
-                                <div class="gov-subpart-label">C5 - Dělení nebo scelení pozemků</div>
-                                <div class="gov-upload-zone" ondrop="handleDrop(event, 'C5')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="triggerUpload('C5')"><div class="gov-upload-text">Přetáhněte soubory nebo</div><button class="gov-upload-btn"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>Nahrát ze zařízení</button><input type="file" id="upload-C5" multiple style="display: none;" onchange="handleFiles(event, 'C5')"></div>
-                                <div class="gov-uploaded-files" id="files-C5"></div>
-                            </div>
-                        </div>
-
-                        <!-- D - Dokumentace objektů -->
-                        <div class="gov-doc-part">
-                            <div class="gov-doc-part-title">D - Dokumentace objektů</div>
-                            <div class="gov-doc-part-desc">Dokumentace se zpracovává po objektech a souborech technických nebo technologických zařízení. Dokumentace každého objektu se zpracovává přiměřeně podle požadavků stanovených v dokumentaci pro povolení záměru příslušného objektu.</div>
-                            
-                            <p style="font-size: 14px; font-weight: 500; margin-bottom: 12px;">Členění stavby</p>
-                            <div class="gov-radio-group">
-                                <label class="gov-radio"><input type="radio" name="dType" value="jedna" checked onchange="setDType('jedna')"><span class="gov-radio-circle"></span><div class="gov-radio-content"><div class="gov-radio-label">Jedna stavba</div><div class="gov-radio-desc">Jedna stavba, která může být fyzicky rozdělena do více objektů, které bez sebe nemohou fungovat</div></div></label>
-                                <label class="gov-radio"><input type="radio" name="dType" value="soubor" onchange="setDType('soubor')"><span class="gov-radio-circle"></span><div class="gov-radio-content"><div class="gov-radio-label">Soubor staveb</div><div class="gov-radio-desc">Více samostatných staveb (hlavní + vedlejší), které spolu souvisí, ale každá může fungovat samostatně. Hlavní stavba určuje příslušnost SÚ pro celý soubor.</div></div></label>
-                            </div>
-
-                            <div id="strukturaInfo" style="display: none;">
-                                <div class="gov-alert gov-alert-info" style="margin: 16px 0;">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    <div class="gov-alert-text">
-                                        <strong>Soubor staveb</strong> se skládá z jedné hlavní stavby a minimálně jedné vedlejší stavby. Každá stavba obsahuje jeden nebo více objektů, ke kterým se nahrává dokumentace D1-D3.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Container pro stavby -->
-                            <div id="stavbyContainer">
-                                <!-- Dynamicky generováno JavaScriptem -->
-                            </div>
-
-                            <!-- Přidat vedlejší stavbu (pouze pro soubor staveb) -->
-                            <div class="gov-add-stavba" id="addStavbaSection" style="display: none;">
-                                <div class="gov-add-stavba-form">
-                                    <div class="gov-form-group">
-                                        <label class="gov-form-label">Název vedlejší stavby</label>
-                                        <input type="text" class="gov-form-input" id="newStavbaName" placeholder="Např. Parkoviště, Přípojky, Garáž...">
-                                    </div>
-                                    <button class="gov-add-stavba-btn" onclick="addVedlejsiStavba()">
-                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                                        Přidat vedlejší stavbu
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="gov-form-actions">
-                        <a href="form_1.html" class="gov-btn gov-btn-secondary"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Zpět</a>
-                        <button type="button" class="gov-btn gov-btn-primary" onclick="goToNext()">Dokladová část<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></button>
-                    </div>
-                </div>
-            </main>
-
-            <aside class="gov-sidebar">
-                <div class="gov-autosave">
-                    <div class="gov-autosave-status"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span class="gov-autosave-title">Automaticky uloženo</span></div>
-                    <div class="gov-autosave-time">před <span id="autosaveTime">3</span> sekundami</div>
-                    <button class="gov-autosave-btn">Uložit a zavřít</button>
-                </div>
-
-                <div class="gov-osnova">
-                    <div class="gov-osnova-title">Osnova</div>
-                    <div class="gov-osnova-item completed"><div class="gov-osnova-number">✓</div><span class="gov-osnova-label">Záměr</span></div>
-                    <div class="gov-osnova-item completed"><div class="gov-osnova-number">✓</div><span class="gov-osnova-label">Žadatel</span></div>
-                    <div class="gov-osnova-item active"><div class="gov-osnova-number">3</div><span class="gov-osnova-label">Dokumentace</span></div>
-                    <div class="gov-osnova-item"><div class="gov-osnova-number">4</div><span class="gov-osnova-label">Dokladová část</span></div>
-                    <div class="gov-osnova-item"><div class="gov-osnova-number">5</div><span class="gov-osnova-label">Příjemce</span></div>
-                    <div class="gov-osnova-item"><div class="gov-osnova-number">6</div><span class="gov-osnova-label">Kontrola a podání</span></div>
-                    <div class="gov-osnova-toggle"><a href="#">Rozbalit</a></div>
-                </div>
-
-                <div class="gov-struktura">
-                    <div class="gov-struktura-header">
-                        <div class="gov-struktura-title">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-                            Struktura dokumentace
-                        </div>
-                        <div class="gov-struktura-controls">
-                            <button class="gov-struktura-btn" onclick="expandAllFolders()" title="Rozbalit vše">+</button>
-                            <button class="gov-struktura-btn" onclick="collapseAllFolders()" title="Sbalit vše">−</button>
-                        </div>
-                    </div>
-                    <div class="gov-struktura-tree" id="dokumentaceTree">
-                        <!-- Dynamicky generováno JavaScriptem -->
-                    </div>
-                </div>
-            </aside>
+        
+        <!-- Info box -->
+        <div class="info-box">
+          <svg class="info-box-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"></path>
+          </svg>
+          <div class="info-box-content">
+            <div class="info-box-title">Proč je důležité vybrat správnou kategorii?</div>
+            <div class="info-box-text">
+              Podle kategorie záměru se liší požadované informace a typy žádostí, které můžete v rámci záměru podat. Např. u povolení stavby budete moci žádat o stanoviska, povolení i kolaudaci.
+            </div>
+          </div>
         </div>
+      </div>
+      
+      <!-- Buttons -->
+      <div class="btn-group">
+        <a href="New-Zamer-1.html" class="btn btn-secondary">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Zpět
+        </a>
+        <button type="button" class="btn btn-primary" id="btnContinue" disabled="" onclick="continueToNext()">
+          Pokračovat
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+      
     </div>
-
-    <!-- Modal pro náhled souboru -->
-    <div class="gov-modal-overlay" id="filePreviewModal">
-        <div class="gov-modal">
-            <div class="gov-modal-header">
-                <div class="gov-modal-title">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-                    Náhled souboru
-                </div>
-                <button class="gov-modal-close" onclick="closeFilePreview()">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
-            <div class="gov-modal-body">
-                <div class="gov-modal-preview">
-                    <svg class="gov-modal-preview-icon" id="previewIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    <div class="gov-modal-preview-text">Náhled není k dispozici v prototypu</div>
-                </div>
-                <div class="gov-modal-info">
-                    <div class="gov-modal-info-row">
-                        <span class="gov-modal-info-label">Název souboru:</span>
-                        <span class="gov-modal-info-value" id="previewFileName">-</span>
-                    </div>
-                    <div class="gov-modal-info-row">
-                        <span class="gov-modal-info-label">Cesta:</span>
-                        <span class="gov-modal-info-value" id="previewFilePath">-</span>
-                    </div>
-                    <div class="gov-modal-info-row">
-                        <span class="gov-modal-info-label">Velikost:</span>
-                        <span class="gov-modal-info-value" id="previewFileSize">-</span>
-                    </div>
-                    <div class="gov-modal-info-row">
-                        <span class="gov-modal-info-label">Typ souboru:</span>
-                        <span class="gov-modal-info-value" id="previewFileType">-</span>
-                    </div>
-                    <div class="gov-modal-info-row">
-                        <span class="gov-modal-info-label">Nahráno:</span>
-                        <span class="gov-modal-info-value" id="previewFileDate">-</span>
-                    </div>
-                </div>
-            </div>
-            <div class="gov-modal-footer">
-                <button class="gov-modal-btn gov-modal-btn-secondary" onclick="closeFilePreview()">Zavřít</button>
-                <button class="gov-modal-btn gov-modal-btn-primary" onclick="simulateDownload()">
-                    <svg style="width:14px;height:14px;margin-right:6px;vertical-align:middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                    Stáhnout
-                </button>
-            </div>
-        </div>
+    
+  </div>
+</div>
+<!-- Save draft bar -->
+<div class="save-draft-bar">
+  <div class="save-draft-content">
+    <div class="save-draft-info">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <span class="save-draft-status" id="draftStatus">Koncept neuložen</span>
     </div>
+    <button type="button" class="btn-save-draft" onclick="saveDraft()">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+      </svg>
+      Uložit koncept
+    </button>
+  </div>
+</div>
+<script>
+var appState = {
+  selectedCategory: null
+};
+var categoryConfig = {
+  'povoleni-stavby': {
+    label: 'Povolení stavby',
+    nextPage: 'New-Zamer-3.html'
+  },
+  'dodatecne-povoleni': {
+    label: 'Dodatečné povolení',
+    nextPage: 'New-Zamer-3.html'
+  },
+  'odstraneni-stavby': {
+    label: 'Odstranění stavby',
+    nextPage: 'New-Zamer-3.html'
+  },
+  'zmena-uzivani': {
+    label: 'Změna užívání',
+    nextPage: 'New-Zamer-3.html'
+  },
+  'operace-pozemky': {
+    label: 'Operace s pozemky',
+    nextPage: 'New-Zamer-3.html'
+  }
+};
+function selectCategory(categoryId) {
+  appState.selectedCategory = categoryId;
+  
+  // Update visual state
+  document.querySelectorAll('.category-card').forEach(function(card) {
+    card.classList.remove('selected');
+  });
+  event.currentTarget.classList.add('selected');
+  
+  // Enable continue button
+  document.getElementById('btnContinue').disabled = false;
+  
+  // Update draft status
+  document.getElementById('draftStatus').textContent = 'Neuložené změny';
+}
+function continueToNext() {
+  if (!appState.selectedCategory) return;
+  
+  var config = categoryConfig[appState.selectedCategory];
+  if (config && config.nextPage) {
+    window.location.href = config.nextPage;
+  }
+}
+function saveDraft() {
+  var btn = document.querySelector('.btn-save-draft');
+  var status = document.getElementById('draftStatus');
+  
+  btn.innerHTML = '<svg class="spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> Ukládám...';
+  
+  setTimeout(function() {
+    btn.innerHTML = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg> Uložit koncept';
+    status.textContent = 'Uloženo právě teď';
+    status.classList.add('saved');
+  }, 1000);
+}
+</script>
 
-    <script src="../js/app-state.js"></script>
-    <script src="../js/header-helper.js"></script>
     <script>
-        var state = { 
-            docSource: 'nahrat', 
-            aMethod: 'upload', 
-            dType: 'jedna', 
-            files: {}, 
-            stavby: [
-                { 
-                    id: 1, 
-                    name: '', 
-                    type: 'hlavni', // 'hlavni' nebo 'vedlejsi'
-                    objekty: [{ id: 1, name: '' }],
-                    nextObjektId: 2
-                }
-            ],
-            nextStavbaId: 2
-        };
-
-        function loadIdentity() {
-            // Kontrola přihlášení
-            if (!PortalStavebnika.isLoggedIn()) {
-                window.location.href = '../index.html';
-                return;
+        function toggleUserMenu() {
+            var btn = document.querySelector('.gov-header-user-btn');
+            var dropdown = document.getElementById('userDropdown');
+            if (btn) btn.classList.toggle('active');
+            if (dropdown) dropdown.classList.toggle('show');
+        }
+        document.addEventListener('click', function(e) {
+            var userSection = document.querySelector('.gov-header-user');
+            if (userSection && !userSection.contains(e.target)) {
+                var btn = document.querySelector('.gov-header-user-btn');
+                var dropdown = document.getElementById('userDropdown');
+                if (btn) btn.classList.remove('active');
+                if (dropdown) dropdown.classList.remove('show');
             }
-            
-            // Načtení hlavičky přes HeaderHelper
-            HeaderHelper.loadHeaderData();
-        }
-
-        function setDocSource(value) { state.docSource = value; document.getElementById('uploadSections').style.display = value === 'nahrat' ? 'block' : 'none'; }
-        function setAMethod(value) { state.aMethod = value; document.getElementById('aUploadZone').style.display = value === 'upload' ? 'block' : 'none'; }
-        
-        function setDType(type) { 
-            state.dType = type; 
-            document.getElementById('strukturaInfo').style.display = type === 'soubor' ? 'block' : 'none'; 
-            document.getElementById('addStavbaSection').style.display = type === 'soubor' ? 'block' : 'none';
-            
-            // Reset staveb při změně typu
-            if (type === 'jedna') {
-                // Jedna stavba - ponechat pouze první stavbu jako hlavní
-                state.stavby = [{
-                    id: 1,
-                    name: state.stavby[0] ? state.stavby[0].name : '',
-                    type: 'hlavni',
-                    objekty: state.stavby[0] ? state.stavby[0].objekty : [{ id: 1, name: '' }],
-                    nextObjektId: state.stavby[0] ? state.stavby[0].nextObjektId : 2
-                }];
-            }
-            
-            renderStavby();
-            updateDokumentaceTree();
-        }
-
-        // ===== RENDER STAVBY =====
-        function renderStavby() {
-            var container = document.getElementById('stavbyContainer');
-            var html = '';
-            
-            state.stavby.forEach(function(stavba) {
-                html += renderStavbaHTML(stavba);
-            });
-            
-            container.innerHTML = html;
-        }
-        
-        function renderStavbaHTML(stavba) {
-            var isHlavni = stavba.type === 'hlavni';
-            var isSoubor = state.dType === 'soubor';
-            var showDelete = isSoubor && !isHlavni;
-            
-            var html = '<div class="gov-stavba ' + stavba.type + '" id="stavba-' + stavba.id + '">';
-            
-            // Header
-            html += '<div class="gov-stavba-header">';
-            html += '<div class="gov-stavba-header-top">';
-            html += '<div class="gov-stavba-badge">';
-            if (isHlavni) {
-                html += '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>';
-                html += isSoubor ? 'Hlavní stavba' : 'Stavba';
-            } else {
-                html += '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>';
-                html += 'Vedlejší stavba';
-            }
-            html += '</div>';
-            
-            // Actions
-            if (showDelete) {
-                html += '<div class="gov-objekt-actions">';
-                html += '<button class="gov-objekt-btn delete" onclick="deleteStavba(' + stavba.id + ')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>Odstranit stavbu</button>';
-                html += '</div>';
-            }
-            html += '</div>'; // header-top
-            
-            // Name input
-            html += '<div class="gov-stavba-name">';
-            html += '<span class="gov-stavba-name-label">Název:</span>';
-            html += '<input type="text" class="gov-stavba-name-input" id="stavba-' + stavba.id + '-name" value="' + (stavba.name || '') + '" placeholder="' + (isHlavni ? 'Např. Rodinný dům, Bytový dům...' : 'Např. Garáž, Parkoviště, Přípojky...') + '" onchange="updateStavbaName(' + stavba.id + ', this.value)">';
-            html += '</div>';
-            
-            html += '</div>'; // header
-            
-            // Body s objekty
-            html += '<div class="gov-stavba-body" id="stavba-' + stavba.id + '-body">';
-            
-            if (isSoubor && isHlavni) {
-                html += '<p class="gov-stavba-info">Hlavní stavba určuje příslušnost stavebního úřadu pro celý soubor staveb.</p>';
-            }
-            
-            // Objekty
-            stavba.objekty.forEach(function(objekt) {
-                html += renderObjektHTML(stavba.id, objekt, stavba.objekty.length > 1);
-            });
-            
-            // Přidat objekt
-            html += '<div class="gov-add-objekt">';
-            html += '<div class="gov-add-objekt-form">';
-            html += '<div class="gov-form-group">';
-            html += '<label class="gov-form-label">Přidat objekt</label>';
-            html += '<input type="text" class="gov-form-input" id="newObjekt-' + stavba.id + '" placeholder="Např. Hlavní budova, Sekce A...">';
-            html += '</div>';
-            html += '<button class="gov-add-objekt-btn" onclick="addObjekt(' + stavba.id + ')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>Přidat objekt</button>';
-            html += '</div>';
-            html += '</div>';
-            
-            html += '</div>'; // body
-            html += '</div>'; // stavba
-            
-            return html;
-        }
-        
-        function renderObjektHTML(stavbaId, objekt, canDelete) {
-            var objektKey = stavbaId + '-' + objekt.id;
-            var html = '<div class="gov-objekt" id="objekt-' + objektKey + '">';
-            
-            // Header
-            html += '<div class="gov-objekt-header">';
-            html += '<div class="gov-objekt-title">';
-            html += '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>';
-            html += '<span class="gov-objekt-title-text" id="objekt-' + objektKey + '-label" onclick="startEditObjektName(' + stavbaId + ', ' + objekt.id + ')">' + (objekt.name || 'Objekt ' + objekt.id) + '</span>';
-            html += '<input type="text" class="gov-objekt-title-input" id="objekt-' + objektKey + '-input" style="display:none;" onblur="finishEditObjektName(' + stavbaId + ', ' + objekt.id + ')" onkeydown="handleObjektNameKey(event, ' + stavbaId + ', ' + objekt.id + ')">';
-            html += '</div>';
-            html += '<div class="gov-objekt-actions">';
-            html += '<button class="gov-objekt-btn" onclick="startEditObjektName(' + stavbaId + ', ' + objekt.id + ')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>Přejmenovat</button>';
-            if (canDelete) {
-                html += '<button class="gov-objekt-btn delete" onclick="deleteObjekt(' + stavbaId + ', ' + objekt.id + ')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>Odstranit</button>';
-            }
-            html += '</div>';
-            html += '</div>';
-            
-            // Body s upload zónami
-            html += '<div class="gov-objekt-body">';
-            html += createUploadSectionHTML(objektKey, 'D1', 'D1 - Stavební a technologická část', true);
-            html += createUploadSectionHTML(objektKey, 'D2', 'D2 - Základní stavebně konstrukční řešení', false);
-            html += createUploadSectionHTML(objektKey, 'D3', 'D3 - Požárně bezpečnostní řešení', false);
-            html += '</div>';
-            
-            html += '</div>';
-            return html;
-        }
-
-        function createUploadSectionHTML(objektKey, part, label, showHint) {
-            var key = part + '-' + objektKey;
-            var html = '<div class="gov-upload-section"><div class="gov-upload-label">' + label + '</div>';
-            html += '<div class="gov-upload-zone" ondrop="handleDrop(event, \'' + key + '\')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">';
-            html += '<div class="gov-upload-text">Přetáhněte soubory nebo složky nebo</div>';
-            html += '<div class="gov-upload-btns">';
-            html += '<button class="gov-upload-btn" onclick="event.stopPropagation(); triggerUpload(\'' + key + '\')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Nahrát soubory</button>';
-            html += '<button class="gov-upload-btn gov-upload-btn-folder" onclick="event.stopPropagation(); triggerFolderUpload(\'' + key + '\')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>Nahrát složku</button>';
-            html += '</div>';
-            html += '<input type="file" id="upload-' + key + '" multiple style="display: none;" onchange="handleFiles(event, \'' + key + '\')">';
-            html += '<input type="file" id="upload-' + key + '-folder" webkitdirectory style="display: none;" onchange="handleFolderFiles(event, \'' + key + '\')">';
-            html += '</div>';
-            html += '<div class="gov-uploaded-files" id="files-' + key + '"></div>';
-            if (showHint) {
-                html += '<p class="gov-form-hint">Můžete nahrát jak jednotlivé soubory, tak celé složky včetně všech podsložek a jejich obsahu.</p>';
-            }
-            html += '</div>';
-            return html;
-        }
-
-        // ===== STAVBA OPERATIONS =====
-        function updateStavbaName(stavbaId, name) {
-            var stavba = state.stavby.find(function(s) { return s.id === stavbaId; });
-            if (stavba) {
-                stavba.name = name;
-                updateDokumentaceTree();
-            }
-        }
-        
-        function addVedlejsiStavba() {
-            var nameInput = document.getElementById('newStavbaName');
-            var name = nameInput.value.trim() || 'Vedlejší stavba ' + (state.stavby.length);
-            
-            var stavba = {
-                id: state.nextStavbaId,
-                name: name,
-                type: 'vedlejsi',
-                objekty: [{ id: 1, name: '' }],
-                nextObjektId: 2
-            };
-            
-            state.stavby.push(stavba);
-            state.nextStavbaId++;
-            nameInput.value = '';
-            
-            renderStavby();
-            updateDokumentaceTree();
-        }
-        
-        function deleteStavba(stavbaId) {
-            var stavba = state.stavby.find(function(s) { return s.id === stavbaId; });
-            if (!stavba || stavba.type === 'hlavni') {
-                alert('Hlavní stavbu nelze odstranit.');
-                return;
-            }
-            if (!confirm('Opravdu chcete odstranit tuto stavbu včetně všech objektů a nahraných souborů?')) return;
-            
-            // Smazat soubory všech objektů stavby
-            stavba.objekty.forEach(function(objekt) {
-                var key = stavbaId + '-' + objekt.id;
-                delete state.files['D1-' + key];
-                delete state.files['D2-' + key];
-                delete state.files['D3-' + key];
-            });
-            
-            state.stavby = state.stavby.filter(function(s) { return s.id !== stavbaId; });
-            renderStavby();
-            updateDokumentaceTree();
-        }
-
-        // ===== OBJEKT OPERATIONS =====
-        function addObjekt(stavbaId) {
-            var stavba = state.stavby.find(function(s) { return s.id === stavbaId; });
-            if (!stavba) return;
-            
-            var nameInput = document.getElementById('newObjekt-' + stavbaId);
-            var name = nameInput.value.trim() || 'Objekt ' + stavba.nextObjektId;
-            
-            stavba.objekty.push({ id: stavba.nextObjektId, name: name });
-            stavba.nextObjektId++;
-            nameInput.value = '';
-            
-            renderStavby();
-            updateDokumentaceTree();
-        }
-        
-        function deleteObjekt(stavbaId, objektId) { 
-            var stavba = state.stavby.find(function(s) { return s.id === stavbaId; });
-            if (!stavba) return;
-            
-            if (stavba.objekty.length <= 1) { 
-                alert('Stavba musí obsahovat alespoň jeden objekt.'); 
-                return; 
-            } 
-            if (!confirm('Opravdu chcete odstranit tento objekt včetně všech nahraných souborů?')) return; 
-            
-            var key = stavbaId + '-' + objektId;
-            delete state.files['D1-' + key];
-            delete state.files['D2-' + key];
-            delete state.files['D3-' + key];
-            
-            stavba.objekty = stavba.objekty.filter(function(o) { return o.id !== objektId; });
-            renderStavby();
-            updateDokumentaceTree();
-        }
-        
-        function startEditObjektName(stavbaId, objektId) { 
-            var objektKey = stavbaId + '-' + objektId;
-            var labelEl = document.getElementById('objekt-' + objektKey + '-label');
-            var inputEl = document.getElementById('objekt-' + objektKey + '-input');
-            
-            if (!labelEl || !inputEl) return;
-            
-            // Najít aktuální název
-            var stavba = state.stavby.find(function(s) { return s.id === stavbaId; });
-            if (!stavba) return;
-            var objekt = stavba.objekty.find(function(o) { return o.id === objektId; });
-            if (!objekt) return;
-            
-            // Přepnout na input
-            labelEl.style.display = 'none';
-            inputEl.style.display = 'inline-block';
-            inputEl.value = objekt.name || 'Objekt ' + objektId;
-            inputEl.focus();
-            inputEl.select();
-        }
-        
-        function finishEditObjektName(stavbaId, objektId) {
-            var objektKey = stavbaId + '-' + objektId;
-            var labelEl = document.getElementById('objekt-' + objektKey + '-label');
-            var inputEl = document.getElementById('objekt-' + objektKey + '-input');
-            
-            if (!labelEl || !inputEl) return;
-            
-            var newName = inputEl.value.trim();
-            
-            // Najít a aktualizovat objekt
-            var stavba = state.stavby.find(function(s) { return s.id === stavbaId; });
-            if (stavba) {
-                var objekt = stavba.objekty.find(function(o) { return o.id === objektId; });
-                if (objekt) {
-                    objekt.name = newName || 'Objekt ' + objektId;
-                    labelEl.textContent = objekt.name;
-                }
-            }
-            
-            // Přepnout zpět na label
-            inputEl.style.display = 'none';
-            labelEl.style.display = 'inline';
-            
-            updateDokumentaceTree();
-        }
-        
-        function handleObjektNameKey(event, stavbaId, objektId) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                finishEditObjektName(stavbaId, objektId);
-            } else if (event.key === 'Escape') {
-                event.preventDefault();
-                var objektKey = stavbaId + '-' + objektId;
-                var labelEl = document.getElementById('objekt-' + objektKey + '-label');
-                var inputEl = document.getElementById('objekt-' + objektKey + '-input');
-                if (labelEl && inputEl) {
-                    inputEl.style.display = 'none';
-                    labelEl.style.display = 'inline';
-                }
-            }
-        }
-        
-        
-
-        function triggerUpload(key) { document.getElementById('upload-' + key).click(); }
-        function triggerFolderUpload(key) { document.getElementById('upload-' + key + '-folder').click(); }
-        function handleFiles(event, key) { addFiles(key, event.target.files, false); }
-        function handleFolderFiles(event, key) { addFiles(key, event.target.files, true); }
-        
-        function handleDrop(event, key) { 
-            event.preventDefault(); 
-            event.currentTarget.classList.remove('dragover'); 
-            var items = event.dataTransfer.items;
-            if (items) {
-                // Použijeme webkitGetAsEntry pro detekci složek
-                var entries = [];
-                for (var i = 0; i < items.length; i++) {
-                    var entry = items[i].webkitGetAsEntry ? items[i].webkitGetAsEntry() : null;
-                    if (entry) entries.push(entry);
-                }
-                if (entries.length > 0) {
-                    processEntries(entries, key, '');
-                    return;
-                }
-            }
-            // Fallback na standardní soubory
-            addFiles(key, event.dataTransfer.files, false); 
-        }
-        
-        function processEntries(entries, key, basePath) {
-            entries.forEach(function(entry) {
-                if (entry.isFile) {
-                    entry.file(function(file) {
-                        var path = basePath ? basePath + '/' + file.name : file.name;
-                        addSingleFile(key, file, path);
-                    });
-                } else if (entry.isDirectory) {
-                    var dirReader = entry.createReader();
-                    var folderPath = basePath ? basePath + '/' + entry.name : entry.name;
-                    dirReader.readEntries(function(subEntries) {
-                        processEntries(subEntries, key, folderPath);
-                    });
-                }
-            });
-        }
-        
-        function addSingleFile(key, file, path) {
-            if (!state.files[key]) state.files[key] = [];
-            state.files[key].push({ 
-                name: file.name, 
-                size: file.size, 
-                path: path,
-                type: file.type || getFileTypeFromName(file.name),
-                addedAt: new Date().toISOString()
-            });
-            renderFiles(key);
-        }
-        function handleDragOver(event) { event.preventDefault(); event.currentTarget.classList.add('dragover'); }
-        function handleDragLeave(event) { event.currentTarget.classList.remove('dragover'); }
-
-        function addFiles(key, fileList, isFolder) {
-            if (!state.files[key]) state.files[key] = [];
-            var now = new Date().toISOString();
-            for (var i = 0; i < fileList.length; i++) { 
-                var file = fileList[i];
-                var path = isFolder && file.webkitRelativePath ? file.webkitRelativePath : file.name;
-                state.files[key].push({ 
-                    name: file.name, 
-                    size: file.size, 
-                    path: path,
-                    type: file.type || getFileTypeFromName(file.name),
-                    addedAt: now
-                }); 
-            }
-            renderFiles(key);
-        }
-        
-        function getFileTypeFromName(filename) {
-            var ext = filename.split('.').pop().toLowerCase();
-            var types = {
-                'pdf': 'application/pdf',
-                'doc': 'application/msword',
-                'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'xls': 'application/vnd.ms-excel',
-                'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'jpg': 'image/jpeg',
-                'jpeg': 'image/jpeg',
-                'png': 'image/png',
-                'gif': 'image/gif',
-                'dwg': 'application/acad',
-                'dxf': 'application/dxf',
-                'zip': 'application/zip',
-                'rar': 'application/x-rar-compressed'
-            };
-            return types[ext] || 'application/octet-stream';
-        }
-
-        function renderFiles(key) {
-            var container = document.getElementById('files-' + key);
-            if (!container) return;
-            var files = state.files[key] || [];
-            var html = '';
-            
-            if (files.length > 0) {
-                // Header s počtem a tlačítkem Smazat vše
-                html += '<div class="gov-uploaded-files-header">';
-                html += '<span class="gov-uploaded-files-count">Nahráno ' + files.length + ' ' + getFilesLabel(files.length) + '</span>';
-                html += '<button class="gov-uploaded-files-clear" onclick="clearAllFiles(\'' + key + '\')">';
-                html += '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>';
-                html += 'Smazat vše';
-                html += '</button>';
-                html += '</div>';
-                
-                files.forEach(function(file, index) {
-                    var displayName = file.path || file.name;
-                    var isInFolder = displayName.indexOf('/') > -1;
-                    var folderIcon = isInFolder ? '<svg style="width:14px;height:14px;margin-right:4px;color:#666;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>' : '';
-                    
-                    html += '<div class="gov-uploaded-file">';
-                    html += '<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
-                    html += '<span class="gov-uploaded-file-name">' + folderIcon + displayName + '</span>';
-                    html += '<span class="gov-uploaded-file-size">' + formatFileSize(file.size) + '</span>';
-                    html += '<div class="gov-uploaded-file-actions">';
-                    html += '<button class="gov-uploaded-file-view" onclick="openFilePreview(\'' + key + '\', ' + index + ')" title="Zobrazit detail">';
-                    html += '<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>';
-                    html += '</button>';
-                    html += '<button class="gov-uploaded-file-remove" onclick="removeFile(\'' + key + '\', ' + index + ')" title="Smazat soubor">';
-                    html += '<svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>';
-                    html += '</button>';
-                    html += '</div>';
-                    html += '</div>';
-                });
-            }
-            
-            container.innerHTML = html;
-        }
-        
-        function getFilesLabel(count) {
-            if (count === 1) return 'soubor';
-            if (count >= 2 && count <= 4) return 'soubory';
-            return 'souborů';
-        }
-        
-        function clearAllFiles(key) {
-            var files = state.files[key] || [];
-            if (files.length === 0) return;
-            
-            if (!confirm('Opravdu chcete smazat všech ' + files.length + ' ' + getFilesLabel(files.length) + '?')) return;
-            
-            state.files[key] = [];
-            renderFiles(key);
-        }
-
-        function removeFile(key, index) { 
-            if (state.files[key]) { 
-                state.files[key].splice(index, 1); 
-                renderFiles(key); 
-            } 
-        }
-        
-        // ===== FILE PREVIEW =====
-        var currentPreviewFile = null;
-        
-        function openFilePreview(key, index) {
-            var file = state.files[key] ? state.files[key][index] : null;
-            if (!file) return;
-            
-            currentPreviewFile = file;
-            
-            // Vyplnit údaje
-            document.getElementById('previewFileName').textContent = file.name;
-            document.getElementById('previewFilePath').textContent = file.path || file.name;
-            document.getElementById('previewFileSize').textContent = formatFileSize(file.size);
-            document.getElementById('previewFileType').textContent = getFileTypeLabel(file.type || getFileTypeFromName(file.name));
-            document.getElementById('previewFileDate').textContent = file.addedAt ? formatDateTime(file.addedAt) : 'Právě nahráno';
-            
-            // Nastavit ikonu podle typu souboru
-            var iconEl = document.getElementById('previewIcon');
-            iconEl.innerHTML = getFileIconPath(file.name);
-            
-            // Zobrazit modal
-            document.getElementById('filePreviewModal').classList.add('show');
-        }
-        
-        function closeFilePreview() {
-            document.getElementById('filePreviewModal').classList.remove('show');
-            currentPreviewFile = null;
-        }
-        
-        function simulateDownload() {
-            if (currentPreviewFile) {
-                alert('V prototypu není stahování k dispozici.\n\nSoubor: ' + currentPreviewFile.name);
-            }
-        }
-        
-        function getFileTypeLabel(mimeType) {
-            var labels = {
-                'application/pdf': 'PDF dokument',
-                'application/msword': 'Word dokument',
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'Word dokument (DOCX)',
-                'application/vnd.ms-excel': 'Excel tabulka',
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Excel tabulka (XLSX)',
-                'image/jpeg': 'Obrázek JPEG',
-                'image/png': 'Obrázek PNG',
-                'image/gif': 'Obrázek GIF',
-                'application/acad': 'AutoCAD výkres (DWG)',
-                'application/dxf': 'AutoCAD výkres (DXF)',
-                'application/zip': 'ZIP archiv',
-                'application/x-rar-compressed': 'RAR archiv',
-                'application/octet-stream': 'Binární soubor'
-            };
-            return labels[mimeType] || mimeType;
-        }
-        
-        function getFileIconPath(filename) {
-            var ext = filename.split('.').pop().toLowerCase();
-            
-            // PDF
-            if (ext === 'pdf') {
-                return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>';
-            }
-            // Obrázky
-            if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].indexOf(ext) > -1) {
-                return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>';
-            }
-            // CAD
-            if (['dwg', 'dxf'].indexOf(ext) > -1) {
-                return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>';
-            }
-            // Archivy
-            if (['zip', 'rar', '7z', 'tar', 'gz'].indexOf(ext) > -1) {
-                return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>';
-            }
-            // Default - dokument
-            return '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>';
-        }
-        
-        function formatDateTime(isoString) {
-            var date = new Date(isoString);
-            var day = String(date.getDate()).padStart(2, '0');
-            var month = String(date.getMonth() + 1).padStart(2, '0');
-            var year = date.getFullYear();
-            var hours = String(date.getHours()).padStart(2, '0');
-            var minutes = String(date.getMinutes()).padStart(2, '0');
-            return day + '.' + month + '.' + year + ' v ' + hours + ':' + minutes;
-        }
-        
-        // Event listenery pro modal
-        document.getElementById('filePreviewModal').addEventListener('click', function(e) {
-            if (e.target === this) closeFilePreview();
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeFilePreview();
-        });
-        function formatFileSize(bytes) { if (bytes < 1024) return bytes + ' B'; if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'; return (bytes / (1024 * 1024)).toFixed(1) + ' MB'; }
-        function goToNext() { localStorage.setItem('formDokumentace', JSON.stringify(state)); window.location.href = 'form_3.html'; }
-        function toggleUserMenu() { var btn = document.querySelector('.gov-header-user-btn'); var dropdown = document.getElementById('userDropdown'); if (btn) btn.classList.toggle('active'); if (dropdown) dropdown.classList.toggle('show'); }
-        document.addEventListener('click', function(e) { var userSection = document.querySelector('.gov-header-user'); if (userSection && !userSection.contains(e.target)) { var btn = document.querySelector('.gov-header-user-btn'); var dropdown = document.getElementById('userDropdown'); if (btn) btn.classList.remove('active'); if (dropdown) dropdown.classList.remove('show'); } });
-        function startAutosaveTimer() { var s = 3; setInterval(function() { document.getElementById('autosaveTime').textContent = ++s; }, 1000); }
-
-        // ===== STRUKTURA DOKUMENTACE =====
-        var treeIdCounter = 0;
-        
-        function updateDokumentaceTree() {
-            var tree = document.getElementById('dokumentaceTree');
-            if (!tree) return;
-            
-            treeIdCounter = 0;
-            var html = '';
-            
-            // A - Průvodní list
-            html += renderTreeFolder('A - Průvodní list', function() {
-                return renderTreeFiles(state.files['A']);
-            }, state.files['A']);
-            
-            // B - Souhrnná technická zpráva
-            html += renderTreeFolder('B - Souhrnná technická zpráva', function() {
-                return renderTreeFiles(state.files['B']);
-            }, state.files['B']);
-            
-            // C - Situační výkresy
-            html += renderTreeFolder('C - Situační výkresy', function() {
-                var content = '';
-                content += renderTreeFolder('C1 - Širší vztahy', function() { return renderTreeFiles(state.files['C1']); }, state.files['C1']);
-                content += renderTreeFolder('C2 - Katastrální', function() { return renderTreeFiles(state.files['C2']); }, state.files['C2']);
-                content += renderTreeFolder('C3 - Koordinační', function() { return renderTreeFiles(state.files['C3']); }, state.files['C3']);
-                content += renderTreeFolder('C4 - Speciální', function() { return renderTreeFiles(state.files['C4']); }, state.files['C4']);
-                content += renderTreeFolder('C5 - Dělení pozemků', function() { return renderTreeFiles(state.files['C5']); }, state.files['C5']);
-                return content;
-            }, null, true); // always has children (subfolders)
-            
-            // D - Dokumentace objektů
-            html += renderTreeFolder('D - Dokumentace', function() {
-                var content = '';
-                state.stavby.forEach(function(stavba) {
-                    var stavbaName = stavba.name || (stavba.type === 'hlavni' ? 'Hlavní stavba' : 'Vedlejší stavba');
-                    var stavbaIcon = stavba.type === 'hlavni' ? '🏠 ' : '🏗️ ';
-                    
-                    content += renderTreeFolder(stavbaIcon + stavbaName, function() {
-                        var objektyContent = '';
-                        stavba.objekty.forEach(function(objekt) {
-                            var objektName = objekt.name || 'Objekt ' + objekt.id;
-                            var objektKey = stavba.id + '-' + objekt.id;
-                            
-                            objektyContent += renderTreeFolder('📦 ' + objektName, function() {
-                                var dContent = '';
-                                dContent += renderTreeFolder('D1 - Stavební', function() { return renderTreeFiles(state.files['D1-' + objektKey]); }, state.files['D1-' + objektKey]);
-                                dContent += renderTreeFolder('D2 - Konstrukční', function() { return renderTreeFiles(state.files['D2-' + objektKey]); }, state.files['D2-' + objektKey]);
-                                dContent += renderTreeFolder('D3 - Požární', function() { return renderTreeFiles(state.files['D3-' + objektKey]); }, state.files['D3-' + objektKey]);
-                                return dContent;
-                            }, null, true);
-                        });
-                        return objektyContent;
-                    }, null, true);
-                });
-                return content;
-            }, null, true);
-            
-            tree.innerHTML = html;
-        }
-        
-        function renderTreeFolder(label, contentFn, files, alwaysHasChildren) {
-            var id = 'tree-folder-' + (++treeIdCounter);
-            var fileCount = files ? files.length : 0;
-            var countBadge = fileCount > 0 ? '<span class="gov-tree-count">(' + fileCount + ')</span>' : '';
-            var hasContent = alwaysHasChildren || fileCount > 0;
-            
-            var html = '<div class="gov-tree-item folder" onclick="toggleTreeFolder(\'' + id + '\')">';
-            html += toggleIcon(true); // defaultně sbaleno
-            html += folderIcon();
-            html += label + countBadge;
-            html += '</div>';
-            
-            var content = contentFn ? contentFn() : '';
-            html += '<div class="gov-tree-children collapsed' + (hasContent ? ' has-content' : '') + '" id="' + id + '">';
-            html += content;
-            html += '</div>';
-            
-            return html;
-        }
-        
-        function renderTreeFiles(files) {
-            if (!files || files.length === 0) return '';
-            
-            var fileTree = buildFileTree(files);
-            return renderFileTreeContent(fileTree);
-        }
-        
-        function renderFileTreeContent(tree) {
-            var html = '';
-            
-            // Nejprve složky
-            Object.keys(tree).forEach(function(key) {
-                if (key === '_files') return;
-                var id = 'tree-folder-' + (++treeIdCounter);
-                
-                html += '<div class="gov-tree-item folder" onclick="toggleTreeFolder(\'' + id + '\')">';
-                html += toggleIcon(true);
-                html += folderIcon();
-                html += key;
-                html += '</div>';
-                html += '<div class="gov-tree-children collapsed has-content" id="' + id + '">';
-                html += renderFileTreeContent(tree[key]);
-                html += '</div>';
-            });
-            
-            // Pak soubory
-            if (tree._files) {
-                tree._files.forEach(function(file) {
-                    html += '<div class="gov-tree-item file">' + fileIcon() + file.name + '</div>';
-                });
-            }
-            
-            return html;
-        }
-        
-        function toggleTreeFolder(id) {
-            var el = document.getElementById(id);
-            if (!el) return;
-            
-            var isCollapsed = el.classList.contains('collapsed');
-            var toggleEl = el.previousElementSibling.querySelector('.gov-tree-toggle');
-            
-            if (isCollapsed) {
-                el.classList.remove('collapsed');
-                if (toggleEl) toggleEl.classList.remove('collapsed');
-            } else {
-                el.classList.add('collapsed');
-                if (toggleEl) toggleEl.classList.add('collapsed');
-            }
-        }
-        
-        function expandAllFolders() {
-            var folders = document.querySelectorAll('.gov-tree-children');
-            var toggles = document.querySelectorAll('.gov-tree-toggle');
-            folders.forEach(function(el) { el.classList.remove('collapsed'); });
-            toggles.forEach(function(el) { el.classList.remove('collapsed'); });
-        }
-        
-        function collapseAllFolders() {
-            var folders = document.querySelectorAll('.gov-tree-children');
-            var toggles = document.querySelectorAll('.gov-tree-toggle');
-            folders.forEach(function(el) { el.classList.add('collapsed'); });
-            toggles.forEach(function(el) { el.classList.add('collapsed'); });
-        }
-        
-        function renderTreeSection(key, label, files) {
-            // Zachováno pro zpětnou kompatibilitu, ale už se nepoužívá
-            return renderTreeFolder(label, function() { return renderTreeFiles(files); }, files);
-        }
-        
-        function buildFileTree(files) {
-            var tree = {};
-            
-            files.forEach(function(file) {
-                var path = file.path || file.name;
-                var parts = path.split('/');
-                var current = tree;
-                
-                for (var i = 0; i < parts.length; i++) {
-                    var part = parts[i];
-                    if (i === parts.length - 1) {
-                        // Je to soubor
-                        if (!current._files) current._files = [];
-                        current._files.push({ name: part, size: file.size });
-                    } else {
-                        // Je to složka
-                        if (!current[part]) current[part] = {};
-                        current = current[part];
-                    }
-                }
-            });
-            
-            return tree;
-        }
-        
-        function hasAnyFiles(keys) {
-            for (var i = 0; i < keys.length; i++) {
-                if (state.files[keys[i]] && state.files[keys[i]].length > 0) return true;
-            }
-            return false;
-        }
-        
-        function toggleIcon(collapsed) {
-            return '<svg class="gov-tree-toggle' + (collapsed ? ' collapsed' : '') + '" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>';
-        }
-        
-        function folderIcon() {
-            return '<svg class="gov-tree-icon folder-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>';
-        }
-        
-        function fileIcon() {
-            return '<svg class="gov-tree-icon file-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>';
-        }
-        
-        // Aktualizovat strom při změnách
-        var originalRenderFiles = renderFiles;
-        renderFiles = function(key) {
-            originalRenderFiles(key);
-            updateDokumentaceTree();
-        };
-        
-        // Inicializace stromu
-        document.addEventListener('DOMContentLoaded', function() { 
-            loadIdentity(); 
-            startAutosaveTimer(); 
-            renderStavby();
-            updateDokumentaceTree();
         });
     </script>
 </body>
