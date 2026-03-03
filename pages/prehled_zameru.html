@@ -136,10 +136,42 @@ body {
 /* ===== SEARCH BAR ===== */
 .gov-search-bar {
   max-width: 1400px;
-  margin: 24px auto;
-  padding: 0 32px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  position: sticky;
+  top: 0;
+  background: var(--gov-neutral-50);
+  z-index: 100;
+  border-bottom: 1px solid var(--gov-neutral-200);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.gov-btn-new-zamer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--gov-primary-600);
+  color: #fff;
+  border: none;
+  border-radius: var(--gov-radius);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.gov-btn-new-zamer:hover {
+  background: var(--gov-primary-700);
+}
+.gov-btn-new-zamer svg {
+  width: 18px;
+  height: 18px;
 }
 .gov-search-container {
+  flex: 1;
   display: flex;
   gap: 12px;
   align-items: center;
@@ -208,10 +240,10 @@ body {
   border: 1px solid var(--gov-neutral-200);
   padding: 20px;
   height: fit-content;
-  max-height: calc(100vh - 48px);
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
   position: sticky;
-  top: 24px;
+  top: 80px;
 }
 .gov-filter-group {
   margin-bottom: 24px;
@@ -1378,6 +1410,12 @@ body {
 
 <!-- Search Bar -->
 <div class="gov-search-bar">
+  <a href="form_1.html" class="gov-btn-new-zamer">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    </svg>
+    Založit nový záměr
+  </a>
   <div class="gov-search-container">
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;color:var(--gov-neutral-400)">
       <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
