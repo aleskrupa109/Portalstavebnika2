@@ -36,6 +36,18 @@
         .gov-nav-link { display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; border-top: 3px solid transparent; }
         .gov-nav-link:hover { background: rgba(255,255,255,0.1); }
         .gov-nav-link.disabled { color: rgba(255,255,255,0.4); pointer-events: none; }
+
+        /* ===== SIDEBAR ===== */
+        .gov-sidebar { width: 320px; flex-shrink: 0; position: sticky; top: 120px; }
+        .gov-summary { background: #fff; border-radius: var(--gov-radius-lg); padding: 20px; }
+        .gov-summary-title { font-size: 13px; font-weight: 600; color: var(--gov-primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+        .gov-summary-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--gov-neutral-100); font-size: 13px; }
+        .gov-summary-item:last-child { border-bottom: none; }
+        .gov-summary-label { color: var(--gov-neutral-500); }
+        .gov-summary-value { color: var(--gov-neutral-900); font-weight: 500; text-align: right; max-width: 180px; }
+        .gov-page-header { margin-bottom: 24px; }
+        .gov-page-header h1 { font-size: 24px; font-weight: 500; margin: 0; }
+
 /* ===== GOV.CZ DESIGN TOKENS ===== */
 :root {
   --gov-primary-600: #2362a2;
@@ -981,11 +993,14 @@ h1 {
         </nav>
     </header>
     <div class="gov-page">
-      <div class="gov-layout">
-<div class="gov-main">
-      <h1 style="font-size: 24px; font-weight: 500; margin: 0 0 24px 0;">Typ stavby</h1>
-  
-      <div class="section">
+        <div class="gov-page-header">
+            <h1>Typ stavby</h1>
+        </div>
+
+        <div class="gov-layout">
+            <main class="gov-main">
+                <div class="gov-card">
+                    <div class="section">
     <p class="gov-card-title" style="font-size: 13px; font-weight: 600; color: #2c5a8c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Krok 1: Výběr typu záměru</p>
     
     <div class="quick-tags">
@@ -1648,8 +1663,37 @@ h1 {
   </div>
   
   
-      </div>
+
+            </main>
+
+            <aside class="gov-sidebar">
+                <div class="gov-summary">
+                    <div class="gov-summary-title">Shrnutí záměru</div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Stavebník</span>
+                        <span class="gov-summary-value">Aleš Krupa</span>
+                    </div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Kategorie</span>
+                        <span class="gov-summary-value">Povolení stavby</span>
+                    </div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Typ stavby</span>
+                        <span class="gov-summary-value" id="sidebarTyp">—</span>
+                    </div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Kategorie stavby</span>
+                        <span class="gov-summary-value" id="sidebarKategorie">—</span>
+                    </div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Název</span>
+                        <span class="gov-summary-value" id="sidebarNazev">—</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
     </div>
+
     <script>
         function toggleUserMenu() {
             var dropdown = document.getElementById('userDropdown');
@@ -1666,6 +1710,34 @@ h1 {
     <script>
 
 // Konfigurace quick tagů
+
+// Aktualizace sidebaru
+function updateSidebar() {
+    var typEl = document.getElementById('sidebarTyp');
+    var katEl = document.getElementById('sidebarKategorie');
+    var nazevEl = document.getElementById('sidebarNazev');
+    
+    if (typEl && appState.selectedTag) {
+        var config = quickTagConfig[appState.selectedTag];
+        typEl.textContent = config ? config.label : '---';
+    }
+    
+    if (katEl) {
+        var kategorie = {
+            'drobna': 'Drobna stavba',
+            'jednoducha': 'Jednoducha stavba',
+            'ostatni': 'Ostatni stavba',
+            'vyhrazena': 'Vyhrazena stavba'
+        };
+        katEl.textContent = kategorie[appState.buildingCategory] || '---';
+    }
+    
+    if (nazevEl) {
+        var nazevInput = document.getElementById('nazev');
+        nazevEl.textContent = nazevInput && nazevInput.value ? nazevInput.value : '---';
+    }
+}
+
 var quickTagConfig = {
   'rd': {
     label: 'Rodinný dům',
@@ -1763,11 +1835,40 @@ var appState = {
 };
 
 // Výběr quick tagu
+
+// Aktualizace shrnutí v sidebaru
+function updateSummary() {
+    var typEl = document.getElementById('summaryTyp');
+    var katEl = document.getElementById('summaryKategorie');
+    var nazevEl = document.getElementById('summaryNazev');
+    
+    if (typEl && appState.selectedTag) {
+        var config = quickTagConfig[appState.selectedTag];
+        typEl.textContent = config ? config.label : '—';
+    }
+    
+    if (katEl && appState.buildingCategory) {
+        var kategorie = {
+            'drobna': 'Drobná stavba',
+            'jednoducha': 'Jednoduchá stavba',
+            'ostatni': 'Ostatní stavba',
+            'vyhrazena': 'Vyhrazená stavba'
+        };
+        katEl.textContent = kategorie[appState.buildingCategory] || '—';
+    }
+    
+    if (nazevEl) {
+        var nazevInput = document.getElementById('nazev');
+        nazevEl.textContent = nazevInput && nazevInput.value ? nazevInput.value : '—';
+    }
+}
+
 function selectQuickTag(tagId) {
   var config = quickTagConfig[tagId];
   if (!config) return;
   
   appState.selectedTag = tagId;
+  updateSidebar();
   appState.selectedFollowupOption = null;
   
   // Označit změny
@@ -1779,6 +1880,7 @@ function selectQuickTag(tagId) {
     t.classList.remove('selected');
   });
   event.currentTarget.classList.add('selected');
+  updateSummary();
   
   // Skrýt vše a resetovat stavy
   document.getElementById('followup').classList.remove('visible');
@@ -1880,6 +1982,8 @@ function selectFollowupOption(tagId, optionIndex) {
   
   var option = config.followUp.options[optionIndex];
   appState.buildingCategory = option.category;
+  updateSidebar();
+  updateSummary();
   appState.selectedFollowupOption = option;
   
   // Označit změny
@@ -1891,6 +1995,7 @@ function selectFollowupOption(tagId, optionIndex) {
     opt.classList.remove('selected');
   });
   event.currentTarget.classList.add('selected');
+  updateSummary();
   
   // Konfigurace kategorií
   var categoryConfig = {
@@ -1936,6 +2041,7 @@ function selectBuildingType(type) {
     card.classList.remove('selected');
   });
   event.currentTarget.classList.add('selected');
+  updateSummary();
   
   // Rozbalit sekci pokud byla sbalená
   document.getElementById('manualTypeSection').classList.remove('collapsed');
@@ -1999,6 +2105,7 @@ function selectSubtype(type, subtype) {
     item.classList.remove('selected');
   });
   event.currentTarget.classList.add('selected');
+  updateSummary();
   
   // Konfigurace stavebních úřadů a kategorií
   var suConfig = {
@@ -2085,6 +2192,7 @@ function selectCategory(category) {
     item.classList.remove('selected');
   });
   event.currentTarget.classList.add('selected');
+  updateSummary();
   
   // Konfigurace pro běžné stavby
   var categoryConfig = {
@@ -2363,6 +2471,20 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-    </script>
+    
+// Listener pro aktualizaci nazvu v sidebaru
+document.addEventListener('DOMContentLoaded', function() {
+    var nazevInput = document.getElementById('nazev');
+    if (nazevInput) {
+        nazevInput.addEventListener('input', function() {
+            var nazevEl = document.getElementById('sidebarNazev');
+            if (nazevEl) {
+                nazevEl.textContent = this.value || '---';
+            }
+        });
+    }
+});
+
+</script>
 </body>
 </html>
