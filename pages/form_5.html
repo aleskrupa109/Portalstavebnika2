@@ -1,0 +1,2880 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shrnutí záměru | Portál stavebníka 2.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gov-primary: #2c5a8c;
+            --gov-primary-600: #2362a2;
+            --gov-primary-700: #1e5086;
+            --gov-primary-200: #c5dbf2;
+            --gov-primary-100: #e5eef9;
+            --gov-primary-50: #f3f7fc;
+            --gov-secondary-600: #fab413;
+            --gov-secondary-100: #fff6e1;
+            --gov-neutral-0: #ffffff;
+            --gov-neutral-50: #f6f6f6;
+            --gov-neutral-100: #e7e7e7;
+            --gov-neutral-200: #d1d1d1;
+            --gov-neutral-300: #b0b0b0;
+            --gov-neutral-400: #888888;
+            --gov-neutral-500: #6d6d6d;
+            --gov-neutral-600: #5a5a5a;
+            --gov-neutral-700: #4f4f4f;
+            --gov-neutral-800: #3b3b3b;
+            --gov-neutral-900: #2d2d2d;
+            --gov-error-600: #c62828;
+            --gov-error-100: #fde3e3;
+            --gov-warning-600: #ca8504;
+            --gov-warning-100: #fef7c3;
+            --gov-warning-50: #fefbe8;
+            --gov-success-600: #2e7d32;
+            --gov-success-100: #e2f6e3;
+            --gov-success-50: #f3faf3;
+            --gov-radius: 4px;
+            --gov-radius-lg: 8px;
+            --gov-font: 'Roboto', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--gov-font); background: var(--gov-neutral-50); color: var(--gov-neutral-900); line-height: 1.5; }
+
+        /* ===== HEADER ===== */
+        .gov-header { background: var(--gov-primary); position: sticky; top: 0; z-index: 1000; }
+        .gov-header-top { padding: 14px 40px; }
+        .gov-header-top-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .gov-header-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; }
+        .gov-header-logo { height: 38px; }
+        .gov-header-title { font-size: 18px; font-weight: 400; }
+        .gov-header-user { position: relative; }
+        .gov-header-user-btn { display: flex; align-items: center; gap: 10px; padding: 8px 16px; border: 1px solid rgba(255,255,255,0.5); border-radius: 4px; color: #fff; font-size: 13px; cursor: pointer; background: transparent; font-family: var(--gov-font); }
+        .gov-header-user-btn:hover { background: rgba(255,255,255,0.1); }
+        .gov-header-user-btn svg { width: 18px; height: 18px; }
+        .gov-header-user-info { display: flex; flex-direction: column; line-height: 1.25; text-align: left; }
+        .gov-header-user-name { font-weight: 500; font-size: 13px; }
+        .gov-header-user-detail { font-size: 11px; opacity: 0.85; }
+        .gov-header-user-dropdown { position: absolute; top: calc(100% + 8px); right: 0; min-width: 280px; background: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.2s; z-index: 100; }
+        .gov-header-user-dropdown.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .gov-header-user-dropdown-header { padding: 16px; border-bottom: 1px solid #eee; background: #f9fafb; border-radius: 8px 8px 0 0; }
+        .gov-header-user-dropdown-name { font-weight: 600; color: #1a1a1a; font-size: 14px; }
+        .gov-header-user-dropdown-detail { font-size: 12px; color: #666; margin-top: 2px; }
+        .gov-header-user-dropdown-badge { display: inline-block; background: #e8f4fc; color: #2362a2; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; margin-top: 6px; }
+        .gov-header-user-dropdown a { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #333; text-decoration: none; font-size: 14px; transition: background 0.15s; }
+        .gov-header-user-dropdown a:last-child { border-radius: 0 0 8px 8px; border-top: 1px solid #eee; color: #c53030; }
+        .gov-header-user-dropdown a:hover { background: #f5f7fa; }
+        .gov-header-user-dropdown svg { width: 18px; height: 18px; color: #666; }
+        .gov-header-user-dropdown a:last-child svg { color: #c53030; }
+        .gov-header-nav { padding: 0 40px; }
+        .gov-header-nav-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; }
+        .gov-nav-menu { display: flex; list-style: none; }
+        .gov-nav-link { display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-top: 3px solid transparent; }
+        .gov-nav-link:hover { background: rgba(255,255,255,0.1); }
+        .gov-nav-link.disabled { color: rgba(255,255,255,0.4); cursor: default; pointer-events: none; }
+
+        /* ===== PAGE LAYOUT ===== */
+        .gov-page { max-width: 1060px; margin: 0 auto; padding: 32px 24px; }
+        .gov-page-header { margin-bottom: 24px; }
+        .gov-page-header h1 { font-size: 24px; font-weight: 500; margin: 0; }
+        .gov-layout { display: flex; gap: 32px; align-items: flex-start; }
+        .gov-main { flex: 1; min-width: 0; }
+        .gov-sidebar { width: 320px; flex-shrink: 0; position: sticky; top: 120px; }
+
+        /* ===== SIDEBAR ===== */
+        .gov-summary { background: #fff; border-radius: var(--gov-radius-lg); padding: 20px; }
+        .gov-summary-title { font-size: 13px; font-weight: 600; color: var(--gov-primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+        .gov-summary-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--gov-neutral-100); font-size: 13px; }
+        .gov-summary-item:last-child { border-bottom: none; }
+        .gov-summary-label { color: var(--gov-neutral-500); }
+        .gov-summary-value { color: var(--gov-neutral-900); font-weight: 500; text-align: right; max-width: 180px; }
+
+        /* ===== FORM_5 SPECIFIC STYLES ===== */
+/* ===== ZÁMĚR NUMBER BADGE ===== */
+.gov-zamer-number {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--gov-neutral-50);
+  border: 1px solid var(--gov-neutral-200);
+  border-radius: var(--gov-radius);
+  margin-bottom: 20px;
+}
+.gov-zamer-number-label {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.gov-zamer-number-value {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--gov-neutral-700);
+  font-family: 'Roboto Mono', monospace;
+}
+.gov-zamer-number-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  background: var(--gov-warning-100);
+  border-radius: var(--gov-radius);
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: var(--gov-warning-600);
+}
+/* ===== SECTIONS ===== */
+.gov-section {
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: var(--gov-neutral-0);
+  border: 1px solid var(--gov-neutral-100);
+  border-radius: var(--gov-radius-lg);
+  text-align: left;
+}
+.gov-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gov-neutral-100);
+}
+.gov-section-title {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--gov-primary-600);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+.gov-section-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  font-family: var(--gov-font);
+  color: var(--gov-primary-600);
+  background: transparent;
+  border: 1px solid var(--gov-primary-200);
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.gov-section-edit:hover {
+  background: var(--gov-primary-50);
+  border-color: var(--gov-primary-600);
+}
+.gov-section-edit svg {
+  width: 14px;
+  height: 14px;
+}
+/* ===== SUMMARY ITEMS ===== */
+.gov-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.gov-summary-item {
+  padding: 12px;
+  background: var(--gov-neutral-50);
+  border-radius: var(--gov-radius);
+  text-align: left;
+}
+.gov-summary-item.full-width {
+  grid-column: 1 / -1;
+}
+.gov-summary-label {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  text-align: left;
+}
+.gov-summary-value {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-900);
+  text-align: left;
+}
+.gov-summary-value.highlight {
+  color: var(--gov-primary-600);
+}
+/* ===== COLLAPSIBLE DESCRIPTION ===== */
+.gov-summary-collapsible {
+  margin-top: 16px;
+  border-top: 1px solid var(--gov-neutral-100);
+  padding-top: 12px;
+}
+.gov-summary-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--gov-neutral-200);
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  font-size: 13px !important;
+  font-family: var(--gov-font);
+  color: var(--gov-neutral-600);
+  transition: all 0.2s;
+  text-align: left;
+}
+.gov-summary-toggle:hover {
+  background: var(--gov-neutral-50);
+  border-color: var(--gov-neutral-300);
+  color: var(--gov-neutral-900);
+}
+.gov-summary-toggle svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s;
+}
+.gov-summary-toggle.expanded svg {
+  transform: rotate(180deg);
+}
+.gov-summary-description {
+  display: none;
+  margin-top: 12px;
+  padding: 16px;
+  background: var(--gov-neutral-50);
+  border-radius: var(--gov-radius);
+  font-size: 14px !important;
+  font-family: var(--gov-font);
+  color: var(--gov-neutral-700);
+  line-height: 1.6;
+  text-align: left;
+}
+.gov-summary-description p {
+  font-size: 14px !important;
+  font-family: var(--gov-font);
+  font-style: normal !important;
+  margin: 0 0 8px 0;
+  text-align: left;
+}
+.gov-summary-description p:last-child {
+  margin-bottom: 0;
+}
+.gov-summary-description strong {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--gov-neutral-900);
+}
+.gov-summary-description.visible {
+  display: block;
+}
+/* ===== PARCELS LIST IN SUMMARY ===== */
+.gov-summary-parcels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+  justify-content: flex-start;
+}
+.gov-summary-parcel-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: var(--gov-neutral-0);
+  border: 1px solid var(--gov-neutral-200);
+  border-radius: var(--gov-radius);
+  font-size: 12px !important;
+  color: var(--gov-neutral-700);
+}
+.gov-summary-parcel-tag.zamer {
+  background: var(--gov-primary-50);
+  border-color: var(--gov-primary-200);
+  color: var(--gov-primary-700);
+}
+.gov-summary-parcel-tag.sousedni {
+  background: #fff8e1;
+  border-color: #ffcc80;
+  color: #e65100;
+}
+/* ===== SUBJECTS SECTION ===== */
+.gov-subjects-section {
+  /* bez žlutého borderu - přehlednější */
+}
+.gov-subject-group {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--gov-neutral-100);
+}
+.gov-subject-group:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.gov-subject-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.gov-subject-group-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--gov-radius);
+}
+.gov-subject-group-icon.vlastnici {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+.gov-subject-group-icon.vti {
+  background: #fff3e0;
+  color: #e65100;
+}
+.gov-subject-group-icon.vdi {
+  background: #fce4ec;
+  color: #c2185b;
+}
+.gov-subject-group-icon.do {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+.gov-subject-group-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.gov-subject-group-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--gov-neutral-900);
+  margin: 0;
+}
+.gov-subject-group-count {
+  font-size: 12px !important;
+  color: var(--gov-neutral-500);
+}
+/* Subject cards */
+.gov-subject-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gov-subject-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--gov-neutral-50);
+  border: 1px solid var(--gov-neutral-100);
+  border-radius: var(--gov-radius);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.gov-subject-card:hover {
+  border-color: var(--gov-primary-300);
+  background: var(--gov-primary-50);
+  box-shadow: 0 2px 8px rgba(35, 98, 162, 0.1);
+}
+.gov-subject-card.auto-identified {
+  background: var(--gov-success-50);
+  border-color: var(--gov-success-100);
+}
+.gov-subject-card.auto-identified:hover {
+  border-color: var(--gov-success-600);
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.15);
+}
+.gov-subject-card.manual {
+  background: var(--gov-warning-50);
+  border-color: var(--gov-warning-100);
+}
+.gov-subject-card.warning {
+  background: #fff8e1;
+  border-color: #ffcc80;
+}
+.gov-subject-card.warning:hover {
+  border-color: #ff9800;
+}
+.gov-subject-status {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.gov-subject-status.confirmed {
+  background: var(--gov-success-100);
+  color: var(--gov-success-600);
+}
+.gov-subject-status.pending {
+  background: var(--gov-warning-100);
+  color: var(--gov-warning-600);
+}
+.gov-subject-status.error {
+  background: var(--gov-error-100);
+  color: var(--gov-error-600);
+}
+.gov-subject-status svg {
+  width: 14px;
+  height: 14px;
+}
+.gov-subject-info {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+.gov-subject-name {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-900);
+  margin-bottom: 2px;
+}
+.gov-subject-detail {
+  font-size: 11px !important;
+  color: var(--gov-neutral-500);
+}
+.gov-subject-actions {
+  display: flex;
+  gap: 4px;
+}
+.gov-subject-btn {
+  padding: 6px;
+  background: transparent;
+  border: 1px solid var(--gov-neutral-200);
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  color: var(--gov-neutral-500);
+  transition: all 0.2s;
+}
+.gov-subject-btn:hover {
+  background: var(--gov-neutral-100);
+  color: var(--gov-neutral-700);
+}
+.gov-subject-btn.danger:hover {
+  background: var(--gov-error-100);
+  color: var(--gov-error-600);
+  border-color: var(--gov-error-600);
+}
+.gov-subject-btn svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+/* Add subject button */
+.gov-add-subject {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  background: transparent;
+  border: 1px dashed var(--gov-neutral-300);
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  color: var(--gov-neutral-500);
+  font-size: 12px !important;
+  font-family: var(--gov-font);
+  transition: all 0.2s;
+  width: 100%;
+  margin-top: 8px;
+}
+.gov-add-subject:hover {
+  background: var(--gov-neutral-50);
+  border-color: var(--gov-primary-600);
+  color: var(--gov-primary-600);
+}
+.gov-add-subject svg {
+  width: 16px;
+  height: 16px;
+}
+/* ===== HINT BOX ===== */
+.gov-hint-box {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: var(--gov-primary-50);
+  border: 1px solid var(--gov-primary-100);
+  border-radius: var(--gov-radius);
+}
+.gov-hint-box.warning {
+  background: var(--gov-warning-50);
+  border-color: var(--gov-warning-100);
+}
+.gov-hint-box svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gov-primary-600);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.gov-hint-box.warning svg {
+  stroke: var(--gov-warning-600);
+}
+.gov-hint-box-content {
+  flex: 1;
+}
+.gov-hint-box strong {
+  display: block;
+  font-size: 13px !important;
+  color: var(--gov-primary-700);
+  margin-bottom: 4px;
+}
+.gov-hint-box.warning strong {
+  color: var(--gov-warning-600);
+}
+.gov-hint-box p {
+  font-size: 12px !important;
+  color: var(--gov-neutral-600);
+  margin: 0;
+  line-height: 1.5;
+}
+/* ===== STEPPER ===== */
+.gov-stepper {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 16px 20px;
+  background: var(--gov-neutral-0);
+  border: 1px solid var(--gov-neutral-100);
+  border-radius: var(--gov-radius-lg);
+  min-width: 200px;
+}
+.gov-stepper-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  position: relative;
+}
+.gov-stepper-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 36px;
+  bottom: -12px;
+  width: 2px;
+  background: var(--gov-neutral-200);
+}
+.gov-stepper-item.completed:not(:last-child)::after {
+  background: var(--gov-primary-600);
+}
+.gov-stepper-number {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  background: var(--gov-neutral-100);
+  color: var(--gov-neutral-500);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.gov-stepper-item.active .gov-stepper-number {
+  background: var(--gov-primary-600);
+  color: var(--gov-neutral-0);
+}
+.gov-stepper-item.completed .gov-stepper-number {
+  background: var(--gov-primary-600);
+  color: var(--gov-neutral-0);
+}
+.gov-stepper-content {
+  padding-top: 4px;
+}
+.gov-stepper-title {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-500);
+  margin: 0;
+}
+.gov-stepper-item.active .gov-stepper-title,
+.gov-stepper-item.completed .gov-stepper-title {
+  color: var(--gov-neutral-900);
+}
+.gov-stepper-desc {
+  font-size: 11px !important;
+  color: var(--gov-neutral-400);
+  margin-top: 2px;
+}
+/* ===== BUTTONS ===== */
+.gov-btn {
+  padding: 12px 24px;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  font-family: var(--gov-font);
+  border: 2px solid transparent;
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.gov-btn-primary {
+  background: var(--gov-primary-600);
+  border: 2px solid var(--gov-primary-600);
+  color: var(--gov-neutral-0);
+}
+.gov-btn-primary:hover {
+  background: var(--gov-primary-700);
+  border-color: var(--gov-primary-700);
+}
+.gov-btn-secondary {
+  background: var(--gov-neutral-0);
+  border: 2px solid var(--gov-neutral-200);
+  color: var(--gov-neutral-700);
+}
+.gov-btn-secondary:hover {
+  border-color: var(--gov-neutral-400);
+}
+.gov-btn svg {
+  width: 18px;
+  height: 18px;
+}
+/* ===== NAVIGATION ===== */
+.gov-nav {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gov-neutral-100);
+}
+.gov-nav-actions {
+  display: flex;
+  gap: 12px;
+}
+.gov-nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  font-family: var(--gov-font);
+  color: var(--gov-neutral-700);
+  background: var(--gov-neutral-0);
+  border: 2px solid var(--gov-neutral-200);
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.gov-nav-back:hover {
+  border-color: var(--gov-neutral-400);
+  color: var(--gov-neutral-900);
+}
+.gov-nav-back svg {
+  width: 18px;
+  height: 18px;
+}
+/* ===== SAVE DRAFT BAR ===== */
+.save-draft-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--gov-neutral-50);
+  border-top: 1px solid var(--gov-neutral-200);
+  padding: 12px 24px;
+  z-index: 100;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+.save-draft-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.save-draft-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.save-draft-info svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--gov-neutral-400);
+}
+.save-draft-status {
+  font-size: 13px;
+  color: var(--gov-neutral-500);
+}
+.btn-save-draft {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  background: white;
+  border: 1px solid var(--gov-neutral-200);
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--gov-font);
+  color: var(--gov-neutral-700);
+}
+.btn-save-draft:hover {
+  border-color: var(--gov-primary-600);
+  color: var(--gov-primary-600);
+}
+.btn-save-draft svg {
+  width: 16px;
+  height: 16px;
+}
+/* ===== MODAL ===== */
+.gov-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+}
+.gov-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.gov-modal {
+  background: var(--gov-neutral-0);
+  border-radius: var(--gov-radius-lg);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  font-family: var(--gov-font);
+  font-style: normal;
+  font-size: 14px;
+}
+.gov-modal *,
+.gov-modal a,
+.gov-modal span,
+.gov-modal div {
+  font-family: var(--gov-font) !important;
+  font-style: normal !important;
+}
+.gov-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--gov-neutral-100);
+}
+.gov-modal-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  font-family: var(--gov-font);
+  font-style: normal !important;
+  color: var(--gov-neutral-900);
+  margin: 0;
+}
+.gov-modal-close {
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gov-neutral-500);
+  border-radius: var(--gov-radius);
+}
+.gov-modal-close:hover {
+  background: var(--gov-neutral-100);
+  color: var(--gov-neutral-700);
+}
+.gov-modal-close svg {
+  width: 20px;
+  height: 20px;
+}
+.gov-modal-body {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.gov-modal-footer {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding: 16px 20px;
+  border-top: 1px solid var(--gov-neutral-100);
+}
+/* Radio group */
+.gov-radio-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+.gov-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px !important;
+  color: var(--gov-neutral-700);
+}
+.gov-radio-label input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gov-primary-600);
+}
+/* Form row */
+.gov-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+/* Input with button */
+.gov-input-with-btn {
+  display: flex;
+  gap: 8px;
+}
+.gov-input-with-btn .gov-input {
+  flex: 1;
+}
+.gov-btn-icon {
+  padding: 10px;
+  background: var(--gov-primary-600);
+  border: none;
+  border-radius: var(--gov-radius);
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s;
+}
+.gov-btn-icon:hover {
+  background: var(--gov-primary-700);
+}
+.gov-btn-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+/* Full width button */
+.gov-btn-full {
+  width: 100%;
+  margin-top: 12px;
+}
+/* Search wrapper */
+.gov-search-wrapper {
+  position: relative;
+}
+.gov-search-input:disabled {
+  background: var(--gov-neutral-100);
+  cursor: not-allowed;
+}
+.gov-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--gov-neutral-200);
+  border-top: none;
+  border-radius: 0 0 var(--gov-radius) var(--gov-radius);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.gov-search-results.active {
+  display: block;
+}
+.gov-search-result-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--gov-neutral-100);
+  transition: background 0.15s;
+}
+.gov-search-result-item:last-child {
+  border-bottom: none;
+}
+.gov-search-result-item:hover {
+  background: var(--gov-primary-50);
+}
+.gov-search-result-name {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-900);
+}
+.gov-search-result-detail {
+  font-size: 11px !important;
+  color: var(--gov-neutral-500);
+  margin-top: 2px;
+}
+/* Hint text */
+.gov-hint-text {
+  font-size: 11px !important;
+  color: var(--gov-neutral-500);
+  margin-top: 6px;
+  font-style: italic;
+}
+/* Selected provider card */
+.gov-selected-provider {
+  margin-top: 12px;
+}
+.gov-selected-provider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.gov-btn-link-small {
+  background: none;
+  border: none;
+  color: var(--gov-primary-600);
+  font-size: 12px !important;
+  cursor: pointer;
+  padding: 0;
+}
+.gov-btn-link-small:hover {
+  text-decoration: underline;
+}
+.gov-selected-provider-card {
+  padding: 12px;
+  background: var(--gov-success-50);
+  border: 1px solid var(--gov-success-100);
+  border-radius: var(--gov-radius);
+}
+.gov-selected-provider-name {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-900);
+}
+.gov-selected-provider-detail {
+  font-size: 12px !important;
+  color: var(--gov-neutral-600);
+  margin-top: 4px;
+}
+/* ===== SUBJECT DETAIL MODAL ===== */
+.gov-subject-detail-modal .gov-modal {
+  max-width: 450px;
+}
+.gov-subject-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gov-neutral-100);
+  margin-bottom: 16px;
+}
+.gov-subject-detail-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--gov-radius-lg);
+  flex-shrink: 0;
+}
+.gov-subject-detail-icon.vlastnik,
+.gov-subject-detail-icon.vlastnici {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+.gov-subject-detail-icon.vti {
+  background: #fff3e0;
+  color: #e65100;
+}
+.gov-subject-detail-icon.vdi {
+  background: #fce4ec;
+  color: #c2185b;
+}
+.gov-subject-detail-icon.do {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+.gov-subject-detail-icon svg {
+  width: 24px;
+  height: 24px;
+}
+.gov-subject-detail-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  font-family: var(--gov-font);
+  font-style: normal !important;
+  color: var(--gov-neutral-900);
+  margin: 0 0 4px 0;
+}
+.gov-subject-detail-type {
+  font-size: 12px !important;
+  font-family: var(--gov-font);
+  font-style: normal !important;
+  color: var(--gov-neutral-500);
+}
+.gov-subject-detail-row {
+  display: flex;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gov-neutral-100);
+  gap: 16px;
+}
+.gov-subject-detail-row:last-child {
+  border-bottom: none;
+}
+.gov-subject-detail-label {
+  width: 80px;
+  flex-shrink: 0;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  font-family: var(--gov-font);
+  font-style: normal !important;
+  color: var(--gov-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: right;
+}
+.gov-subject-detail-value {
+  flex: 1;
+  font-size: 14px !important;
+  font-family: var(--gov-font);
+  font-style: normal !important;
+  color: var(--gov-neutral-900);
+}
+.gov-subject-detail-value a,
+.gov-subject-detail-modal a,
+.gov-modal-body a {
+  color: var(--gov-primary-600);
+  text-decoration: none;
+  font-size: 14px !important;
+  font-family: var(--gov-font);
+  font-style: normal !important;
+}
+.gov-subject-detail-value a:hover,
+.gov-subject-detail-modal a:hover,
+.gov-modal-body a:hover {
+  text-decoration: underline;
+}
+.gov-subject-detail-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--gov-radius);
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  font-family: var(--gov-font);
+  font-style: normal !important;
+}
+.gov-subject-detail-status.confirmed {
+  background: var(--gov-success-100);
+  color: var(--gov-success-600);
+}
+.gov-subject-detail-status.pending {
+  background: var(--gov-warning-100);
+  color: var(--gov-warning-600);
+}
+/* ===== FORM ELEMENTS ===== */
+.gov-form-group {
+  margin-bottom: 16px;
+}
+.gov-label {
+  display: block;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-700);
+  margin-bottom: 6px;
+}
+.gov-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px !important;
+  font-family: var(--gov-font);
+  color: var(--gov-neutral-900);
+  background: var(--gov-neutral-0);
+  border: 1px solid var(--gov-neutral-200);
+  border-radius: var(--gov-radius);
+  transition: all 0.2s;
+}
+.gov-input:focus {
+  outline: none;
+  border-color: var(--gov-primary-600);
+  box-shadow: 0 0 0 3px var(--gov-primary-100);
+}
+.gov-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236d6d6d'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 36px;
+}
+/* ===== REPRESENTATION CHAIN ===== */
+.gov-representation-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gov-neutral-100);
+}
+.gov-representation-item {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  padding-bottom: 16px;
+}
+.gov-representation-item:last-child {
+  padding-bottom: 0;
+}
+.gov-representation-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: 0;
+  width: 2px;
+  background: var(--gov-neutral-200);
+}
+.gov-representation-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.gov-representation-icon.person {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+.gov-representation-icon.company {
+  background: #fff3e0;
+  color: #e65100;
+}
+.gov-representation-icon.applicant {
+  background: var(--gov-success-100);
+  color: var(--gov-success-600);
+}
+.gov-representation-icon svg {
+  width: 16px;
+  height: 16px;
+}
+.gov-representation-content {
+  flex: 1;
+  padding-top: 4px;
+  text-align: left;
+}
+.gov-representation-role {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.gov-representation-name {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--gov-neutral-900);
+}
+.gov-representation-detail {
+  font-size: 12px !important;
+  color: var(--gov-neutral-500);
+  margin-top: 2px;
+}
+.gov-representation-arrow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px !important;
+  color: var(--gov-neutral-400);
+  margin: 4px 0 4px 44px;
+}
+.gov-representation-arrow svg {
+  width: 12px;
+  height: 12px;
+}
+
+    </style>
+</head>
+<body>
+    <header class="gov-header">
+        <div class="gov-header-top">
+            <div class="gov-header-top-content">
+                <a href="../index.html" class="gov-header-brand">
+                    <img src="../images/logo-lev-white.png" alt="Státní znak" class="gov-header-logo">
+                    <span class="gov-header-title">Portál stavebníka 2.0</span>
+                </a>
+                <div class="gov-header-user">
+                    <button class="gov-header-user-btn" onclick="toggleUserMenu()">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        <div class="gov-header-user-info">
+                            <span class="gov-header-user-name">ALEŠ KRUPA</span>
+                            <span class="gov-header-user-detail">FO · Nar.: 19.04.1968</span>
+                        </div>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:12px;height:12px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="gov-header-user-dropdown" id="userDropdown">
+                        <div class="gov-header-user-dropdown-header">
+                            <div class="gov-header-user-dropdown-name">Aleš Krupa</div>
+                            <div class="gov-header-user-dropdown-detail">Nar.: 19.04.1968</div>
+                            <div class="gov-header-user-dropdown-badge">Fyzická osoba</div>
+                        </div>
+                        <a href="reza_implicitni.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>Změnit postavení</a>
+                        <a href="../index.html"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>Odhlásit se</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="gov-header-nav">
+            <div class="gov-header-nav-content">
+                <ul class="gov-nav-menu">
+                    <li><a href="#" class="gov-nav-link disabled">Úvod</a></li>
+                    <li><a href="prehled_zameru.html" class="gov-nav-link">Záměry</a></li>
+                    <li><a href="reza_setup.html" class="gov-nav-link">Plné moci</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="gov-page">
+        <div class="gov-page-header">
+            <h1>Shrnutí a potvrzení</h1>
+        </div>
+
+        <div class="gov-layout">
+            <main class="gov-main">
+
+
+      <!-- Záměr badge -->
+      <div class="gov-zamer-number">
+        <span class="gov-zamer-number-label">Záměr č.</span>
+        <span class="gov-zamer-number-value">Z/2024/001234</span>
+        <span class="gov-zamer-number-status">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:12px;height:12px">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          Koncept
+        </span>
+      </div>
+      <!-- 1. Identifikace žadatele -->
+      <div class="gov-section">
+        <div class="gov-section-header">
+          <h2 class="gov-section-title">Identifikace žadatele a zastoupení</h2>
+          <a href="form_1.html" class="gov-section-edit">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            Upravit
+          </a>
+        </div>
+        
+        <!-- Přihlášený uživatel -->
+        <div class="gov-summary-grid">
+          <div class="full-width gov-summary-item">
+            <div class="gov-summary-label">Přihlášený uživatel</div>
+            <div class="gov-summary-value">Ing. Petra Projektová</div>
+          </div>
+        </div>
+        
+        <!-- Řetězec zastoupení -->
+        <div class="gov-representation-chain">
+          <div class="gov-representation-item">
+            <div class="applicant gov-representation-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+            <div class="gov-representation-content">
+              <div class="gov-representation-role">Stavebník (žadatel)</div>
+              <div class="gov-representation-name">Jan Novák</div>
+              <div class="gov-representation-detail">nar. 15. 5. 1975 • Květinová 123/4, 250 73 Radonice</div>
+            </div>
+          </div>
+          
+          <div class="gov-representation-arrow">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+            je zastoupen
+          </div>
+          
+          <div class="gov-representation-item">
+            <div class="company gov-representation-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <div class="gov-representation-content">
+              <div class="gov-representation-role">Zástupce na základě plné moci</div>
+              <div class="gov-representation-name">PROJEKTA s.r.o.</div>
+              <div class="gov-representation-detail">IČO: 12345678 • Projektová 456, 110 00 Praha 1</div>
+            </div>
+          </div>
+          
+          <div class="gov-representation-arrow">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+            pověřuje osobu
+          </div>
+          
+          <div class="gov-representation-item">
+            <div class="gov-representation-icon person">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+            </div>
+            <div class="gov-representation-content">
+              <div class="gov-representation-role">Pověřená osoba (přihlášený uživatel)</div>
+              <div class="gov-representation-name">Ing. Petra Projektová</div>
+              <div class="gov-representation-detail">Zaměstnanec PROJEKTA s.r.o. • <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d4a4b1a0a6b5faa4a6bbbeb1bfa0bba2b594a4a6bbbeb1bfa0b5fab7ae">[email&nbsp;protected]</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 2. Typ a kategorie stavby -->
+      <div class="gov-section">
+        <div class="gov-section-header">
+          <h2 class="gov-section-title">Typ a kategorie stavby</h2>
+          <a href="form_3.html" class="gov-section-edit">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            Upravit
+          </a>
+        </div>
+        <div class="gov-summary-grid">
+          <div class="gov-summary-item">
+            <div class="gov-summary-label">Typ stavby</div>
+            <div class="gov-summary-value" id="summaryBuildingType">Rodinný dům</div>
+          </div>
+          <div class="gov-summary-item">
+            <div class="gov-summary-label">Kategorie</div>
+            <div class="gov-summary-value highlight" id="summaryCategory">Běžná stavba</div>
+          </div>
+          <div class="full-width gov-summary-item">
+            <div class="gov-summary-label">Název záměru</div>
+            <div class="gov-summary-value" id="summaryZamerName">Přístavba garáže k RD č.p. 156, ul. Polní, Radonice</div>
+          </div>
+          <div class="gov-summary-item">
+            <div class="gov-summary-label">Vlastní ID záměru</div>
+            <div class="gov-summary-value" id="summaryVlastniId">—</div>
+          </div>
+          <div class="gov-summary-item">
+            <div class="gov-summary-label">Příslušný stavební úřad</div>
+            <div class="gov-summary-value" id="summarySU">Městský úřad Brandýs nad Labem-Stará Boleslav, odbor stavební</div>
+          </div>
+        </div>
+        
+        <!-- Sbalitelný popis -->
+        <div class="gov-summary-collapsible">
+          <button type="button" class="gov-summary-toggle" onclick="toggleDescription(this)">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+            </svg>
+            Zobrazit popis záměru
+          </button>
+          <div class="gov-summary-description" id="descriptionContent">
+            <p><strong>Popis stavby:</strong></p>
+            <p>Přístavba jednopodlažní garáže k stávajícímu rodinnému domu č.p. 156. Garáž bude mít půdorysné rozměry 6,0 × 3,5 m, výšku 3,2 m. Konstrukce zděná z pórobetonových tvárnic, střecha plochá s atikou. Napojení na stávající elektroinstalaci RD.</p>
+            <p style="margin-top: 12px;"><strong>Účel stavby:</strong></p>
+            <p>Parkování osobního automobilu a skladování zahradního nářadí.</p>
+          </div>
+        </div>
+      </div>
+      <!-- 3. Pozemky -->
+      <div class="gov-section">
+        <div class="gov-section-header">
+          <h2 class="gov-section-title">Dotčené pozemky</h2>
+          <a href="form_4.html" class="gov-section-edit">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+            </svg>
+            Upravit
+          </a>
+        </div>
+        
+        <div class="full-width gov-summary-item" style="margin-bottom: 16px;">
+          <div class="gov-summary-label">Pozemky záměru</div>
+          <div class="gov-summary-parcels" id="summaryZamerParcels">
+            <span class="gov-summary-parcel-tag zamer">St. 405, k.ú. Radonice u Prahy</span>
+            <span class="gov-summary-parcel-tag zamer">p.č. 188/22, k.ú. Radonice u Prahy</span>
+          </div>
+        </div>
+        
+        <div class="full-width gov-summary-item">
+          <div class="gov-summary-label">Sousední pozemky</div>
+          <div class="gov-summary-parcels" id="summarySousedniParcels">
+            <span class="gov-summary-parcel-tag sousedni">St. 415, k.ú. Radonice u Prahy</span>
+            <span class="gov-summary-parcel-tag sousedni">St. 425, k.ú. Radonice u Prahy</span>
+            <span class="gov-summary-parcel-tag sousedni">p.č. 188/33, k.ú. Radonice u Prahy</span>
+            <span class="gov-summary-parcel-tag sousedni">p.č. 188/24, k.ú. Radonice u Prahy</span>
+            <span class="gov-summary-parcel-tag sousedni">St. 380, k.ú. Radonice u Prahy</span>
+          </div>
+        </div>
+      </div>
+      <!-- 4. Dotčené subjekty -->
+      <div class="gov-section gov-subjects-section">
+        <div class="gov-section-header">
+          <h2 class="gov-section-title">Dotčené subjekty</h2>
+        </div>
+        
+        <div class="gov-hint-box warning" style="margin-top: 0; margin-bottom: 20px;">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+          </svg>
+          <div class="gov-hint-box-content">
+            <strong>Zkontrolujte a potvrďte seznam subjektů</strong>
+            <p>Níže uvedené subjekty byly automaticky identifikovány na základě vybraných pozemků. Zkontrolujte, zda jsou všechny údaje správné, a případně doplňte chybějící subjekty.</p>
+          </div>
+        </div>
+        <!-- Vlastníci pozemků -->
+        <div class="gov-subject-group">
+          <div class="gov-subject-group-header">
+            <div class="gov-subject-group-icon vlastnici">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="gov-subject-group-title">Vlastníci sousedních pozemků</h3>
+              <span class="gov-subject-group-count">5 subjektů</span>
+            </div>
+          </div>
+          <div class="gov-subject-list">
+            <div class="auto-identified gov-subject-card" data-subject-id="marie-svobodova">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">Marie Svobodová</div>
+                <div class="gov-subject-detail">St. 415, 188/33 • Ověřeno z KN</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="petr-dvorak">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">Petr Dvořák</div>
+                <div class="gov-subject-detail">St. 425 • Ověřeno z KN</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="cerni-sjm">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">Jana Černá, Tomáš Černý (SJM)</div>
+                <div class="gov-subject-detail">188/24 • Ověřeno z KN</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="gov-subject-card warning" data-subject-id="neznamy-380">
+              <div class="gov-subject-status pending">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">Vlastník neznámý</div>
+                <div class="gov-subject-detail">St. 380 • Vyžaduje doplnění</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="gov-subject-btn" title="Doplnit" onclick="openAddSubjectModal('vlastnik')">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                  </svg>
+                </button>
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="obec-radonice-vlastnik">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">Obec Radonice</div>
+                <div class="gov-subject-detail">188/24 (komunikace) • Ověřeno z KN</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="gov-add-subject" onclick="openAddSubjectModal('vlastnik')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              Přidat vlastníka
+            </button>
+          </div>
+        </div>
+        <!-- Vlastníci technické infrastruktury -->
+        <div class="gov-subject-group">
+          <div class="gov-subject-group-header">
+            <div class="gov-subject-group-icon vti">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="gov-subject-group-title">Vlastníci technické infrastruktury (VTI)</h3>
+              <span class="gov-subject-group-count">4 subjekty</span>
+            </div>
+          </div>
+          <div class="gov-subject-list">
+            <div class="auto-identified gov-subject-card" data-subject-id="cez-distribuce">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">ČEZ Distribuce, a.s.</div>
+                <div class="gov-subject-detail">Elektřina • Vedení NN</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="gasnet">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">GasNet, s.r.o.</div>
+                <div class="gov-subject-detail">Plyn • STL plynovod DN100</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="1scv">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">1. SčV, a.s.</div>
+                <div class="gov-subject-detail">Voda • Vodovodní řad DN150</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="cetin">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">CETIN a.s.</div>
+                <div class="gov-subject-detail">Telekomunikace • Optický kabel</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="gov-add-subject" onclick="openAddSubjectModal('vti')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              Přidat správce sítí
+            </button>
+          </div>
+        </div>
+        <!-- Vlastníci dopravní infrastruktury -->
+        <div class="gov-subject-group">
+          <div class="gov-subject-group-header">
+            <div class="gov-subject-group-icon vdi">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="gov-subject-group-title">Vlastníci dopravní infrastruktury (VDI)</h3>
+              <span class="gov-subject-group-count">2 subjekty</span>
+            </div>
+          </div>
+          <div class="gov-subject-list">
+            <div class="auto-identified gov-subject-card" data-subject-id="obec-radonice-vdi">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">Obec Radonice</div>
+                <div class="gov-subject-detail">Místní komunikace • ul. Jabloňová</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="ksus">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">Krajská správa a údržba silnic Středočeského kraje</div>
+                <div class="gov-subject-detail">Silnice III. třídy • III/2457</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="gov-add-subject" onclick="openAddSubjectModal('vdi')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              Přidat správce komunikací
+            </button>
+          </div>
+        </div>
+        <!-- Dotčené orgány -->
+        <div class="gov-subject-group">
+          <div class="gov-subject-group-header">
+            <div class="do gov-subject-group-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="gov-subject-group-title">Dotčené orgány</h3>
+              <span class="gov-subject-group-count">3 orgány</span>
+            </div>
+          </div>
+          <div class="gov-subject-list">
+            <div class="auto-identified gov-subject-card" data-subject-id="hzs">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">Hasičský záchranný sbor Středočeského kraje</div>
+                <div class="gov-subject-detail">Požární ochrana</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="khs">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">KHS Středočeského kraje</div>
+                <div class="gov-subject-detail">Hygiena</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="auto-identified gov-subject-card" data-subject-id="meu-zp">
+              <div class="confirmed gov-subject-status">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="gov-subject-info">
+                <div class="gov-subject-name">MěÚ Brandýs n. L. - odbor životního prostředí</div>
+                <div class="gov-subject-detail">Ochrana přírody, ovzduší, voda</div>
+              </div>
+              <div class="gov-subject-actions">
+                <button type="button" class="danger gov-subject-btn" title="Odebrat">
+                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="gov-add-subject" onclick="openAddSubjectModal('do')">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              Přidat dotčený orgán
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Navigation -->
+      <!-- Navigation -->
+      <div class="gov-nav">
+        <a href="form_4.html" class="gov-nav-back">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Zpět
+        </a>
+        <div class="gov-nav-actions">
+          <button type="button" class="gov-btn gov-btn-secondary" onclick="saveAndReturn()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+            Uložit záměr
+          </button>
+          <button type="button" class="gov-btn gov-btn-primary" onclick="saveAndContinue()">
+            Uložit a podat žádost
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Stepper -->
+    <div class="gov-stepper">
+      <div class="completed gov-stepper-item">
+        <div class="gov-stepper-number">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" style="width:16px;height:16px">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <div class="gov-stepper-content">
+          <p class="gov-stepper-title">Identifikace osoby</p>
+          <p class="gov-stepper-desc">Zástupce stavebníka</p>
+        </div>
+      </div>
+      <div class="completed gov-stepper-item">
+        <div class="gov-stepper-number">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" style="width:16px;height:16px">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <div class="gov-stepper-content">
+          <p class="gov-stepper-title">Typ stavby</p>
+          <p class="gov-stepper-desc">Rodinný dům</p>
+        </div>
+      </div>
+      <div class="completed gov-stepper-item">
+        <div class="gov-stepper-number">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3" style="width:16px;height:16px">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <div class="gov-stepper-content">
+          <p class="gov-stepper-title">Pozemky a subjekty</p>
+          <p class="gov-stepper-desc">7 parcel, 14 subjektů</p>
+        </div>
+      </div>
+      <div class="active gov-stepper-item">
+        <div class="gov-stepper-number">4</div>
+        <div class="gov-stepper-content">
+          <p class="gov-stepper-title">Shrnutí</p>
+          <p class="gov-stepper-desc">Kontrola a potvrzení</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Save Draft Bar -->
+<div class="save-draft-bar">
+  <div class="save-draft-content">
+    <div class="save-draft-info">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <span class="save-draft-status">Koncept neuložen</span>
+    </div>
+    <button type="button" class="btn-save-draft" onclick="saveDraft()">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+      </svg>
+      Uložit koncept
+    </button>
+  </div>
+</div>
+<!-- Modal pro detail subjektu -->
+<div class="gov-modal-overlay gov-subject-detail-modal" id="subjectDetailModal">
+  <div class="gov-modal">
+    <div class="gov-modal-header">
+      <h3 class="gov-modal-title">Detail subjektu</h3>
+      <button type="button" class="gov-modal-close" onclick="closeDetailModal()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="gov-modal-body">
+      <div class="gov-subject-detail-header">
+        <div class="gov-subject-detail-icon" id="detailIcon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" id="detailIconSvg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+          </svg>
+        </div>
+        <div>
+          <h4 class="gov-subject-detail-title" id="detailName">Název subjektu</h4>
+          <span class="gov-subject-detail-type" id="detailType">Typ subjektu</span>
+        </div>
+      </div>
+      
+      <div id="detailContent">
+        <!-- Content filled by JS -->
+      </div>
+    </div>
+    <div class="gov-modal-footer" style="justify-content: center;">
+      <button type="button" class="gov-btn gov-btn-secondary" onclick="closeDetailModal()">Zavřít</button>
+    </div>
+  </div>
+</div>
+<!-- Modal pro přidání vlastníka -->
+<div class="gov-modal-overlay" id="addSubjectModal">
+  <div class="gov-modal">
+    <div class="gov-modal-header">
+      <h3 class="gov-modal-title" id="modalTitle">Přidat subjekt</h3>
+      <button type="button" class="gov-modal-close" onclick="closeModal()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="gov-modal-body">
+      
+      <!-- Vlastník - výběr FO/PO -->
+      <div id="formVlastnik" style="display:none;">
+        <div class="gov-form-group">
+          <label class="gov-label">Typ osoby</label>
+          <div class="gov-radio-group">
+            <label class="gov-radio-label">
+              <input type="radio" name="typOsoby" value="fo" checked="" onchange="toggleOsobaType()">
+              <span class="gov-radio-text">Fyzická osoba</span>
+            </label>
+            <label class="gov-radio-label">
+              <input type="radio" name="typOsoby" value="po" onchange="toggleOsobaType()">
+              <span class="gov-radio-text">Právnická osoba / OSVČ</span>
+            </label>
+          </div>
+        </div>
+        
+        <!-- FO formulář -->
+        <div id="formFO">
+          <div class="gov-form-row">
+            <div class="gov-form-group">
+              <label class="gov-label">Jméno</label>
+              <input type="text" class="gov-input" id="foJmeno" placeholder="Jan">
+            </div>
+            <div class="gov-form-group">
+              <label class="gov-label">Příjmení</label>
+              <input type="text" class="gov-input" id="foPrijmeni" placeholder="Novák">
+            </div>
+          </div>
+          <div class="gov-form-group">
+            <label class="gov-label">Datum narození</label>
+            <input type="date" class="gov-input" id="foDatumNarozeni">
+          </div>
+          <button type="button" class="gov-btn gov-btn-full gov-btn-secondary" onclick="loadFromRegisterFO()">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            Načíst z registru obyvatel
+          </button>
+        </div>
+        
+        <!-- PO formulář -->
+        <div id="formPO" style="display:none;">
+          <div class="gov-form-group">
+            <label class="gov-label">IČO</label>
+            <div class="gov-input-with-btn">
+              <input type="text" class="gov-input" id="poICO" placeholder="12345678" maxlength="8">
+              <button type="button" class="gov-btn-icon" title="Načíst z ARES" onclick="loadFromARES()">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="gov-form-group">
+            <label class="gov-label">Název subjektu</label>
+            <input type="text" class="gov-input" id="poNazev" placeholder="Načte se z ARES" readonly="">
+          </div>
+          <div class="gov-form-group">
+            <label class="gov-label">Adresa sídla</label>
+            <input type="text" class="gov-input" id="poAdresa" placeholder="Načte se z ARES" readonly="">
+          </div>
+        </div>
+        
+        <div class="gov-form-group" style="margin-top: 16px;">
+          <label class="gov-label">Parcela (volitelné)</label>
+          <input type="text" class="gov-input" id="vlastnikParcela" placeholder="např. St. 380">
+        </div>
+      </div>
+      
+      <!-- VTI/VDI formulář -->
+      <div id="formInfrastruktura" style="display:none;">
+        <div class="gov-form-group">
+          <label class="gov-label" id="labelInfraType">Typ infrastruktury</label>
+          <select class="gov-input gov-select" id="selectInfraType" onchange="updateInfraSearch()">
+            <option value="">Vyberte typ</option>
+          </select>
+        </div>
+        
+        <div class="gov-form-group">
+          <label class="gov-label">Vyhledat správce</label>
+          <div class="gov-search-wrapper">
+            <input type="text" class="gov-input gov-search-input" id="infraSearch" placeholder="Zadejte název nebo IČO..." disabled="" oninput="searchInfraProvider(this.value)">
+            <div class="gov-search-results" id="infraSearchResults"></div>
+          </div>
+          <p class="gov-hint-text">Nejprve vyberte typ infrastruktury</p>
+        </div>
+        
+        <div class="gov-selected-provider" id="selectedProvider" style="display:none;">
+          <div class="gov-selected-provider-header">
+            <span class="gov-label">Vybraný správce</span>
+            <button type="button" class="gov-btn-link-small" onclick="clearSelectedProvider()">Změnit</button>
+          </div>
+          <div class="gov-selected-provider-card">
+            <div class="gov-selected-provider-name" id="selectedProviderName"></div>
+            <div class="gov-selected-provider-detail" id="selectedProviderDetail"></div>
+          </div>
+        </div>
+        
+        <div class="gov-form-group" style="margin-top: 16px;">
+          <label class="gov-label">Poznámka (volitelné)</label>
+          <input type="text" class="gov-input" id="infraNote" placeholder="např. Vedení prochází přes parcelu 188/22">
+        </div>
+      </div>
+      
+      <!-- DO formulář -->
+      <div id="formDO" style="display:none;">
+        <div class="gov-form-group">
+          <label class="gov-label">Oblast působnosti</label>
+          <select class="gov-input gov-select" id="selectDOType" onchange="updateDOSearch()">
+            <option value="">Vyberte oblast</option>
+            <option value="pozar">Požární ochrana</option>
+            <option value="hygiena">Hygiena a ochrana veřejného zdraví</option>
+            <option value="zivotni">Životní prostředí</option>
+            <option value="pamatky">Památková péče</option>
+            <option value="doprava">Doprava a silniční správa</option>
+            <option value="voda">Vodní hospodářství</option>
+            <option value="zemedelstvi">Ochrana ZPF</option>
+            <option value="les">Lesní hospodářství</option>
+            <option value="veterinar">Veterinární správa</option>
+            <option value="energetika">Energetika</option>
+            <option value="jine">Jiná oblast</option>
+          </select>
+        </div>
+        
+        <div class="gov-form-group">
+          <label class="gov-label">Vyhledat orgán</label>
+          <div class="gov-search-wrapper">
+            <input type="text" class="gov-input gov-search-input" id="doSearch" placeholder="Zadejte název orgánu..." disabled="" oninput="searchDO(this.value)">
+            <div class="gov-search-results" id="doSearchResults"></div>
+          </div>
+          <p class="gov-hint-text">Nejprve vyberte oblast působnosti</p>
+        </div>
+        
+        <div class="gov-selected-provider" id="selectedDO" style="display:none;">
+          <div class="gov-selected-provider-header">
+            <span class="gov-label">Vybraný orgán</span>
+            <button type="button" class="gov-btn-link-small" onclick="clearSelectedDO()">Změnit</button>
+          </div>
+          <div class="gov-selected-provider-card">
+            <div class="gov-selected-provider-name" id="selectedDOName"></div>
+            <div class="gov-selected-provider-detail" id="selectedDODetail"></div>
+          </div>
+        </div>
+        
+        <div class="gov-form-group" style="margin-top: 16px;">
+          <label class="gov-label">Důvod dotčení (volitelné)</label>
+          <input type="text" class="gov-input" id="doNote" placeholder="např. Stavba v ochranném pásmu vodního zdroje">
+        </div>
+      </div>
+      
+    </div>
+    <div class="gov-modal-footer">
+      <button type="button" class="gov-btn gov-btn-secondary" onclick="closeModal()">Zrušit</button>
+      <button type="button" class="gov-btn gov-btn-primary" onclick="addSubject()">Přidat</button>
+            </main>
+
+            <aside class="gov-sidebar">
+                <div class="gov-summary">
+                    <div class="gov-summary-title">Shrnutí záměru</div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Stavebník</span>
+                        <span class="gov-summary-value">Aleš Krupa</span>
+                    </div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Kategorie</span>
+                        <span class="gov-summary-value">Povolení stavby</span>
+                    </div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Typ stavby</span>
+                        <span class="gov-summary-value">Rodinný dům</span>
+                    </div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Pozemky</span>
+                        <span class="gov-summary-value" id="sidebarPozemky">3 parcely</span>
+                    </div>
+                    <div class="gov-summary-item">
+                        <span class="gov-summary-label">Stavební úřad</span>
+                        <span class="gov-summary-value" id="sidebarSU">SÚ Černošice</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        function toggleUserMenu() {
+            var dropdown = document.getElementById('userDropdown');
+            if (dropdown) dropdown.classList.toggle('show');
+        }
+        document.addEventListener('click', function(e) {
+            var userSection = document.querySelector('.gov-header-user');
+            if (userSection && !userSection.contains(e.target)) {
+                var dropdown = document.getElementById('userDropdown');
+                if (dropdown) dropdown.classList.remove('show');
+            }
+        });
+    </script>
+    <script>
+// Current subject type being added
+var currentSubjectType = '';
+// Data o subjektech pro zobrazení detailu
+var subjectsData = {
+  // Vlastníci
+  'marie-svobodova': {
+    type: 'vlastnik',
+    typeName: 'Vlastník sousedního pozemku',
+    name: 'Marie Svobodová',
+    ico: null,
+    datumNarozeni: '15. 3. 1965',
+    adresa: 'Jabloňová 234, 250 73 Radonice',
+    parcely: 'St. 415, p.č. 188/33',
+    status: 'confirmed',
+    source: 'Katastr nemovitostí'
+  },
+  'petr-dvorak': {
+    type: 'vlastnik',
+    typeName: 'Vlastník sousedního pozemku',
+    name: 'Petr Dvořák',
+    ico: null,
+    datumNarozeni: '22. 8. 1978',
+    adresa: 'Ligasova 567, 250 73 Radonice',
+    parcely: 'St. 425',
+    status: 'confirmed',
+    source: 'Katastr nemovitostí'
+  },
+  'cerni-sjm': {
+    type: 'vlastnik',
+    typeName: 'Vlastníci sousedního pozemku (SJM)',
+    name: 'Jana Černá, Tomáš Černý',
+    ico: null,
+    datumNarozeni: null,
+    adresa: 'Polní 89, 250 73 Radonice',
+    parcely: 'p.č. 188/24',
+    status: 'confirmed',
+    source: 'Katastr nemovitostí'
+  },
+  'neznamy-380': {
+    type: 'vlastnik',
+    typeName: 'Vlastník sousedního pozemku',
+    name: 'Vlastník neznámý',
+    ico: null,
+    datumNarozeni: null,
+    adresa: 'Adresa nezjištěna',
+    parcely: 'St. 380',
+    status: 'pending',
+    source: 'Vyžaduje doplnění'
+  },
+  'obec-radonice-vlastnik': {
+    type: 'vlastnik',
+    typeName: 'Vlastník pozemku (obec)',
+    name: 'Obec Radonice',
+    ico: '00240451',
+    adresa: 'Radonice 24, 250 73 Radonice',
+    parcely: 'p.č. 188/110 (komunikace)',
+    status: 'confirmed',
+    source: 'Katastr nemovitostí'
+  },
+  // VTI
+  'cez-distribuce': {
+    type: 'vti',
+    typeName: 'Správce distribuční soustavy',
+    name: 'ČEZ Distribuce, a.s.',
+    ico: '24729035',
+    adresa: 'Teplická 874/8, 405 02 Děčín',
+    infrastruktura: 'Elektřina - vedení NN',
+    kontakt: 'Zákaznická linka: 800 850 860',
+    email: 'info@cezdistribuce.cz',
+    status: 'confirmed',
+    source: 'DTM'
+  },
+  'gasnet': {
+    type: 'vti',
+    typeName: 'Správce distribuční soustavy',
+    name: 'GasNet, s.r.o.',
+    ico: '27295567',
+    adresa: 'Klíšská 940/96, 400 01 Ústí nad Labem',
+    infrastruktura: 'Plyn - STL plynovod DN100',
+    kontakt: 'Poruchová linka: 800 101 010',
+    email: 'info@gasnet.cz',
+    status: 'confirmed',
+    source: 'DTM'
+  },
+  '1scv': {
+    type: 'vti',
+    typeName: 'Provozovatel vodovodu a kanalizace',
+    name: '1. SčV, a.s.',
+    ico: '47549793',
+    adresa: 'Ke Kablu 971/1, 102 00 Praha 10',
+    infrastruktura: 'Voda - vodovodní řad DN150',
+    kontakt: 'Zákaznická linka: 800 111 060',
+    email: 'info@1scv.cz',
+    status: 'confirmed',
+    source: 'DTM'
+  },
+  'cetin': {
+    type: 'vti',
+    typeName: 'Správce telekomunikační infrastruktury',
+    name: 'CETIN a.s.',
+    ico: '04084063',
+    adresa: 'Českomoravská 2510/19, 190 00 Praha 9',
+    infrastruktura: 'Telekomunikace - optický kabel',
+    kontakt: 'Infolinka: 238 461 111',
+    email: 'info@cetin.cz',
+    status: 'confirmed',
+    source: 'DTM'
+  },
+  // VDI
+  'obec-radonice-vdi': {
+    type: 'vdi',
+    typeName: 'Vlastník místní komunikace',
+    name: 'Obec Radonice',
+    ico: '00240451',
+    adresa: 'Radonice 24, 250 73 Radonice',
+    infrastruktura: 'Místní komunikace - ul. Jabloňová',
+    kontakt: 'Tel: 326 990 401',
+    email: 'obec@radonice.cz',
+    status: 'confirmed',
+    source: 'Pasport komunikací'
+  },
+  'ksus': {
+    type: 'vdi',
+    typeName: 'Správce silnic II. a III. třídy',
+    name: 'Krajská správa a údržba silnic Středočeského kraje',
+    ico: '00066001',
+    adresa: 'Zborovská 11, 150 21 Praha 5',
+    infrastruktura: 'Silnice III. třídy - III/2457',
+    kontakt: 'Tel: 257 280 111',
+    email: 'info@ksus.cz',
+    status: 'confirmed',
+    source: 'Silniční databanky'
+  },
+  // DO
+  'hzs': {
+    type: 'do',
+    typeName: 'Dotčený orgán - požární ochrana',
+    name: 'Hasičský záchranný sbor Středočeského kraje',
+    ico: '70885371',
+    adresa: 'Jana Palacha 1970, 272 01 Kladno',
+    pusobnost: 'Požární ochrana',
+    kontakt: 'Tel: 950 870 111',
+    email: 'podatelna@sck.izscr.cz',
+    status: 'confirmed',
+    source: 'Automaticky určeno'
+  },
+  'khs': {
+    type: 'do',
+    typeName: 'Dotčený orgán - hygiena',
+    name: 'KHS Středočeského kraje',
+    ico: '71009191',
+    adresa: 'Dittrichova 329/17, 120 00 Praha 2',
+    pusobnost: 'Hygiena a ochrana veřejného zdraví',
+    kontakt: 'Tel: 224 267 171',
+    email: 'podatelna@khsstc.cz',
+    status: 'confirmed',
+    source: 'Automaticky určeno'
+  },
+  'meu-zp': {
+    type: 'do',
+    typeName: 'Dotčený orgán - životní prostředí',
+    name: 'MěÚ Brandýs n. L. - odbor životního prostředí',
+    ico: '00240079',
+    adresa: 'Masarykovo nám. 1, 250 01 Brandýs nad Labem',
+    pusobnost: 'Ochrana přírody, ovzduší, voda',
+    kontakt: 'Tel: 326 909 111',
+    email: 'podatelna@brandysko.cz',
+    status: 'confirmed',
+    source: 'Automaticky určeno'
+  }
+};
+// Data pro autocomplete
+var infraProviders = {
+  vti: {
+    elektrina: [
+      { name: 'ČEZ Distribuce, a.s.', ico: '24729035', detail: 'Distribuce elektřiny' },
+      { name: 'EG.D, a.s.', ico: '28085400', detail: 'Distribuce elektřiny - jižní Morava' },
+      { name: 'PREdistribuce, a.s.', ico: '27376516', detail: 'Distribuce elektřiny - Praha' }
+    ],
+    plyn: [
+      { name: 'GasNet, s.r.o.', ico: '27295567', detail: 'Distribuce plynu' },
+      { name: 'Pražská plynárenská Distribuce, a.s.', ico: '27403505', detail: 'Distribuce plynu - Praha' }
+    ],
+    voda: [
+      { name: '1. SčV, a.s.', ico: '47549793', detail: 'Vodovody a kanalizace - střední Čechy' },
+      { name: 'Pražské vodovody a kanalizace, a.s.', ico: '25656635', detail: 'Vodovody a kanalizace - Praha' },
+      { name: 'Vodovody a kanalizace Beroun, a.s.', ico: '46356975', detail: 'Vodovody a kanalizace - Beroun' }
+    ],
+    teplo: [
+      { name: 'Pražská teplárenská a.s.', ico: '45273600', detail: 'Zásobování teplem - Praha' },
+      { name: 'Veolia Energie ČR, a.s.', ico: '45193410', detail: 'Zásobování teplem' }
+    ],
+    telekomunikace: [
+      { name: 'CETIN a.s.', ico: '04084063', detail: 'Telekomunikační infrastruktura' },
+      { name: 'T-Mobile Czech Republic a.s.', ico: '64949681', detail: 'Mobilní sítě' },
+      { name: 'Vodafone Czech Republic a.s.', ico: '25788001', detail: 'Mobilní sítě' }
+    ]
+  },
+  vdi: {
+    mistni: [
+      { name: 'Obec Radonice', ico: '00240451', detail: 'Místní komunikace' },
+      { name: 'Městys Nehvizdy', ico: '00240567', detail: 'Místní komunikace' }
+    ],
+    krajske: [
+      { name: 'Krajská správa a údržba silnic Středočeského kraje', ico: '00066001', detail: 'Silnice II. a III. třídy' },
+      { name: 'Ředitelství silnic a dálnic ČR', ico: '65993390', detail: 'Silnice I. třídy a dálnice' }
+    ],
+    zeleznice: [
+      { name: 'Správa železnic, státní organizace', ico: '70994234', detail: 'Železniční infrastruktura' }
+    ],
+    letiste: [
+      { name: 'Letiště Praha, a.s.', ico: '28244532', detail: 'Letištní infrastruktura' }
+    ]
+  }
+};
+var doProviders = {
+  pozar: [
+    { name: 'HZS Středočeského kraje', detail: 'Územní odbor Praha-východ' },
+    { name: 'HZS hl. m. Prahy', detail: 'Požární ochrana' }
+  ],
+  hygiena: [
+    { name: 'KHS Středočeského kraje', detail: 'Územní pracoviště Praha' },
+    { name: 'Hygienická stanice hl. m. Prahy', detail: 'Ochrana veřejného zdraví' }
+  ],
+  zivotni: [
+    { name: 'MěÚ Brandýs n. L. - odbor životního prostředí', detail: 'Ochrana přírody, ovzduší, voda' },
+    { name: 'Krajský úřad Středočeského kraje - odbor ŽP', detail: 'Ochrana přírody a krajiny' },
+    { name: 'ČIŽP - oblastní inspektorát Praha', detail: 'Kontrola ochrany ŽP' }
+  ],
+  pamatky: [
+    { name: 'NPÚ - územní odborné pracoviště středních Čech', detail: 'Památková péče' },
+    { name: 'MěÚ Brandýs n. L. - odbor památkové péče', detail: 'Památková péče' }
+  ],
+  doprava: [
+    { name: 'MěÚ Brandýs n. L. - odbor dopravy', detail: 'Silniční správní úřad' },
+    { name: 'Krajský úřad Středočeského kraje - odbor dopravy', detail: 'Silnice I. třídy' },
+    { name: 'Policie ČR - DI Praha-východ', detail: 'Dopravní inspektorát' }
+  ],
+  voda: [
+    { name: 'Povodí Labe, s.p.', detail: 'Správce povodí' },
+    { name: 'MěÚ Brandýs n. L. - vodoprávní úřad', detail: 'Vodní hospodářství' }
+  ],
+  zemedelstvi: [
+    { name: 'MěÚ Brandýs n. L. - odbor ŽP', detail: 'Ochrana ZPF' },
+    { name: 'Státní pozemkový úřad', detail: 'Pozemkové úpravy' }
+  ],
+  les: [
+    { name: 'MěÚ Brandýs n. L. - odbor ŽP', detail: 'Lesní hospodářství' },
+    { name: 'Lesy ČR, s.p.', detail: 'Správa státních lesů' }
+  ],
+  veterinar: [
+    { name: 'Krajská veterinární správa pro Středočeský kraj', detail: 'Veterinární dozor' }
+  ],
+  energetika: [
+    { name: 'Energetický regulační úřad', detail: 'Regulace energetiky' },
+    { name: 'Státní energetická inspekce', detail: 'Kontrola energetiky' }
+  ]
+};
+// Toggle collapsible description
+function toggleDescription(btn) {
+  var description = document.getElementById('descriptionContent');
+  btn.classList.toggle('expanded');
+  description.classList.toggle('visible');
+  
+  if (btn.classList.contains('expanded')) {
+    btn.innerHTML = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg> Skrýt popis záměru';
+  } else {
+    btn.innerHTML = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg> Zobrazit popis záměru';
+  }
+}
+// Open modal for adding subject with specific type
+function openAddSubjectModal(type) {
+  currentSubjectType = type;
+  
+  var modalTitle = document.getElementById('modalTitle');
+  
+  // Hide all forms
+  document.getElementById('formVlastnik').style.display = 'none';
+  document.getElementById('formInfrastruktura').style.display = 'none';
+  document.getElementById('formDO').style.display = 'none';
+  
+  // Reset forms
+  resetForms();
+  
+  if (type === 'vlastnik') {
+    modalTitle.textContent = 'Přidat vlastníka pozemku';
+    document.getElementById('formVlastnik').style.display = 'block';
+  } else if (type === 'vti') {
+    modalTitle.textContent = 'Přidat správce technické infrastruktury';
+    document.getElementById('formInfrastruktura').style.display = 'block';
+    document.getElementById('labelInfraType').textContent = 'Typ technické infrastruktury';
+    
+    var select = document.getElementById('selectInfraType');
+    select.innerHTML = '<option value="">Vyberte typ</option>' +
+      '<option value="elektrina">Elektřina</option>' +
+      '<option value="plyn">Plyn</option>' +
+      '<option value="voda">Vodovody a kanalizace</option>' +
+      '<option value="teplo">Teplovody</option>' +
+      '<option value="telekomunikace">Telekomunikace</option>';
+  } else if (type === 'vdi') {
+    modalTitle.textContent = 'Přidat správce dopravní infrastruktury';
+    document.getElementById('formInfrastruktura').style.display = 'block';
+    document.getElementById('labelInfraType').textContent = 'Typ dopravní infrastruktury';
+    
+    var select = document.getElementById('selectInfraType');
+    select.innerHTML = '<option value="">Vyberte typ</option>' +
+      '<option value="mistni">Místní komunikace</option>' +
+      '<option value="krajske">Silnice II. a III. třídy</option>' +
+      '<option value="zeleznice">Železnice</option>' +
+      '<option value="letiste">Letiště</option>';
+  } else if (type === 'do') {
+    modalTitle.textContent = 'Přidat dotčený orgán';
+    document.getElementById('formDO').style.display = 'block';
+  }
+  
+  document.getElementById('addSubjectModal').classList.add('active');
+}
+// Reset all forms
+function resetForms() {
+  // Vlastník
+  document.querySelector('input[name="typOsoby"][value="fo"]').checked = true;
+  toggleOsobaType();
+  document.getElementById('foJmeno').value = '';
+  document.getElementById('foPrijmeni').value = '';
+  document.getElementById('foDatumNarozeni').value = '';
+  document.getElementById('poICO').value = '';
+  document.getElementById('poNazev').value = '';
+  document.getElementById('poAdresa').value = '';
+  document.getElementById('vlastnikParcela').value = '';
+  
+  // Infrastruktura
+  document.getElementById('selectInfraType').value = '';
+  document.getElementById('infraSearch').value = '';
+  document.getElementById('infraSearch').disabled = true;
+  document.getElementById('infraSearchResults').classList.remove('active');
+  document.getElementById('selectedProvider').style.display = 'none';
+  document.getElementById('infraNote').value = '';
+  
+  // DO
+  document.getElementById('selectDOType').value = '';
+  document.getElementById('doSearch').value = '';
+  document.getElementById('doSearch').disabled = true;
+  document.getElementById('doSearchResults').classList.remove('active');
+  document.getElementById('selectedDO').style.display = 'none';
+  document.getElementById('doNote').value = '';
+}
+// Toggle FO/PO forms
+function toggleOsobaType() {
+  var typOsoby = document.querySelector('input[name="typOsoby"]:checked').value;
+  document.getElementById('formFO').style.display = typOsoby === 'fo' ? 'block' : 'none';
+  document.getElementById('formPO').style.display = typOsoby === 'po' ? 'block' : 'none';
+}
+// Load from register (simulation)
+function loadFromRegisterFO() {
+  var jmeno = document.getElementById('foJmeno').value;
+  var prijmeni = document.getElementById('foPrijmeni').value;
+  var datumNarozeni = document.getElementById('foDatumNarozeni').value;
+  
+  if (!jmeno || !prijmeni || !datumNarozeni) {
+    alert('Vyplňte prosím jméno, příjmení a datum narození.');
+    return;
+  }
+  
+  // Simulation
+  alert('Osoba nalezena v registru obyvatel (simulace):\n\n' + jmeno + ' ' + prijmeni + '\nDatum narození: ' + datumNarozeni + '\nAdresa: Květinová 456, 250 73 Radonice');
+}
+// Load from ARES (simulation)
+function loadFromARES() {
+  var ico = document.getElementById('poICO').value;
+  
+  if (!ico || ico.length !== 8) {
+    alert('Zadejte prosím platné IČO (8 číslic).');
+    return;
+  }
+  
+  // Simulation - fill in data
+  document.getElementById('poNazev').value = 'Simulovaná společnost s.r.o.';
+  document.getElementById('poAdresa').value = 'Testovací 123, 110 00 Praha 1';
+  
+  alert('Data načtena z ARES (simulace)');
+}
+// Update infrastructure search when type selected
+function updateInfraSearch() {
+  var type = document.getElementById('selectInfraType').value;
+  var searchInput = document.getElementById('infraSearch');
+  var hint = searchInput.parentElement.nextElementSibling;
+  
+  if (type) {
+    searchInput.disabled = false;
+    searchInput.placeholder = 'Zadejte název nebo IČO...';
+    hint.style.display = 'none';
+  } else {
+    searchInput.disabled = true;
+    searchInput.placeholder = 'Nejprve vyberte typ';
+    hint.style.display = 'block';
+  }
+  
+  searchInput.value = '';
+  document.getElementById('infraSearchResults').classList.remove('active');
+  document.getElementById('selectedProvider').style.display = 'none';
+}
+// Search infrastructure provider
+function searchInfraProvider(query) {
+  var resultsDiv = document.getElementById('infraSearchResults');
+  var type = document.getElementById('selectInfraType').value;
+  
+  if (!query || query.length < 2) {
+    resultsDiv.classList.remove('active');
+    return;
+  }
+  
+  var providers = currentSubjectType === 'vti' ? infraProviders.vti[type] : infraProviders.vdi[type];
+  if (!providers) {
+    resultsDiv.classList.remove('active');
+    return;
+  }
+  
+  var filtered = providers.filter(function(p) {
+    return p.name.toLowerCase().includes(query.toLowerCase()) || 
+           (p.ico && p.ico.includes(query));
+  });
+  
+  if (filtered.length === 0) {
+    resultsDiv.innerHTML = '<div class="gov-search-result-item"><span class="gov-search-result-name">Žádné výsledky</span></div>';
+  } else {
+    resultsDiv.innerHTML = filtered.map(function(p) {
+      return '<div class="gov-search-result-item" onclick="selectProvider(\'' + p.name.replace(/'/g, "\\'") + '\', \'' + (p.ico || '') + '\', \'' + p.detail.replace(/'/g, "\\'") + '\')">' +
+        '<div class="gov-search-result-name">' + p.name + '</div>' +
+        '<div class="gov-search-result-detail">' + (p.ico ? 'IČO: ' + p.ico + ' • ' : '') + p.detail + '</div>' +
+      '</div>';
+    }).join('');
+  }
+  
+  resultsDiv.classList.add('active');
+}
+// Select provider from search results
+function selectProvider(name, ico, detail) {
+  document.getElementById('infraSearch').value = '';
+  document.getElementById('infraSearchResults').classList.remove('active');
+  
+  document.getElementById('selectedProviderName').textContent = name;
+  document.getElementById('selectedProviderDetail').textContent = (ico ? 'IČO: ' + ico + ' • ' : '') + detail;
+  document.getElementById('selectedProvider').style.display = 'block';
+}
+// Clear selected provider
+function clearSelectedProvider() {
+  document.getElementById('selectedProvider').style.display = 'none';
+  document.getElementById('infraSearch').value = '';
+  document.getElementById('infraSearch').focus();
+}
+// Update DO search when type selected
+function updateDOSearch() {
+  var type = document.getElementById('selectDOType').value;
+  var searchInput = document.getElementById('doSearch');
+  var hint = searchInput.parentElement.nextElementSibling;
+  
+  if (type) {
+    searchInput.disabled = false;
+    searchInput.placeholder = 'Zadejte název orgánu...';
+    hint.style.display = 'none';
+  } else {
+    searchInput.disabled = true;
+    searchInput.placeholder = 'Nejprve vyberte oblast';
+    hint.style.display = 'block';
+  }
+  
+  searchInput.value = '';
+  document.getElementById('doSearchResults').classList.remove('active');
+  document.getElementById('selectedDO').style.display = 'none';
+}
+// Search DO
+function searchDO(query) {
+  var resultsDiv = document.getElementById('doSearchResults');
+  var type = document.getElementById('selectDOType').value;
+  
+  if (!query || query.length < 2) {
+    resultsDiv.classList.remove('active');
+    return;
+  }
+  
+  var providers = doProviders[type];
+  if (!providers) {
+    resultsDiv.classList.remove('active');
+    return;
+  }
+  
+  var filtered = providers.filter(function(p) {
+    return p.name.toLowerCase().includes(query.toLowerCase());
+  });
+  
+  if (filtered.length === 0) {
+    resultsDiv.innerHTML = '<div class="gov-search-result-item"><span class="gov-search-result-name">Žádné výsledky</span></div>';
+  } else {
+    resultsDiv.innerHTML = filtered.map(function(p) {
+      return '<div class="gov-search-result-item" onclick="selectDO(\'' + p.name.replace(/'/g, "\\'") + '\', \'' + p.detail.replace(/'/g, "\\'") + '\')">' +
+        '<div class="gov-search-result-name">' + p.name + '</div>' +
+        '<div class="gov-search-result-detail">' + p.detail + '</div>' +
+      '</div>';
+    }).join('');
+  }
+  
+  resultsDiv.classList.add('active');
+}
+// Select DO from search results
+function selectDO(name, detail) {
+  document.getElementById('doSearch').value = '';
+  document.getElementById('doSearchResults').classList.remove('active');
+  
+  document.getElementById('selectedDOName').textContent = name;
+  document.getElementById('selectedDODetail').textContent = detail;
+  document.getElementById('selectedDO').style.display = 'block';
+}
+// Clear selected DO
+function clearSelectedDO() {
+  document.getElementById('selectedDO').style.display = 'none';
+  document.getElementById('doSearch').value = '';
+  document.getElementById('doSearch').focus();
+}
+// Close modal
+function closeModal() {
+  document.getElementById('addSubjectModal').classList.remove('active');
+}
+// Add subject (simulation)
+function addSubject() {
+  alert('Subjekt byl přidán (simulace)');
+  closeModal();
+}
+// Save draft
+function saveDraft() {
+  var btn = document.querySelector('.btn-save-draft');
+  var status = document.querySelector('.save-draft-status');
+  
+  btn.classList.add('saving');
+  btn.innerHTML = '<svg class="spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> Ukládám...';
+  
+  setTimeout(function() {
+    btn.classList.remove('saving');
+    btn.innerHTML = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg> Uložit koncept';
+    status.textContent = 'Uloženo v ' + new Date().toLocaleTimeString('cs-CZ');
+    status.classList.add('saved');
+  }, 1500);
+}
+// Confirm and continue
+// Save and return to overview
+function saveAndReturn() {
+  // Check if there are any pending subjects
+  var pendingSubjects = document.querySelectorAll('.gov-subject-status.pending');
+  if (pendingSubjects.length > 0) {
+    if (!confirm('Některé subjekty vyžadují doplnění. Chcete přesto uložit záměr?')) {
+      return;
+    }
+  }
+  
+  // Simulate saving
+  alert('Záměr byl uložen.');
+  // Redirect to overview
+  window.location.href = 'Zamery-Prehled.html';
+}
+// Save and continue to request
+function saveAndContinue() {
+  // Check if there are any pending subjects
+  var pendingSubjects = document.querySelectorAll('.gov-subject-status.pending');
+  if (pendingSubjects.length > 0) {
+    if (!confirm('Některé subjekty vyžadují doplnění. Chcete přesto pokračovat k podání žádosti?')) {
+      return;
+    }
+  }
+  
+  // Simulate saving and redirect to request page
+  window.location.href = 'Zadost-1.html';
+}
+// Close modal on overlay click
+document.getElementById('addSubjectModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeModal();
+  }
+});
+// Close detail modal on overlay click
+document.getElementById('subjectDetailModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeDetailModal();
+  }
+});
+// Close modal on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeDetailModal();
+  }
+});
+// Show subject detail modal
+function showSubjectDetail(subjectId) {
+  var subject = subjectsData[subjectId];
+  if (!subject) {
+    console.error('Subject not found:', subjectId);
+    return;
+  }
+  
+  var iconEl = document.getElementById('detailIcon');
+  var nameEl = document.getElementById('detailName');
+  var typeEl = document.getElementById('detailType');
+  var contentEl = document.getElementById('detailContent');
+  
+  // Set icon class based on type
+  iconEl.className = 'gov-subject-detail-icon ' + subject.type;
+  
+  // Set icon SVG based on type
+  var iconSvg = '';
+  if (subject.type === 'vlastnik') {
+    iconSvg = '<path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>';
+  } else if (subject.type === 'vti') {
+    iconSvg = '<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path>';
+  } else if (subject.type === 'vdi') {
+    iconSvg = '<path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>';
+  } else if (subject.type === 'do') {
+    iconSvg = '<path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>';
+  }
+  document.getElementById('detailIconSvg').innerHTML = iconSvg;
+  
+  nameEl.textContent = subject.name;
+  typeEl.textContent = subject.typeName;
+  
+  // Build content based on type
+  var html = '';
+  
+  // Status row
+  var statusClass = subject.status === 'confirmed' ? 'confirmed' : 'pending';
+  var statusText = subject.status === 'confirmed' ? '✓ Ověřeno' : '⚠ Vyžaduje doplnění';
+  html += '<div class="gov-subject-detail-row">';
+  html += '<span class="gov-subject-detail-label">Stav</span>';
+  html += '<span class="gov-subject-detail-value"><span class="gov-subject-detail-status ' + statusClass + '">' + statusText + '</span></span>';
+  html += '</div>';
+  
+  // IČO (if exists)
+  if (subject.ico) {
+    html += '<div class="gov-subject-detail-row">';
+    html += '<span class="gov-subject-detail-label">IČO</span>';
+    html += '<span class="gov-subject-detail-value"><a href="https://ares.gov.cz/ekonomicke-subjekty?ico=' + subject.ico + '" target="_blank">' + subject.ico + '</a></span>';
+    html += '</div>';
+  }
+  
+  // Datum narození (for FO)
+  if (subject.datumNarozeni) {
+    html += '<div class="gov-subject-detail-row">';
+    html += '<span class="gov-subject-detail-label">Nar.</span>';
+    html += '<span class="gov-subject-detail-value">' + subject.datumNarozeni + '</span>';
+    html += '</div>';
+  }
+  
+  // Adresa
+  if (subject.adresa) {
+    html += '<div class="gov-subject-detail-row">';
+    html += '<span class="gov-subject-detail-label">Adresa</span>';
+    html += '<span class="gov-subject-detail-value">' + subject.adresa + '</span>';
+    html += '</div>';
+  }
+  
+  // Parcely (for vlastnik)
+  if (subject.parcely) {
+    html += '<div class="gov-subject-detail-row">';
+    html += '<span class="gov-subject-detail-label">Parcely</span>';
+    html += '<span class="gov-subject-detail-value">' + subject.parcely + '</span>';
+    html += '</div>';
+  }
+  
+  // Infrastruktura (for VTI/VDI)
+  if (subject.infrastruktura) {
+    html += '<div class="gov-subject-detail-row">';
+    html += '<span class="gov-subject-detail-label">Síť</span>';
+    html += '<span class="gov-subject-detail-value">' + subject.infrastruktura + '</span>';
+    html += '</div>';
+  }
+  
+  // Působnost (for DO)
+  if (subject.pusobnost) {
+    html += '<div class="gov-subject-detail-row">';
+    html += '<span class="gov-subject-detail-label">Oblast</span>';
+    html += '<span class="gov-subject-detail-value">' + subject.pusobnost + '</span>';
+    html += '</div>';
+  }
+  
+  // Kontakt
+  if (subject.kontakt) {
+    html += '<div class="gov-subject-detail-row">';
+    html += '<span class="gov-subject-detail-label">Kontakt</span>';
+    html += '<span class="gov-subject-detail-value">' + subject.kontakt + '</span>';
+    html += '</div>';
+  }
+  
+  // Email
+  if (subject.email) {
+    html += '<div class="gov-subject-detail-row">';
+    html += '<span class="gov-subject-detail-label">E-mail</span>';
+    html += '<span class="gov-subject-detail-value"><a href="mailto:' + subject.email + '">' + subject.email + '</a></span>';
+    html += '</div>';
+  }
+  
+  // Source
+  html += '<div class="gov-subject-detail-row">';
+  html += '<span class="gov-subject-detail-label">Zdroj</span>';
+  html += '<span class="gov-subject-detail-value">' + subject.source + '</span>';
+  html += '</div>';
+  
+  contentEl.innerHTML = html;
+  
+  // Store current subject for edit
+  currentDetailSubject = subjectId;
+  
+  document.getElementById('subjectDetailModal').classList.add('active');
+}
+var currentDetailSubject = null;
+// Close detail modal
+function closeDetailModal() {
+  document.getElementById('subjectDetailModal').classList.remove('active');
+  currentDetailSubject = null;
+}
+// Load data from sessionStorage (simulation)
+document.addEventListener('DOMContentLoaded', function() {
+  // In real app, load data from previous steps
+  console.log('Step 4 loaded - Summary and Confirmation');
+  
+  // Load data from step 2 (building type, name, vlastniId)
+  var step2Data = sessionStorage.getItem('zamerStep2Data');
+  if (step2Data) {
+    try {
+      var data = JSON.parse(step2Data);
+      if (data.nazev) {
+        document.getElementById('summaryZamerName').textContent = data.nazev;
+      }
+      if (data.vlastniId) {
+        document.getElementById('summaryVlastniId').textContent = data.vlastniId;
+      }
+    } catch(e) {
+      console.log('Error loading step 2 data:', e);
+    }
+  }
+  
+  // Add click handlers to subject cards
+  var cards = document.querySelectorAll('.gov-subject-card');
+  cards.forEach(function(card) {
+    var subjectId = card.getAttribute('data-subject-id');
+    if (subjectId) {
+      card.addEventListener('click', function(e) {
+        // Don't trigger if clicking on action buttons
+        if (e.target.closest('.gov-subject-actions')) return;
+        showSubjectDetail(subjectId);
+      });
+    }
+  });
+});
+
+    </script>
+</body>
+</html>
