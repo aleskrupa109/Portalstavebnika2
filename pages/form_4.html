@@ -4596,11 +4596,13 @@ function updateCislaDropdown() {
   var cisloSelect = document.getElementById('parcelaCislo');
   var podlomeniSelect = document.getElementById('parcelaPodlomeni');
   var druh = druhSelect.value;
-  
+
   cisloSelect.innerHTML = '<option value="">Vyberte číslo</option>';
   podlomeniSelect.innerHTML = '<option value="">—</option>';
   
-  if (!druh || !availableParcels[druh]) return;
+  if (!druh || !availableParcels[druh]) {
+    return;
+  }
   
   // Získat unikátní čísla parcel
   var cisla = [];
@@ -4612,7 +4614,6 @@ function updateCislaDropdown() {
   
   // Seřadit čísla
   cisla.sort(function(a, b) { return parseInt(a) - parseInt(b); });
-  
   cisla.forEach(function(cislo) {
     var option = document.createElement('option');
     option.value = cislo;
@@ -4857,20 +4858,20 @@ function addSousedniParcel() {
 // Přepínání tabů
 function switchTab(tabId) {
   // Deaktivovat všechny taby v sekci pozemků
-  var section = document.getElementById('sectionPozemky');
-  if (section) {
-    section.querySelectorAll('.gov-tab').forEach(function(tab) {
-      tab.classList.remove('active');
-    });
-    section.querySelectorAll('.gov-tab-content').forEach(function(content) {
-      content.classList.remove('active');
-    });
-  }
+  var tabs = document.querySelectorAll('#sectionPozemky .gov-tab');
+  var contents = document.querySelectorAll('#sectionPozemky .gov-tab-content');
+  
+  tabs.forEach(function(tab) {
+    tab.classList.remove('active');
+  });
+  contents.forEach(function(content) {
+    content.classList.remove('active');
+  });
   
   // Aktivovat vybraný tab
   var tabBtn = document.querySelector('#sectionPozemky [data-tab="' + tabId + '"]');
   var tabContent = document.getElementById('tab-' + tabId);
-  
+
   if (tabBtn) tabBtn.classList.add('active');
   if (tabContent) tabContent.classList.add('active');
 }
@@ -5013,7 +5014,8 @@ function loadKatastry() {
   var obecSelect = document.getElementById('obec');
   var katastrSelect = document.getElementById('katastr');
   var obecKod = obecSelect.value;
-  
+
+
   katastrSelect.innerHTML = '<option value="">Vyberte katastr</option>';
   
   if (obecKod && katastryData[obecKod]) {
@@ -5284,9 +5286,6 @@ function confirmStep1() {
     return;
   }
   
-  // Aktualizovat stepper
-  ));
-  updateStepperByStep(2);
   
   // Vytvořit text shrnutí
   var mapParcels = appState.parcels.filter(function(p) { return p.mapId; });
@@ -5336,8 +5335,6 @@ function confirmStep2() {
   }
   
   // Aktualizovat stepper
-  updateStepperByStep(3);
-  
   // Aktualizovat shrnutí sekce
   updateSectionSummaries();
   
@@ -5368,9 +5365,6 @@ function handleGeometryUpload(input) {
   var file = input.files[0];
   var fileName = file.name;
   var extension = fileName.split('.').pop().toLowerCase();
-  
-  console.log('Uploaded file:', fileName, 'Extension:', extension);
-  
   // Kontrola podporovaných formátů - rozšířený seznam
   var supportedFormats = ['wkt', 'shp', 'dbf', 'shx', 'prj', 'dgn', 'dxf', 'zip', 'txt', 'json', 'geojson', 'kml', 'gml', 'pdf', 'dwg'];
   if (supportedFormats.indexOf(extension) === -1) {
@@ -6299,60 +6293,7 @@ function showIdentificationResults(title, results, type) {
 function closeIdentificationResults() {
   document.getElementById('identificationResults').style.display = 'none';
 }
-// Aktualizace stepperu podle aktuální pozice
-,    // Popis záměru
-    { selector: '.gov-section-pozemky', step: 2 },  // Umístění stavby
-    { selector: '.gov-section-sousedni', step: 2 }, // Stále krok 2
-    { selector: '.gov-section-prehled', step: 3 }   // Subjekty a SÚ
-  ];
-  
-  var currentStep = 1;
-  var scrollTop = window.scrollY || document.documentElement.scrollTop;
-  var windowHeight = window.innerHeight;
-  
-  // Zjistit aktuální sekci podle scroll pozice
-  sections.forEach(function(section) {
-    var el = section.id ? document.getElementById(section.id) : document.querySelector(section.selector);
-    if (el) {
-      var rect = el.getBoundingClientRect();
-      // Pokud je sekce viditelná (horní část je v horní polovině viewportu)
-      if (rect.top < windowHeight / 2 && rect.bottom > 0) {
-        currentStep = section.step;
-      }
-    }
-  });
-  
-  // Aktualizovat stepper
-  stepperItems.forEach(function(item, index) {
-    item.classList.remove('active', 'completed');
-    if (index + 1 < currentStep) {
-      item.classList.add('completed');
-    } else if (index + 1 === currentStep) {
-      item.classList.add('active');
-    }
-  });
-}
-// Sledovat scroll pro aktualizaci stepperu
-window.addEventListener('scroll', updateStepper);
-// ==== NOVÉ FUNKCE PRO SJEDNOCENÍ S KROKY 1 A 2 ====
-// Aktualizace stepperu podle kroku
-function updateStepperByStep(step) {
-  for (var i = 1; i <= 3; i++) {
-    var stepEl = document.getElementById('stepperStep' + i);
-    if (!stepEl) continue;
-    
-    stepEl.classList.remove('active', 'completed');
-    
-    if (i < step) {
-      stepEl.classList.add('completed');
-    } else if (i === step) {
-      stepEl.classList.add('active');
-    }
-  }
-}
-// Aktualizace popisu ve stepperu
 
-}
 // Navigace na další krok
 function goToNextStep() {
   if (appState.parcels.length === 0) {
@@ -6817,11 +6758,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       var parcelCount = appState.parcels.length;
       
-      // Aktualizovat stepper pouze pokud jsou parcely
+      // Aktualizovat stav
       if (parcelCount > 0) {
-        );
-      } else {
-        updateStepperByStep(1);
+        // parcely přidány
       }
       
       markUnsavedChanges();
