@@ -230,6 +230,7 @@
         }
 
         .gov-nav-link {
+            position: relative;
             display: block;
             padding: 14px 20px;
             color: var(--gov-text-light);
@@ -250,6 +251,46 @@
             border-top-color: var(--gov-text-light);
         }
 
+        .gov-nav-link.disabled {
+            color: rgba(255, 255, 255, 0.4);
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .gov-nav-link[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            white-space: normal;
+            width: 280px;
+            line-height: 1.5;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-top: 8px;
+        }
+
+        .gov-nav-link[data-tooltip]:hover::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-bottom-color: #1a1a2e;
+            margin-top: -4px;
+            z-index: 1001;
+        }
+
         .gov-nav-cta {
             display: flex;
             align-items: center;
@@ -263,6 +304,7 @@
             font-weight: 500;
             letter-spacing: 0.5px;
             transition: all 0.2s ease;
+            position: relative;
         }
 
         .gov-nav-cta:hover {
@@ -272,6 +314,38 @@
         .gov-nav-cta svg {
             width: 18px;
             height: 18px;
+        }
+
+        .gov-nav-cta[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            white-space: normal;
+            width: 320px;
+            line-height: 1.5;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-top: 8px;
+        }
+
+        .gov-nav-cta[data-tooltip]:hover::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            border: 6px solid transparent;
+            border-bottom-color: #1a1a2e;
+            margin-top: -4px;
+            z-index: 1001;
         }
 
         /* ===== PAGE CONTENT ===== */
@@ -977,20 +1051,20 @@
                             <div class="gov-header-user-dropdown-badge" id="dropdownBadge">Fyzická osoba</div>
                         </div>
                         <a href="reza_implicitni.html">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
                             </svg>
                             Změnit postavení
                         </a>
                         <a href="#">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
                             Nastavení
                         </a>
                         <a href="../index.html">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                             </svg>
                             Odhlásit se
@@ -1003,16 +1077,16 @@
         <nav class="gov-header-nav">
             <div class="gov-header-nav-content">
                 <ul class="gov-nav-menu">
-                    <li class="gov-nav-item"><a href="reza_implicitni.html" class="gov-nav-link">Úvod</a></li>
-                    <li class="gov-nav-item"><a href="prehled_zameru.html" class="gov-nav-link">Záměry</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Řízení</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Žádosti</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Stavby</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Dokumentace</a></li>
-                    <li class="gov-nav-item"><a href="reza_setup.html" class="gov-nav-link active">Plné moci</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Úvod</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Záměry</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Řízení</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Žádosti</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Stavby</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Dokumentace</a></li>
+                    <li class="gov-nav-item"><a href="reza_setup.html" class="gov-nav-link" data-tooltip="Simulace administrace elektronických plných mocí v Registru elektronického zastupování (REZA)">Plné moci</a></li>
                 </ul>
-                <a href="form_new.html" class="gov-nav-cta">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="form_new.html" class="gov-nav-cta" data-tooltip="Simulace vytvoření nové žádosti o povolení stavby se strukturovanou dokumentací a oddělenou dokladovou částí, nebo hromadné žádosti o stanovisko dotčených orgánů">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
                     NOVÁ ŽÁDOST
@@ -1495,9 +1569,11 @@
         </div>
     </div>
 
+    <script src="../js/app-state.js"></script>
+    <script src="../js/header-helper.js"></script>
     <script>
         // ===== DATA =====
-        let formData = {
+        var formData = {
             scope: 'zastupce',
             zmocnitelType: 'po',
             zmocnitelData: {},
@@ -1509,99 +1585,85 @@
             platnostDo: ''
         };
 
-        let zamerCounter = 0;
-
-        // Data zmocněnce podle identity
-        const zmocnenecData = {
-            "FO": { 
-                jmeno: "Aleš Krupa", 
-                identifikatorType: "narozeni",
-                identifikator: "19.04.1968", 
-                adresa: "Vinohradská 1234/56, 120 00 Praha 2" 
-            },
-            "OSVČ": { 
-                jmeno: "Ing. Aleš Krupa", 
-                identifikatorType: "ico",
-                identifikator: "15104418", 
-                adresa: "Vinohradská 1234/56, 120 00 Praha 2" 
-            },
-            "PO_ALMANI": { 
-                jmeno: "ALMANI s.r.o.", 
-                identifikatorType: "ico",
-                identifikator: "28765432", 
-                adresa: "Projektová 789, 150 00 Praha 5" 
-            },
-            "PO_PRVNI": { 
-                jmeno: "První projektová a.s.", 
-                identifikatorType: "ico",
-                identifikator: "45678901", 
-                adresa: "Stavitelská 456, 140 00 Praha 4" 
-            }
-        };
+        var zamerCounter = 0;
 
         // ===== IDENTITY LOADING =====
         function loadIdentity() {
-            const stored = localStorage.getItem('selectedIdentity');
-            let identityKey = 'OSVČ'; // default
-
-            if (stored) {
-                const identity = JSON.parse(stored);
-
-                // Aktualizace hlavičky
-                document.getElementById('userDisplayName').textContent = identity.name.toUpperCase();
-                let detailText = identity.type;
-                if (identity.detail) {
-                    detailText += ' · ' + identity.detail;
-                }
-                document.getElementById('userDisplayDetail').textContent = detailText;
-
-                document.getElementById('dropdownName').textContent = identity.name;
-                document.getElementById('dropdownDetail').textContent = identity.detail;
-                document.getElementById('dropdownBadge').textContent = identity.badge;
-
-                // Určení klíče identity
-                if (identity.key) {
-                    identityKey = identity.key;
-                } else if (identity.badge === 'Fyzická osoba') {
-                    identityKey = 'FO';
-                } else if (identity.badge === 'OSVČ') {
-                    identityKey = 'OSVČ';
-                } else if (identity.name.includes('ALMANI')) {
-                    identityKey = 'PO_ALMANI';
-                } else if (identity.name.includes('První')) {
-                    identityKey = 'PO_PRVNI';
-                }
-
-                // Aktualizace "Budoucí zmocněnec"
-                document.getElementById('futureRepresentative').textContent = identity.name;
+            // Kontrola přihlášení
+            if (!PortalStavebnika.isLoggedIn()) {
+                window.location.href = '../index.html';
+                return;
             }
 
-            // Načtení dat zmocněnce
-            const data = zmocnenecData[identityKey] || zmocnenecData['OSVČ'];
+            // Načtení hlavičky
+            HeaderHelper.loadHeaderData();
             
-            document.getElementById('zmocnenecJmeno').textContent = data.jmeno;
-            document.getElementById('zmocnenecAdresa').textContent = data.adresa;
+            // Získání dat
+            var user = PortalStavebnika.getUser();
+            var identity = PortalStavebnika.getCurrentIdentity();
+            var identityKey = PortalStavebnika.getCurrentIdentityKey();
+            var identities = PortalStavebnika.getIdentities();
+            
+            // Sestavení dat zmocněnce
+            var zmocnenecInfo = {
+                jmeno: user.name,
+                identifikatorType: 'narozeni',
+                identifikator: user.birthDate,
+                adresa: 'Adresa z registru'
+            };
+            
+            if (identityKey === 'OSVC' && identities.OSVC) {
+                zmocnenecInfo = {
+                    jmeno: identities.OSVC.name,
+                    identifikatorType: 'ico',
+                    identifikator: identities.OSVC.ico,
+                    adresa: identities.OSVC.address
+                };
+            } else if (identityKey.startsWith('po_')) {
+                var company = identities.companies.find(function(c) { return c.id === identityKey; });
+                if (company) {
+                    zmocnenecInfo = {
+                        jmeno: company.name,
+                        identifikatorType: 'ico',
+                        identifikator: company.ico,
+                        adresa: company.address
+                    };
+                }
+            }
+            
+            // Aktualizace "Budoucí zmocněnec"
+            var futureRep = document.getElementById('futureRepresentative');
+            if (futureRep) futureRep.textContent = zmocnenecInfo.jmeno;
 
-            if (data.identifikatorType === 'ico') {
-                document.getElementById('zmocnenecIcoRow').style.display = '';
-                document.getElementById('zmocnenecNarozeniRow').style.display = 'none';
-                document.getElementById('zmocnenecIco').textContent = data.identifikator;
+            // Načtení dat zmocněnce do formuláře
+            var zmocnenecJmeno = document.getElementById('zmocnenecJmeno');
+            var zmocnenecAdresa = document.getElementById('zmocnenecAdresa');
+            if (zmocnenecJmeno) zmocnenecJmeno.textContent = zmocnenecInfo.jmeno;
+            if (zmocnenecAdresa) zmocnenecAdresa.textContent = zmocnenecInfo.adresa;
+
+            var icoRow = document.getElementById('zmocnenecIcoRow');
+            var narozeniRow = document.getElementById('zmocnenecNarozeniRow');
+            
+            if (zmocnenecInfo.identifikatorType === 'ico') {
+                if (icoRow) icoRow.style.display = '';
+                if (narozeniRow) narozeniRow.style.display = 'none';
+                var icoEl = document.getElementById('zmocnenecIco');
+                if (icoEl) icoEl.textContent = zmocnenecInfo.identifikator;
             } else {
-                document.getElementById('zmocnenecIcoRow').style.display = 'none';
-                document.getElementById('zmocnenecNarozeniRow').style.display = '';
-                document.getElementById('zmocnenecNarozeni').textContent = data.identifikator;
+                if (icoRow) icoRow.style.display = 'none';
+                if (narozeniRow) narozeniRow.style.display = '';
+                var narozeniEl = document.getElementById('zmocnenecNarozeni');
+                if (narozeniEl) narozeniEl.textContent = zmocnenecInfo.identifikator;
             }
 
             // Aktualizace souhrnu
-            document.getElementById('summary-zmocnenec').textContent = data.jmeno;
+            var summaryZmocnenec = document.getElementById('summary-zmocnenec');
+            if (summaryZmocnenec) summaryZmocnenec.textContent = zmocnenecInfo.jmeno;
         }
 
         // ===== USER MENU =====
         function toggleUserMenu() {
-            const btn = document.querySelector('.gov-header-user-btn');
-            const dropdown = document.getElementById('userDropdown');
-            if (btn) btn.classList.toggle('active');
-            if (dropdown) dropdown.classList.toggle('show');
+            HeaderHelper.toggleUserMenu();
         }
 
         document.addEventListener('click', function(e) {
@@ -1782,7 +1844,7 @@
             if (formData.zamery === 'unlimited') {
                 document.getElementById('summary-zamery').textContent = 'Bez omezení';
             } else if (formData.selectedZamery.length > 0) {
-                document.getElementById('summary-zamery').textContent = formData.selectedZamery.map(z => z.num).join(', ');
+                document.getElementById('summary-zamery').textContent = formData.selectedZamery.map(function(z) { return z.num + ' – ' + z.name; }).join('; ');
             } else {
                 document.getElementById('summary-zamery').textContent = 'Žádné záměry nevybrány';
             }

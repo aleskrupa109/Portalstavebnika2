@@ -230,6 +230,7 @@
         }
 
         .gov-nav-link {
+            position: relative;
             display: block;
             padding: 14px 20px;
             color: var(--gov-text-light);
@@ -250,6 +251,46 @@
             border-top-color: var(--gov-text-light);
         }
 
+        .gov-nav-link.disabled {
+            color: rgba(255, 255, 255, 0.4);
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .gov-nav-link[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            white-space: normal;
+            width: 280px;
+            line-height: 1.5;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-top: 8px;
+        }
+
+        .gov-nav-link[data-tooltip]:hover::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-bottom-color: #1a1a2e;
+            margin-top: -4px;
+            z-index: 1001;
+        }
+
         .gov-nav-cta {
             display: flex;
             align-items: center;
@@ -263,6 +304,7 @@
             font-weight: 500;
             letter-spacing: 0.5px;
             transition: all 0.2s ease;
+            position: relative;
         }
 
         .gov-nav-cta:hover {
@@ -272,6 +314,38 @@
         .gov-nav-cta svg {
             width: 18px;
             height: 18px;
+        }
+
+        .gov-nav-cta[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            white-space: normal;
+            width: 320px;
+            line-height: 1.5;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-top: 8px;
+        }
+
+        .gov-nav-cta[data-tooltip]:hover::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            border: 6px solid transparent;
+            border-bottom-color: #1a1a2e;
+            margin-top: -4px;
+            z-index: 1001;
         }
 
         /* ===== PAGE CONTENT ===== */
@@ -939,20 +1013,20 @@
                             <div class="gov-header-user-dropdown-badge" id="dropdownBadge">Fyzická osoba</div>
                         </div>
                         <a href="reza_implicitni.html">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
                             </svg>
                             Změnit postavení
                         </a>
                         <a href="#">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
                             Nastavení
                         </a>
                         <a href="../index.html">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                             </svg>
                             Odhlásit se
@@ -965,16 +1039,16 @@
         <nav class="gov-header-nav">
             <div class="gov-header-nav-content">
                 <ul class="gov-nav-menu">
-                    <li class="gov-nav-item"><a href="reza_implicitni.html" class="gov-nav-link">Úvod</a></li>
-                    <li class="gov-nav-item"><a href="prehled_zameru.html" class="gov-nav-link">Záměry</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Řízení</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Žádosti</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Stavby</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Dokumentace</a></li>
-                    <li class="gov-nav-item"><a href="reza_setup.html" class="gov-nav-link active">Plné moci</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Úvod</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Záměry</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Řízení</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Žádosti</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Stavby</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Dokumentace</a></li>
+                    <li class="gov-nav-item"><a href="reza_setup.html" class="gov-nav-link" data-tooltip="Simulace administrace elektronických plných mocí v Registru elektronického zastupování (REZA)">Plné moci</a></li>
                 </ul>
-                <a href="form_new.html" class="gov-nav-cta">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="form_new.html" class="gov-nav-cta" data-tooltip="Simulace vytvoření nové žádosti o povolení stavby se strukturovanou dokumentací a oddělenou dokladovou částí, nebo hromadné žádosti o stanovisko dotčených orgánů">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
                     NOVÁ ŽÁDOST
@@ -1602,44 +1676,62 @@
         </div>
     </div>
 
+    <script src="../js/app-state.js"></script>
+    <script src="../js/header-helper.js"></script>
     <script>
         // ===== NAČTENÍ IDENTITY =====
         function loadIdentity() {
-            const stored = localStorage.getItem('selectedIdentity');
-
-            if (stored) {
-                const identity = JSON.parse(stored);
-
-                // Aktualizace hlavičky
-                document.getElementById('userDisplayName').textContent = identity.name.toUpperCase();
-                let detailText = identity.type;
-                if (identity.detail) {
-                    detailText += ' · ' + identity.detail;
-                }
-                document.getElementById('userDisplayDetail').textContent = detailText;
-
-                document.getElementById('dropdownName').textContent = identity.name;
-                document.getElementById('dropdownDetail').textContent = identity.detail;
-                document.getElementById('dropdownBadge').textContent = identity.badge;
-
-                // Aktualizace jména přihlášeného uživatele v obsahu
-                document.getElementById('currentUserDisplay').textContent = identity.name;
+            // Kontrola přihlášení
+            if (!PortalStavebnika.isLoggedIn()) {
+                window.location.href = '../index.html';
+                return;
             }
+
+            // Načtení hlavičky
+            HeaderHelper.loadHeaderData();
+            
+            // Získání dat pro zobrazení
+            var user = PortalStavebnika.getUser();
+            var identity = PortalStavebnika.getCurrentIdentity();
+            var identityKey = PortalStavebnika.getCurrentIdentityKey();
+            var identities = PortalStavebnika.getIdentities();
+            
+            // Sestavení jména pro zobrazení
+            var displayName = user.name;
+            
+            if (identityKey === 'OSVC' && identities.OSVC) {
+                displayName = identities.OSVC.name;
+            } else if (identityKey.startsWith('po_')) {
+                var company = identities.companies.find(function(c) { return c.id === identityKey; });
+                if (company) {
+                    displayName = company.name;
+                }
+            }
+            
+            // Aktualizace jména přihlášeného uživatele v obsahu
+            var currentUserDisplay = document.getElementById('currentUserDisplay');
+            if (currentUserDisplay) currentUserDisplay.textContent = displayName;
+            
+            // Načtení přijatých PM
+            renderReceivedPM();
+        }
+
+        // ===== VYKRESLENÍ PŘIJATÝCH PM =====
+        function renderReceivedPM() {
+            // Pro budoucí použití - nyní používáme hardcoded tiles
+            // Zde by se načetly PM z PortalStavebnika.getReceivedPM()
         }
 
         // ===== USER MENU =====
         function toggleUserMenu() {
-            const btn = document.querySelector('.gov-header-user-btn');
-            const dropdown = document.getElementById('userDropdown');
-            if (btn) btn.classList.toggle('active');
-            if (dropdown) dropdown.classList.toggle('show');
+            HeaderHelper.toggleUserMenu();
         }
 
         document.addEventListener('click', function(e) {
-            const userSection = document.querySelector('.gov-header-user');
+            var userSection = document.querySelector('.gov-header-user');
             if (userSection && !userSection.contains(e.target)) {
-                const btn = document.querySelector('.gov-header-user-btn');
-                const dropdown = document.getElementById('userDropdown');
+                var btn = document.querySelector('.gov-header-user-btn');
+                var dropdown = document.getElementById('userDropdown');
                 if (btn) btn.classList.remove('active');
                 if (dropdown) dropdown.classList.remove('show');
             }
@@ -1647,20 +1739,20 @@
 
         // ===== TILE FUNKCE =====
         function toggleTile(tile) {
-            document.querySelectorAll('.tile.expanded').forEach(t => {
+            document.querySelectorAll('.tile.expanded').forEach(function(t) {
                 if (t !== tile) t.classList.remove('expanded');
             });
             tile.classList.toggle('expanded');
         }
 
         function filterTiles(status) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
+            document.querySelectorAll('.filter-btn').forEach(function(btn) {
                 btn.classList.remove('active');
             });
             event.target.closest('.filter-btn').classList.add('active');
 
-            document.querySelectorAll('.tile').forEach(tile => {
-                const tileStatus = tile.dataset.status;
+            document.querySelectorAll('.tile').forEach(function(tile) {
+                var tileStatus = tile.dataset.status;
                 tile.classList.remove('expanded');
                 if (status === 'all') {
                     tile.style.display = 'block';
@@ -1673,47 +1765,43 @@
         }
 
         function acceptPM(btn) {
-            const tile = btn.closest('.tile');
-            const modal = document.getElementById('accept-modal');
+            var tile = btn.closest('.tile');
+            var modal = document.getElementById('accept-modal');
             modal.classList.add('show');
 
-            setTimeout(() => {
+            setTimeout(function() {
                 modal.classList.remove('show');
                 tile.dataset.status = 'active';
                 tile.querySelector('.status-badge').className = 'status-badge active';
                 tile.querySelector('.status-badge').innerHTML = '<span class="status-dot"></span> Aktivní';
-                const paramLabels = tile.querySelectorAll('.tile-summary .tile-param-label');
-                const paramValues = tile.querySelectorAll('.tile-summary .tile-param-value');
+                var paramLabels = tile.querySelectorAll('.tile-summary .tile-param-label');
+                var paramValues = tile.querySelectorAll('.tile-summary .tile-param-value');
                 if (paramLabels[0]) paramLabels[0].textContent = 'Přijato';
                 if (paramValues[0]) paramValues[0].textContent = new Date().toLocaleDateString('cs-CZ');
-                const detailActions = tile.querySelector('.detail-actions');
-                detailActions.innerHTML = `
-                    <button class="btn btn-primary" onclick="goToZamery()">Přejít na záměry</button>
-                    <button class="btn btn-danger" onclick="terminatePM(this)">Vypovědět zmocnění</button>
-                    <button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>
-                `;
+                var detailActions = tile.querySelector('.detail-actions');
+                detailActions.innerHTML = '<button class="btn btn-primary" onclick="goToZamery()">Přejít na záměry</button>' +
+                    '<button class="btn btn-danger" onclick="terminatePM(this)">Vypovědět zmocnění</button>' +
+                    '<button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>';
                 updateFilterCounts();
             }, 2000);
         }
 
         function rejectPM(btn) {
-            const tile = btn.closest('.tile');
-            const modal = document.getElementById('reject-modal');
+            var tile = btn.closest('.tile');
+            var modal = document.getElementById('reject-modal');
             modal.classList.add('show');
 
-            setTimeout(() => {
+            setTimeout(function() {
                 modal.classList.remove('show');
                 tile.dataset.status = 'inactive';
                 tile.querySelector('.status-badge').className = 'status-badge rejected';
                 tile.querySelector('.status-badge').innerHTML = '<span class="status-dot"></span> Odmítnuta';
-                const paramLabels = tile.querySelectorAll('.tile-summary .tile-param-label');
-                const paramValues = tile.querySelectorAll('.tile-summary .tile-param-value');
+                var paramLabels = tile.querySelectorAll('.tile-summary .tile-param-label');
+                var paramValues = tile.querySelectorAll('.tile-summary .tile-param-value');
                 if (paramLabels[0]) paramLabels[0].textContent = 'Odmítnuto';
                 if (paramValues[0]) paramValues[0].textContent = new Date().toLocaleDateString('cs-CZ');
-                const detailActions = tile.querySelector('.detail-actions');
-                detailActions.innerHTML = `
-                    <button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>
-                `;
+                var detailActions = tile.querySelector('.detail-actions');
+                detailActions.innerHTML = '<button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>';
                 updateFilterCounts();
             }, 2000);
         }
@@ -1721,18 +1809,16 @@
         function terminatePM(btn) {
             if (!confirm('Opravdu chcete vypovědět tuto plnou moc? Tato akce je nevratná.')) return;
 
-            const tile = btn.closest('.tile');
+            var tile = btn.closest('.tile');
             tile.dataset.status = 'inactive';
             tile.querySelector('.status-badge').className = 'status-badge terminated';
             tile.querySelector('.status-badge').innerHTML = '<span class="status-dot"></span> Vypovězena';
-            const paramLabels = tile.querySelectorAll('.tile-summary .tile-param-label');
-            const paramValues = tile.querySelectorAll('.tile-summary .tile-param-value');
+            var paramLabels = tile.querySelectorAll('.tile-summary .tile-param-label');
+            var paramValues = tile.querySelectorAll('.tile-summary .tile-param-value');
             if (paramLabels[0]) paramLabels[0].textContent = 'Vypovězeno';
             if (paramValues[0]) paramValues[0].textContent = new Date().toLocaleDateString('cs-CZ');
-            const detailActions = tile.querySelector('.detail-actions');
-            detailActions.innerHTML = `
-                <button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>
-            `;
+            var detailActions = tile.querySelector('.detail-actions');
+            detailActions.innerHTML = '<button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>';
             updateFilterCounts();
         }
 
@@ -1758,19 +1844,19 @@
         }
 
         function resendProposal(proposalId, name) {
-            if (!confirm(`Chcete odeslat připomínku pro "${name}" o schválení návrhu plné moci?`)) return;
-            alert(`Připomínka byla odeslána na e-mail klienta "${name}".`);
+            if (!confirm('Chcete odeslat připomínku pro "' + name + '" o schválení návrhu plné moci?')) return;
+            alert('Připomínka byla odeslána na e-mail klienta "' + name + '".');
         }
 
         function cancelSentProposal(proposalId, name) {
-            if (!confirm(`Opravdu chcete zrušit návrh plné moci pro "${name}"?`)) return;
+            if (!confirm('Opravdu chcete zrušit návrh plné moci pro "' + name + '"?')) return;
 
-            const proposal = document.getElementById(proposalId);
+            var proposal = document.getElementById(proposalId);
             if (proposal) {
                 proposal.style.transition = 'opacity 0.3s, transform 0.3s';
                 proposal.style.opacity = '0';
                 proposal.style.transform = 'translateX(20px)';
-                setTimeout(() => {
+                setTimeout(function() {
                     proposal.remove();
                     updateSentProposalsCount();
                 }, 300);
@@ -1778,9 +1864,9 @@
         }
 
         function updateSentProposalsCount() {
-            const section = document.getElementById('sent-proposals-section');
-            const proposals = section.querySelectorAll('.sent-proposal-tile');
-            const count = proposals.length;
+            var section = document.getElementById('sent-proposals-section');
+            var proposals = section.querySelectorAll('.sent-proposal-tile');
+            var count = proposals.length;
             
             document.getElementById('sent-proposals-count').textContent = count;
             
@@ -1791,17 +1877,17 @@
         }
 
         function updateFilterCounts() {
-            const tiles = document.querySelectorAll('.tile');
-            let pending = 0, active = 0, inactive = 0;
+            var tiles = document.querySelectorAll('.tile');
+            var pending = 0, active = 0, inactive = 0;
 
-            tiles.forEach(tile => {
-                const status = tile.dataset.status;
+            tiles.forEach(function(tile) {
+                var status = tile.dataset.status;
                 if (status === 'pending') pending++;
                 else if (status === 'active') active++;
                 else inactive++;
             });
 
-            const buttons = document.querySelectorAll('.filter-btn');
+            var buttons = document.querySelectorAll('.filter-btn');
             buttons[0].querySelector('.filter-count').textContent = tiles.length;
             buttons[1].querySelector('.filter-count').textContent = pending;
             buttons[2].querySelector('.filter-count').textContent = active;

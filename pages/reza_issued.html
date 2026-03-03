@@ -240,6 +240,13 @@
             text-transform: uppercase;
             transition: all 0.2s ease;
             border-top: 3px solid transparent;
+            position: relative;
+        }
+
+        .gov-nav-link.disabled {
+            color: rgba(255, 255, 255, 0.4);
+            cursor: default;
+            pointer-events: none;
         }
 
         .gov-nav-link:hover {
@@ -248,6 +255,40 @@
 
         .gov-nav-link.active {
             border-top-color: var(--gov-text-light);
+        }
+
+        .gov-nav-link[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            white-space: normal;
+            width: 280px;
+            line-height: 1.5;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-top: 8px;
+        }
+
+        .gov-nav-link[data-tooltip]:hover::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-bottom-color: #1a1a2e;
+            margin-top: -4px;
+            z-index: 1001;
         }
 
         .gov-nav-cta {
@@ -263,6 +304,7 @@
             font-weight: 500;
             letter-spacing: 0.5px;
             transition: all 0.2s ease;
+            position: relative;
         }
 
         .gov-nav-cta:hover {
@@ -272,6 +314,38 @@
         .gov-nav-cta svg {
             width: 18px;
             height: 18px;
+        }
+
+        .gov-nav-cta[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            white-space: normal;
+            width: 320px;
+            line-height: 1.5;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-top: 8px;
+        }
+
+        .gov-nav-cta[data-tooltip]:hover::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            border: 6px solid transparent;
+            border-bottom-color: #1a1a2e;
+            margin-top: -4px;
+            z-index: 1001;
         }
 
         /* ===== PAGE CONTENT ===== */
@@ -1026,20 +1100,20 @@
                             <div class="gov-header-user-dropdown-badge" id="dropdownBadge">Fyzická osoba</div>
                         </div>
                         <a href="reza_implicitni.html">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
                             </svg>
                             Změnit postavení
                         </a>
                         <a href="#">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
                             Nastavení
                         </a>
                         <a href="../index.html">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                             </svg>
                             Odhlásit se
@@ -1052,16 +1126,16 @@
         <nav class="gov-header-nav">
             <div class="gov-header-nav-content">
                 <ul class="gov-nav-menu">
-                    <li class="gov-nav-item"><a href="reza_implicitni.html" class="gov-nav-link">Úvod</a></li>
-                    <li class="gov-nav-item"><a href="prehled_zameru.html" class="gov-nav-link">Záměry</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Řízení</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Žádosti</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Stavby</a></li>
-                    <li class="gov-nav-item"><a href="#" class="gov-nav-link">Dokumentace</a></li>
-                    <li class="gov-nav-item"><a href="reza_setup.html" class="gov-nav-link active">Plné moci</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Úvod</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Záměry</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Řízení</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Žádosti</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Stavby</a></li>
+                    <li class="gov-nav-item"><a href="#" class="gov-nav-link disabled">Dokumentace</a></li>
+                    <li class="gov-nav-item"><a href="reza_setup.html" class="gov-nav-link active" data-tooltip="Simulace administrace elektronických plných mocí v Registru elektronického zastupování (REZA)">Plné moci</a></li>
                 </ul>
-                <a href="form_new.html" class="gov-nav-cta">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="form_new.html" class="gov-nav-cta" data-tooltip="Simulace vytvoření nové žádosti o povolení stavby se strukturovanou dokumentací a oddělenou dokladovou částí, nebo hromadné žádosti o stanovisko dotčených orgánů">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
                     NOVÁ ŽÁDOST
@@ -1111,17 +1185,20 @@
 
         <!-- Filtry -->
         <div class="filters" role="group" aria-label="Filtrovat podle stavu">
-            <button class="filter-btn active" onclick="filterTiles('all')">
-                Všechny <span class="filter-count" id="count-all">4</span>
+            <button class="filter-btn active" onclick="filterTiles('all', this)">
+                Všechny <span class="filter-count" id="count-all">0</span>
             </button>
-            <button class="filter-btn" onclick="filterTiles('pending')">
-                Čeká na přijetí <span class="filter-count" id="count-pending">1</span>
+            <button class="filter-btn" onclick="filterTiles('approval', this)">
+                Čeká na vaše schválení <span class="filter-count" id="count-approval">0</span>
             </button>
-            <button class="filter-btn" onclick="filterTiles('active')">
-                Aktivní <span class="filter-count" id="count-active">2</span>
+            <button class="filter-btn" onclick="filterTiles('pending', this)">
+                Čeká na přijetí <span class="filter-count" id="count-pending">0</span>
             </button>
-            <button class="filter-btn" onclick="filterTiles('inactive')">
-                Neaktivní <span class="filter-count" id="count-inactive">1</span>
+            <button class="filter-btn" onclick="filterTiles('active', this)">
+                Aktivní <span class="filter-count" id="count-active">0</span>
+            </button>
+            <button class="filter-btn" onclick="filterTiles('inactive', this)">
+                Neaktivní <span class="filter-count" id="count-inactive">0</span>
             </button>
         </div>
 
@@ -1192,340 +1269,7 @@
 
         <!-- Dlaždice - Moje PM (default) -->
         <div class="tiles" id="tiles-self">
-
-            <!-- PM 1: Čeká na přijetí -->
-            <div class="tile" data-status="pending" onclick="toggleTile(this)">
-                <div class="tile-summary">
-                    <div class="tile-header">
-                        <div class="tile-header-left">
-                            <div class="tile-title">Projektová kancelář ABC s.r.o.</div>
-                            <div class="tile-subtitle">IČO: 12345678</div>
-                        </div>
-                        <div class="tile-header-right">
-                            <div class="status-badge pending">
-                                <span class="status-dot"></span>
-                                Čeká na přijetí
-                            </div>
-                            <span class="tile-chevron">▼</span>
-                        </div>
-                    </div>
-                    <div class="tile-params">
-                        <div class="tile-param">
-                            <span class="tile-param-label">Vytvořeno</span>
-                            <span class="tile-param-value">10. 1. 2026</span>
-                        </div>
-                        <div class="tile-param">
-                            <span class="tile-param-label">Platnost</span>
-                            <span class="tile-param-value">Časově neomezená</span>
-                        </div>
-                    </div>
-                    <div class="tile-tags">
-                        <span class="tag scope-zastupce">Zástupce ve správním řízení</span>
-                        <span class="tag zamery">3 záměry</span>
-                    </div>
-                </div>
-                <div class="tile-detail">
-                    <div class="detail-section">
-                        <h4>Údaje o zmocněnci</h4>
-                        <div class="detail-grid">
-                            <div class="detail-row">
-                                <span class="detail-label">Název:</span>
-                                <span class="detail-value">Projektová kancelář ABC s.r.o.</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">IČO:</span>
-                                <span class="detail-value">12345678</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Adresa:</span>
-                                <span class="detail-value">Stavební 123, 110 00 Praha 1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section">
-                        <h4>Parametry plné moci</h4>
-                        <div class="detail-grid">
-                            <div class="detail-row">
-                                <span class="detail-label">Rozsah zmocnění:</span>
-                                <span class="detail-value">Zástupce stavebníka ve správním řízení</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Omezení na záměry:</span>
-                                <span class="detail-value detail-value-list">
-                                    <a href="#" class="detail-link">Z/2025/173247 – Rekonstrukce RD Vinohrady</a>
-                                    <a href="#" class="detail-link">Z/2025/169822 – Přístavba garáže</a>
-                                    <a href="#" class="detail-link">Z/2025/158901 – Zahradní domek</a>
-                                </span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Možnost postoupení:</span>
-                                <span class="detail-value">Ne</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Platnost:</span>
-                                <span class="detail-value">Časově neomezená</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Datum vytvoření:</span>
-                                <span class="detail-value">10. 1. 2026</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-actions" onclick="event.stopPropagation()">
-                        <button class="btn btn-danger" onclick="revokePM(this)">Odvolat plnou moc</button>
-                        <button class="btn btn-secondary" onclick="editPM()">Upravit</button>
-                        <button class="btn btn-secondary" onclick="duplicatePM()">Duplikovat</button>
-                        <button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PM 2: Aktivní -->
-            <div class="tile" data-status="active" onclick="toggleTile(this)">
-                <div class="tile-summary">
-                    <div class="tile-header">
-                        <div class="tile-header-left">
-                            <div class="tile-title">Ing. Jana Nováková</div>
-                            <div class="tile-subtitle">Fyzická osoba</div>
-                        </div>
-                        <div class="tile-header-right">
-                            <div class="status-badge active">
-                                <span class="status-dot"></span>
-                                Aktivní
-                            </div>
-                            <span class="tile-chevron">▼</span>
-                        </div>
-                    </div>
-                    <div class="tile-params">
-                        <div class="tile-param">
-                            <span class="tile-param-label">Přijato</span>
-                            <span class="tile-param-value">5. 1. 2026</span>
-                        </div>
-                        <div class="tile-param">
-                            <span class="tile-param-label">Platnost</span>
-                            <span class="tile-param-value">do 31. 12. 2026</span>
-                        </div>
-                    </div>
-                    <div class="tile-tags">
-                        <span class="tag scope-poverena">Pověřená osoba</span>
-                        <span class="tag bez-omezeni">Bez omezení záměrů</span>
-                    </div>
-                </div>
-                <div class="tile-detail">
-                    <div class="detail-section">
-                        <h4>Údaje o zmocněnci</h4>
-                        <div class="detail-grid">
-                            <div class="detail-row">
-                                <span class="detail-label">Jméno a příjmení:</span>
-                                <span class="detail-value">Ing. Jana Nováková</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Adresa:</span>
-                                <span class="detail-value">Technická 456, 160 00 Praha 6</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section">
-                        <h4>Parametry plné moci</h4>
-                        <div class="detail-grid">
-                            <div class="detail-row">
-                                <span class="detail-label">Rozsah zmocnění:</span>
-                                <span class="detail-value">Pověřená osoba pro úkony na Portálu stavebníka</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Omezení na záměry:</span>
-                                <span class="detail-value">Bez omezení</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Možnost postoupení:</span>
-                                <span class="detail-value">Ne</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Platnost:</span>
-                                <span class="detail-value">1. 1. 2026 – 31. 12. 2026</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Datum přijetí:</span>
-                                <span class="detail-value">5. 1. 2026</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-actions" onclick="event.stopPropagation()">
-                        <button class="btn btn-danger" onclick="revokePM(this)">Odvolat plnou moc</button>
-                        <button class="btn btn-secondary" onclick="editPM()">Upravit</button>
-                        <button class="btn btn-secondary" onclick="duplicatePM()">Duplikovat</button>
-                        <button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PM 3: Aktivní - Administrátor -->
-            <div class="tile" data-status="active" onclick="toggleTile(this)">
-                <div class="tile-summary">
-                    <div class="tile-header">
-                        <div class="tile-header-left">
-                            <div class="tile-title">Mgr. Petr Svoboda</div>
-                            <div class="tile-subtitle">Fyzická osoba</div>
-                        </div>
-                        <div class="tile-header-right">
-                            <div class="status-badge active">
-                                <span class="status-dot"></span>
-                                Aktivní
-                            </div>
-                            <span class="tile-chevron">▼</span>
-                        </div>
-                    </div>
-                    <div class="tile-params">
-                        <div class="tile-param">
-                            <span class="tile-param-label">Přijato</span>
-                            <span class="tile-param-value">1. 12. 2025</span>
-                        </div>
-                        <div class="tile-param">
-                            <span class="tile-param-label">Platnost</span>
-                            <span class="tile-param-value">Časově neomezená</span>
-                        </div>
-                    </div>
-                    <div class="tile-tags">
-                        <span class="tag scope-admin">Administrátor plných mocí</span>
-                        <span class="tag bez-omezeni">Bez omezení záměrů</span>
-                    </div>
-                </div>
-                <div class="tile-detail">
-                    <div class="detail-section">
-                        <h4>Údaje o zmocněnci</h4>
-                        <div class="detail-grid">
-                            <div class="detail-row">
-                                <span class="detail-label">Jméno a příjmení:</span>
-                                <span class="detail-value">Mgr. Petr Svoboda</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Adresa:</span>
-                                <span class="detail-value">Právní 789, 150 00 Praha 5</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section">
-                        <h4>Parametry plné moci</h4>
-                        <div class="detail-grid">
-                            <div class="detail-row">
-                                <span class="detail-label">Rozsah zmocnění:</span>
-                                <span class="detail-value">Administrátor plných mocí</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Omezení na záměry:</span>
-                                <span class="detail-value">Bez omezení</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Možnost postoupení:</span>
-                                <span class="detail-value">Ne</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Platnost:</span>
-                                <span class="detail-value">Časově neomezená</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Datum přijetí:</span>
-                                <span class="detail-value">1. 12. 2025</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-actions" onclick="event.stopPropagation()">
-                        <button class="btn btn-danger" onclick="revokePM(this)">Odvolat plnou moc</button>
-                        <button class="btn btn-secondary" onclick="editPM()">Upravit</button>
-                        <button class="btn btn-secondary" onclick="duplicatePM()">Duplikovat</button>
-                        <button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PM 4: Odvolaná -->
-            <div class="tile" data-status="revoked" onclick="toggleTile(this)">
-                <div class="tile-summary">
-                    <div class="tile-header">
-                        <div class="tile-header-left">
-                            <div class="tile-title">STAVOPLAN s.r.o.</div>
-                            <div class="tile-subtitle">IČO: 87654321</div>
-                        </div>
-                        <div class="tile-header-right">
-                            <div class="status-badge revoked">
-                                <span class="status-dot"></span>
-                                Odvolána
-                            </div>
-                            <span class="tile-chevron">▼</span>
-                        </div>
-                    </div>
-                    <div class="tile-params">
-                        <div class="tile-param">
-                            <span class="tile-param-label">Odvoláno</span>
-                            <span class="tile-param-value">8. 1. 2026</span>
-                        </div>
-                        <div class="tile-param">
-                            <span class="tile-param-label">Původní platnost</span>
-                            <span class="tile-param-value">do 31. 12. 2026</span>
-                        </div>
-                    </div>
-                    <div class="tile-tags">
-                        <span class="tag scope-zastupce">Zástupce ve správním řízení</span>
-                        <span class="tag bez-omezeni">Bez omezení záměrů</span>
-                    </div>
-                </div>
-                <div class="tile-detail">
-                    <div class="detail-section">
-                        <h4>Údaje o zmocněnci</h4>
-                        <div class="detail-grid">
-                            <div class="detail-row">
-                                <span class="detail-label">Název:</span>
-                                <span class="detail-value">STAVOPLAN s.r.o.</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">IČO:</span>
-                                <span class="detail-value">87654321</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Adresa:</span>
-                                <span class="detail-value">Plánská 321, 130 00 Praha 3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-section">
-                        <h4>Parametry plné moci</h4>
-                        <div class="detail-grid">
-                            <div class="detail-row">
-                                <span class="detail-label">Rozsah zmocnění:</span>
-                                <span class="detail-value">Zástupce stavebníka ve správním řízení</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Omezení na záměry:</span>
-                                <span class="detail-value">Bez omezení</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Možnost postoupení:</span>
-                                <span class="detail-value">Ano</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Původní platnost:</span>
-                                <span class="detail-value">1. 6. 2025 – 31. 12. 2026</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Datum přijetí:</span>
-                                <span class="detail-value">5. 6. 2025</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Datum odvolání:</span>
-                                <span class="detail-value">8. 1. 2026</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Důvod ukončení:</span>
-                                <span class="detail-value">Odvolání zmocnitelem</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-actions" onclick="event.stopPropagation()">
-                        <button class="btn btn-secondary" onclick="duplicatePM()">Duplikovat</button>
-                        <button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>
-                    </div>
-                </div>
-            </div>
+            <!-- Dynamicky generováno JavaScriptem -->
         </div>
 
         <!-- Dlaždice - SUDOP (admin mode) - hidden by default -->
@@ -1723,47 +1467,264 @@
         </div>
     </div>
 
+    <script src="../js/app-state.js"></script>
+    <script src="../js/header-helper.js"></script>
     <script>
-        // ===== NAČTENÍ IDENTITY =====
-        function loadIdentity() {
-            const stored = localStorage.getItem('selectedIdentity');
-
-            if (stored) {
-                const identity = JSON.parse(stored);
-
-                // Aktualizace hlavičky
-                document.getElementById('userDisplayName').textContent = identity.name.toUpperCase();
-                let detailText = identity.type;
-                if (identity.detail) {
-                    detailText += ' · ' + identity.detail;
-                }
-                document.getElementById('userDisplayDetail').textContent = detailText;
-
-                document.getElementById('dropdownName').textContent = identity.name;
-                document.getElementById('dropdownDetail').textContent = identity.detail;
-                document.getElementById('dropdownBadge').textContent = identity.badge;
-
-                // Aktualizace jména přihlášeného uživatele v obsahu
-                document.getElementById('currentUserDisplay').textContent = identity.name;
-
-                // Aktualizace context switcher
-                document.getElementById('context-option-self').textContent = identity.name + ' (moje PM)';
+        // ===== MOCK DATA PRO DEMO =====
+        var mockIssuedPM = [
+            {
+                id: 'pm_mock_1',
+                type: 'plna_moc',
+                status: 'pending',
+                zmocnenec: {
+                    name: 'Projektová kancelář ABC s.r.o.',
+                    ico: '12345678',
+                    address: 'Stavební 123, 110 00 Praha 1'
+                },
+                rozsah: 'Zástupce stavebníka ve správním řízení',
+                zamery: ['Z/2025/173247 – Rekonstrukce RD Vinohrady', 'Z/2025/169822 – Přístavba garáže', 'Z/2025/158901 – Zahradní domek'],
+                platnostOd: '10. 1. 2026',
+                platnostDo: 'Časově neomezená',
+                postoupeni: false
+            },
+            {
+                id: 'pm_mock_2',
+                type: 'plna_moc',
+                status: 'active',
+                zmocnenec: {
+                    name: 'Ing. Jana Nováková',
+                    birthDate: '15.03.1985',
+                    address: 'Projektová 45, 120 00 Praha 2'
+                },
+                rozsah: 'Zástupce stavebníka ve správním řízení',
+                zamery: null,
+                platnostOd: '1. 12. 2025',
+                platnostDo: '31. 12. 2026',
+                postoupeni: true
+            },
+            {
+                id: 'pm_mock_3',
+                type: 'povereni',
+                status: 'active',
+                zmocnenec: {
+                    name: 'Petr Svoboda',
+                    birthDate: '22.08.1990',
+                    address: 'Kancelářská 78, 130 00 Praha 3'
+                },
+                rozsah: 'Pověřená osoba pro úkony na Portálu stavebníka',
+                zamery: null,
+                platnostOd: '15. 11. 2025',
+                platnostDo: 'Časově neomezená',
+                postoupeni: false
+            },
+            {
+                id: 'pm_mock_4',
+                type: 'plna_moc',
+                status: 'revoked',
+                zmocnenec: {
+                    name: 'INŽENÝRING DOPRAVNÍCH STAVEB a.s.',
+                    ico: '27876241',
+                    address: 'Zákaznická 33, 140 00 Praha 4'
+                },
+                rozsah: 'Zástupce stavebníka ve správním řízení',
+                zamery: ['Z/2025/156789 – Rozšíření skladového areálu'],
+                platnostOd: '1. 9. 2025',
+                platnostDo: '15. 11. 2025 (odvoláno)',
+                postoupeni: true
             }
+        ];
+
+        // ===== NAČTENÍ IDENTITY A PM =====
+        function loadIdentity() {
+            // Kontrola přihlášení
+            if (!PortalStavebnika.isLoggedIn()) {
+                window.location.href = '../index.html';
+                return;
+            }
+
+            // Načtení hlavičky
+            HeaderHelper.loadHeaderData();
+            
+            // Aktualizace specifických prvků na stránce
+            var user = PortalStavebnika.getUser();
+            var identity = PortalStavebnika.getCurrentIdentity();
+            
+            var currentUserDisplay = document.getElementById('currentUserDisplay');
+            if (currentUserDisplay && user) {
+                currentUserDisplay.textContent = user.name;
+            }
+            
+            var contextOptionSelf = document.getElementById('context-option-self');
+            if (contextOptionSelf && user) {
+                contextOptionSelf.textContent = user.name + ' (moje PM)';
+            }
+
+            // Načtení a vykreslení plných mocí
+            renderIssuedPM();
+        }
+
+        // ===== VYKRESLENÍ PLNÝCH MOCÍ =====
+        function renderIssuedPM() {
+            var container = document.getElementById('tiles-self');
+            if (!container) return;
+
+            // Sloučení mock dat a uložených PM
+            var storedPM = PortalStavebnika.getIssuedPM();
+            var allPM = mockIssuedPM.concat(storedPM);
+
+            if (allPM.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p>Zatím jste nevydali žádné plné moci.</p><a href="reza_new.html" class="btn btn-primary">Vytvořit plnou moc</a></div>';
+                return;
+            }
+
+            var html = '';
+            allPM.forEach(function(pm) {
+                html += createTileHTML(pm);
+            });
+
+            container.innerHTML = html;
+            updateFilterCounts();
+        }
+
+        function createTileHTML(pm) {
+            var zmocnenec = pm.zmocnenec || {};
+            var name = zmocnenec.name || 'Neznámý';
+            var subtitle = zmocnenec.ico ? 'IČO: ' + zmocnenec.ico : (zmocnenec.birthDate ? 'Fyzická osoba' : '');
+            var statusClass = pm.status || 'pending';
+            var statusLabel = getStatusLabel(pm.status);
+            var rozsahTag = pm.type === 'povereni' ? 'scope-poverena' : 'scope-zastupce';
+            var rozsahLabel = pm.type === 'povereni' ? 'Pověřená osoba' : 'Zástupce ve správním řízení';
+            var zameryTag = pm.zamery && pm.zamery.length > 0 ? pm.zamery.length + ' ' + getZameryWord(pm.zamery.length) : 'Bez omezení záměrů';
+            var zameryClass = pm.zamery && pm.zamery.length > 0 ? 'zamery' : 'bez-omezeni';
+
+            var zameryHTML = '';
+            if (pm.zamery && pm.zamery.length > 0) {
+                zameryHTML = '<span class="detail-value detail-value-list">';
+                pm.zamery.forEach(function(z) {
+                    zameryHTML += '<a href="#" class="detail-link">' + z + '</a>';
+                });
+                zameryHTML += '</span>';
+            } else {
+                zameryHTML = '<span class="detail-value">Bez omezení</span>';
+            }
+
+            var actionsHTML = '';
+            if (pm.status === 'active' || pm.status === 'pending') {
+                actionsHTML = '<button class="btn btn-danger" onclick="revokePM(this, \'' + pm.id + '\')">Odvolat plnou moc</button>' +
+                    '<button class="btn btn-secondary" onclick="editPM()">Upravit</button>' +
+                    '<button class="btn btn-secondary" onclick="duplicatePM()">Duplikovat</button>' +
+                    '<button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>';
+            } else {
+                actionsHTML = '<button class="btn btn-secondary" onclick="duplicatePM()">Duplikovat</button>' +
+                    '<button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>';
+            }
+
+            return '<div class="tile" data-status="' + statusClass + '" data-id="' + pm.id + '" onclick="toggleTile(this)">' +
+                '<div class="tile-summary">' +
+                    '<div class="tile-header">' +
+                        '<div class="tile-header-left">' +
+                            '<div class="tile-title">' + name + '</div>' +
+                            '<div class="tile-subtitle">' + subtitle + '</div>' +
+                        '</div>' +
+                        '<div class="tile-header-right">' +
+                            '<div class="status-badge ' + statusClass + '">' +
+                                '<span class="status-dot"></span>' +
+                                statusLabel +
+                            '</div>' +
+                            '<span class="tile-chevron">▼</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="tile-params">' +
+                        '<div class="tile-param">' +
+                            '<span class="tile-param-label">Vytvořeno</span>' +
+                            '<span class="tile-param-value">' + (pm.platnostOd || '-') + '</span>' +
+                        '</div>' +
+                        '<div class="tile-param">' +
+                            '<span class="tile-param-label">Platnost</span>' +
+                            '<span class="tile-param-value">' + (pm.platnostDo || '-') + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="tile-tags">' +
+                        '<span class="tag ' + rozsahTag + '">' + rozsahLabel + '</span>' +
+                        '<span class="tag ' + zameryClass + '">' + zameryTag + '</span>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="tile-detail">' +
+                    '<div class="detail-section">' +
+                        '<h4>Údaje o zmocněnci</h4>' +
+                        '<div class="detail-grid">' +
+                            '<div class="detail-row">' +
+                                '<span class="detail-label">Název:</span>' +
+                                '<span class="detail-value">' + name + '</span>' +
+                            '</div>' +
+                            '<div class="detail-row">' +
+                                '<span class="detail-label">' + (zmocnenec.ico ? 'IČO' : 'Datum nar.') + ':</span>' +
+                                '<span class="detail-value">' + (zmocnenec.ico || zmocnenec.birthDate || '-') + '</span>' +
+                            '</div>' +
+                            '<div class="detail-row">' +
+                                '<span class="detail-label">Adresa:</span>' +
+                                '<span class="detail-value">' + (zmocnenec.address || '-') + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="detail-section">' +
+                        '<h4>Parametry plné moci</h4>' +
+                        '<div class="detail-grid">' +
+                            '<div class="detail-row">' +
+                                '<span class="detail-label">Rozsah zmocnění:</span>' +
+                                '<span class="detail-value">' + (pm.rozsah || '-') + '</span>' +
+                            '</div>' +
+                            '<div class="detail-row">' +
+                                '<span class="detail-label">Omezení na záměry:</span>' +
+                                zameryHTML +
+                            '</div>' +
+                            '<div class="detail-row">' +
+                                '<span class="detail-label">Možnost postoupení:</span>' +
+                                '<span class="detail-value">' + (pm.postoupeni ? 'Ano' : 'Ne') + '</span>' +
+                            '</div>' +
+                            '<div class="detail-row">' +
+                                '<span class="detail-label">Platnost:</span>' +
+                                '<span class="detail-value">' + (pm.platnostDo || '-') + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="detail-actions" onclick="event.stopPropagation()">' +
+                        actionsHTML +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function getStatusLabel(status) {
+            switch(status) {
+                case 'pending': return 'Čeká na přijetí';
+                case 'active': return 'Aktivní';
+                case 'revoked': return 'Odvolána';
+                case 'expired': return 'Vypršela';
+                case 'rejected': return 'Odmítnuta';
+                default: return status || 'Neznámý';
+            }
+        }
+
+        function getZameryWord(count) {
+            if (count === 1) return 'záměr';
+            if (count >= 2 && count <= 4) return 'záměry';
+            return 'záměrů';
         }
 
         // ===== USER MENU =====
         function toggleUserMenu() {
-            const btn = document.querySelector('.gov-header-user-btn');
-            const dropdown = document.getElementById('userDropdown');
+            var btn = document.querySelector('.gov-header-user-btn');
+            var dropdown = document.getElementById('userDropdown');
             if (btn) btn.classList.toggle('active');
             if (dropdown) dropdown.classList.toggle('show');
         }
 
         document.addEventListener('click', function(e) {
-            const userSection = document.querySelector('.gov-header-user');
+            var userSection = document.querySelector('.gov-header-user');
             if (userSection && !userSection.contains(e.target)) {
-                const btn = document.querySelector('.gov-header-user-btn');
-                const dropdown = document.getElementById('userDropdown');
+                var btn = document.querySelector('.gov-header-user-btn');
+                var dropdown = document.getElementById('userDropdown');
                 if (btn) btn.classList.remove('active');
                 if (dropdown) dropdown.classList.remove('show');
             }
@@ -1771,77 +1732,103 @@
 
         // ===== TILE FUNKCE =====
         function toggleTile(tile) {
-            document.querySelectorAll('.tile.expanded').forEach(t => {
+            document.querySelectorAll('.tile.expanded').forEach(function(t) {
                 if (t !== tile) t.classList.remove('expanded');
             });
             tile.classList.toggle('expanded');
         }
 
-        function filterTiles(status) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
+        function filterTiles(status, btn) {
+            // Aktivace tlačítka
+            document.querySelectorAll('.filter-btn').forEach(function(b) {
+                b.classList.remove('active');
             });
-            event.target.closest('.filter-btn').classList.add('active');
+            if (btn) btn.classList.add('active');
 
-            const currentContext = document.getElementById('context-select').value;
-            const tilesContainer = currentContext === 'self' ? document.getElementById('tiles-self') : document.getElementById('tiles-sudop');
+            var currentContext = document.getElementById('context-select');
+            var contextValue = currentContext ? currentContext.value : 'self';
+            var tilesContainer = contextValue === 'self' ? document.getElementById('tiles-self') : document.getElementById('tiles-sudop');
+            var proposalsSection = document.getElementById('proposals-section');
 
-            tilesContainer.querySelectorAll('.tile').forEach(tile => {
-                const tileStatus = tile.dataset.status;
-                tile.classList.remove('expanded');
-                if (status === 'all') {
-                    tile.style.display = 'block';
-                } else if (status === 'inactive') {
-                    tile.style.display = (tileStatus === 'rejected' || tileStatus === 'revoked' || tileStatus === 'terminated' || tileStatus === 'expired' || tileStatus === 'inactive') ? 'block' : 'none';
+            // Filtrování tiles
+            if (tilesContainer) {
+                tilesContainer.querySelectorAll('.tile').forEach(function(tile) {
+                    var tileStatus = tile.dataset.status;
+                    tile.classList.remove('expanded');
+                    
+                    if (status === 'all') {
+                        tile.style.display = 'block';
+                    } else if (status === 'approval') {
+                        // Skrýt všechny tiles při filtru "Čeká na vaše schválení"
+                        tile.style.display = 'none';
+                    } else if (status === 'inactive') {
+                        tile.style.display = (tileStatus === 'rejected' || tileStatus === 'revoked' || tileStatus === 'terminated' || tileStatus === 'expired' || tileStatus === 'inactive') ? 'block' : 'none';
+                    } else {
+                        tile.style.display = tileStatus === status ? 'block' : 'none';
+                    }
+                });
+            }
+
+            // Zobrazení/skrytí sekce návrhů ke schválení
+            if (proposalsSection) {
+                if (status === 'all' || status === 'approval') {
+                    proposalsSection.style.display = 'block';
                 } else {
-                    tile.style.display = tileStatus === status ? 'block' : 'none';
+                    proposalsSection.style.display = 'none';
                 }
-            });
+            }
         }
 
         function switchContext(context) {
-            const selfTiles = document.getElementById('tiles-self');
-            const sudopTiles = document.getElementById('tiles-sudop');
-            const adminInfoBox = document.getElementById('admin-info-box');
+            var selfTiles = document.getElementById('tiles-self');
+            var sudopTiles = document.getElementById('tiles-sudop');
+            var adminInfoBox = document.getElementById('admin-info-box');
 
             if (context === 'self') {
                 selfTiles.classList.remove('hidden');
-                sudopTiles.classList.add('hidden');
-                adminInfoBox.classList.add('hidden');
+                if (sudopTiles) sudopTiles.classList.add('hidden');
+                if (adminInfoBox) adminInfoBox.classList.add('hidden');
             } else {
                 selfTiles.classList.add('hidden');
-                sudopTiles.classList.remove('hidden');
-                adminInfoBox.classList.remove('hidden');
+                if (sudopTiles) sudopTiles.classList.remove('hidden');
+                if (adminInfoBox) adminInfoBox.classList.remove('hidden');
             }
 
             // Reset filter to "all"
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector('.filter-btn').classList.add('active');
+            document.querySelectorAll('.filter-btn').forEach(function(btn) { btn.classList.remove('active'); });
+            var firstBtn = document.querySelector('.filter-btn');
+            if (firstBtn) firstBtn.classList.add('active');
+            
+            // Zobrazit všechny tiles a proposals
+            filterTiles('all', firstBtn);
 
             updateFilterCounts();
         }
 
-        function revokePM(btn) {
+        function revokePM(btn, pmId) {
             if (!confirm('Opravdu chcete odvolat tuto plnou moc? Tato akce je nevratná.')) return;
 
-            const tile = btn.closest('.tile');
-            const modal = document.getElementById('revoke-modal');
+            var tile = btn.closest('.tile');
+            var modal = document.getElementById('revoke-modal');
             modal.classList.add('show');
 
-            setTimeout(() => {
+            // Aktualizace v centrálním stavu
+            if (pmId && !pmId.startsWith('pm_mock_')) {
+                PortalStavebnika.updatePMStatus(pmId, 'revoked', true);
+            }
+
+            setTimeout(function() {
                 modal.classList.remove('show');
                 tile.dataset.status = 'revoked';
                 tile.querySelector('.status-badge').className = 'status-badge revoked';
                 tile.querySelector('.status-badge').innerHTML = '<span class="status-dot"></span> Odvolána';
-                const paramLabels = tile.querySelectorAll('.tile-summary .tile-param-label');
-                const paramValues = tile.querySelectorAll('.tile-summary .tile-param-value');
+                var paramLabels = tile.querySelectorAll('.tile-summary .tile-param-label');
+                var paramValues = tile.querySelectorAll('.tile-summary .tile-param-value');
                 if (paramLabels[0]) paramLabels[0].textContent = 'Odvoláno';
                 if (paramValues[0]) paramValues[0].textContent = new Date().toLocaleDateString('cs-CZ');
-                const detailActions = tile.querySelector('.detail-actions');
-                detailActions.innerHTML = `
-                    <button class="btn btn-secondary" onclick="duplicatePM()">Duplikovat</button>
-                    <button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>
-                `;
+                var detailActions = tile.querySelector('.detail-actions');
+                detailActions.innerHTML = '<button class="btn btn-secondary" onclick="duplicatePM()">Duplikovat</button>' +
+                    '<button class="btn btn-secondary" onclick="downloadPDF()">Stáhnout PDF</button>';
                 updateFilterCounts();
             }, 2000);
         }
@@ -1851,7 +1838,7 @@
         }
 
         function duplicatePM() {
-            alert('Přechod na: Nová plná moc (předvyplněná dle vybrané PM)');
+            window.location.href = 'reza_new.html';
         }
 
         function downloadPDF() {
@@ -1860,20 +1847,19 @@
 
         // ===== FUNKCE PRO NÁVRHY KE SCHVÁLENÍ =====
         function approveProposal(proposalId, name) {
-            if (!confirm(`Opravdu chcete schválit návrh plné moci od "${name}" a odeslat ji do registru REZA?`)) return;
+            if (!confirm('Opravdu chcete schválit návrh plné moci od "' + name + '" a odeslat ji do registru REZA?')) return;
 
             document.getElementById('approve-name').textContent = name;
             document.getElementById('approve-modal').classList.add('show');
 
-            setTimeout(() => {
+            setTimeout(function() {
                 document.getElementById('approve-modal').classList.remove('show');
-                // Odstranit návrh ze seznamu
-                const proposal = document.getElementById(proposalId);
+                var proposal = document.getElementById(proposalId);
                 if (proposal) {
                     proposal.style.transition = 'opacity 0.3s, transform 0.3s';
                     proposal.style.opacity = '0';
                     proposal.style.transform = 'translateX(20px)';
-                    setTimeout(() => {
+                    setTimeout(function() {
                         proposal.remove();
                         updateProposalsCount();
                     }, 300);
@@ -1882,20 +1868,19 @@
         }
 
         function rejectProposal(proposalId, name) {
-            if (!confirm(`Opravdu chcete odmítnout návrh plné moci od "${name}"?`)) return;
+            if (!confirm('Opravdu chcete odmítnout návrh plné moci od "' + name + '"?')) return;
 
             document.getElementById('reject-name').textContent = name;
             document.getElementById('reject-proposal-modal').classList.add('show');
 
-            setTimeout(() => {
+            setTimeout(function() {
                 document.getElementById('reject-proposal-modal').classList.remove('show');
-                // Odstranit návrh ze seznamu
-                const proposal = document.getElementById(proposalId);
+                var proposal = document.getElementById(proposalId);
                 if (proposal) {
                     proposal.style.transition = 'opacity 0.3s, transform 0.3s';
                     proposal.style.opacity = '0';
                     proposal.style.transform = 'translateX(20px)';
-                    setTimeout(() => {
+                    setTimeout(function() {
                         proposal.remove();
                         updateProposalsCount();
                     }, 300);
@@ -1908,36 +1893,61 @@
         }
 
         function updateProposalsCount() {
-            const section = document.getElementById('proposals-section');
-            const proposals = section.querySelectorAll('.proposal-tile');
-            const count = proposals.length;
+            var section = document.getElementById('proposals-section');
+            if (!section) return;
+            var proposals = section.querySelectorAll('.proposal-tile');
+            var count = proposals.length;
             
-            document.getElementById('proposals-count').textContent = count;
+            var countEl = document.getElementById('proposals-count');
+            if (countEl) countEl.textContent = count;
             
-            // Skrýt celou sekci, pokud nejsou žádné návrhy
             if (count === 0) {
                 section.style.display = 'none';
             }
         }
 
         function updateFilterCounts() {
-            const currentContext = document.getElementById('context-select').value;
-            const tilesContainer = currentContext === 'self' ? document.getElementById('tiles-self') : document.getElementById('tiles-sudop');
-            const tiles = tilesContainer.querySelectorAll('.tile');
+            var currentContext = document.getElementById('context-select');
+            var contextValue = currentContext ? currentContext.value : 'self';
+            
+            var tilesContainer = contextValue === 'self' ? document.getElementById('tiles-self') : document.getElementById('tiles-sudop');
+            var proposalsSection = document.getElementById('proposals-section');
+            
+            var pending = 0, active = 0, inactive = 0, approval = 0;
 
-            let pending = 0, active = 0, inactive = 0;
+            // Počítání tiles
+            if (tilesContainer) {
+                var tiles = tilesContainer.querySelectorAll('.tile');
+                tiles.forEach(function(tile) {
+                    var status = tile.dataset.status;
+                    if (status === 'pending') pending++;
+                    else if (status === 'active') active++;
+                    else inactive++;
+                });
+            }
 
-            tiles.forEach(tile => {
-                const status = tile.dataset.status;
-                if (status === 'pending') pending++;
-                else if (status === 'active') active++;
-                else inactive++;
-            });
+            // Počítání proposals (návrhy ke schválení)
+            if (proposalsSection) {
+                var proposals = proposalsSection.querySelectorAll('.proposal-tile');
+                approval = proposals.length;
+            }
 
-            document.getElementById('count-all').textContent = tiles.length;
-            document.getElementById('count-pending').textContent = pending;
-            document.getElementById('count-active').textContent = active;
-            document.getElementById('count-inactive').textContent = inactive;
+            // Celkový počet = tiles + proposals
+            var totalTiles = pending + active + inactive;
+            var totalAll = totalTiles + approval;
+
+            // Aktualizace počtů v UI
+            var countAll = document.getElementById('count-all');
+            var countApproval = document.getElementById('count-approval');
+            var countPending = document.getElementById('count-pending');
+            var countActive = document.getElementById('count-active');
+            var countInactive = document.getElementById('count-inactive');
+            
+            if (countAll) countAll.textContent = totalAll;
+            if (countApproval) countApproval.textContent = approval;
+            if (countPending) countPending.textContent = pending;
+            if (countActive) countActive.textContent = active;
+            if (countInactive) countInactive.textContent = inactive;
         }
 
         // ===== INICIALIZACE =====

@@ -57,9 +57,17 @@
         .gov-header-nav { padding: 0 40px; }
         .gov-header-nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; }
         .gov-nav-menu { display: flex; list-style: none; }
-        .gov-nav-link { display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-top: 3px solid transparent; }
+        .gov-nav-link {
+            position: relative; display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-top: 3px solid transparent; }
         .gov-nav-link:hover { background: rgba(255,255,255,0.1); }
         .gov-nav-link.active { border-top-color: #fff; }
+        .gov-nav-link.disabled { color: rgba(255, 255, 255, 0.4); cursor: default; pointer-events: none; }
+        .gov-nav-link[data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #1a1a2e; color: #fff; padding: 10px 14px; border-radius: 6px; font-size: 12px; font-weight: 400; text-transform: none; letter-spacing: 0; white-space: normal; width: 280px; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-top: 8px; }
+        .gov-nav-link[data-tooltip]:hover::before { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-bottom-color: #1a1a2e; margin-top: -4px; z-index: 1001; }
+        .gov-nav-cta { display: flex; align-items: center; gap: 8px; padding: 8px 16px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; position: relative; }
+        .gov-nav-cta svg { width: 18px; height: 18px; }
+        .gov-nav-cta[data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; top: 100%; right: 0; background: #1a1a2e; color: #fff; padding: 10px 14px; border-radius: 6px; font-size: 12px; font-weight: 400; text-transform: none; letter-spacing: 0; white-space: normal; width: 320px; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-top: 8px; }
+        .gov-nav-cta[data-tooltip]:hover::before { content: ''; position: absolute; top: 100%; right: 20px; border: 6px solid transparent; border-bottom-color: #1a1a2e; margin-top: -4px; z-index: 1001; }
 
         /* ===== PAGE ===== */
         .gov-page { max-width: 1400px; margin: 0 auto; padding: 32px 40px; }
@@ -233,13 +241,20 @@
         <nav class="gov-header-nav">
             <div class="gov-header-nav-content">
                 <ul class="gov-nav-menu">
-                    <li><a href="reza_implicitni.html" class="gov-nav-link">Úvod</a></li>
-                    <li><a href="prehled_zameru.html" class="gov-nav-link">Záměry</a></li>
-                    <li><a href="#" class="gov-nav-link">Řízení</a></li>
-                    <li><a href="#" class="gov-nav-link active">Žádosti</a></li>
-                    <li><a href="#" class="gov-nav-link">Stavby</a></li>
-                    <li><a href="#" class="gov-nav-link">Dokumentace</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Úvod</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Záměry</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Řízení</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Žádosti</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Stavby</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Dokumentace</a></li>
+                    <li><a href="reza_setup.html" class="gov-nav-link" data-tooltip="Simulace administrace elektronických plných mocí v Registru elektronického zastupování (REZA)">Plné moci</a></li>
                 </ul>
+                <a href="form_new.html" class="gov-nav-cta" data-tooltip="Simulace vytvoření nové žádosti o povolení stavby se strukturovanou dokumentací a oddělenou dokladovou částí, nebo hromadné žádosti o stanovisko dotčených orgánů">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    NOVÁ ŽÁDOST
+                </a>
             </div>
         </nav>
     </header>
@@ -276,7 +291,7 @@
                         <div class="gov-podklad-title">Vyjádření nebo závazné stanovisko dotčeného orgánu bude podkladem pro:</div>
                         <div class="gov-podklad-grid">
                             <label class="gov-podklad-item">
-                                <input type="checkbox" checked>
+                                <input type="checkbox">
                                 <span>povolení stavby nebo zařízení (popř. změny dokončené stavby)</span>
                             </label>
                             <label class="gov-podklad-item">
@@ -357,8 +372,8 @@
                                     </div>
                                 </div>
                             </label>
-                            <label class="gov-jes-option selected" onclick="selectJES(this, 'jes-bez-eia')">
-                                <input type="radio" name="jes" value="jes-bez-eia" checked>
+                            <label class="gov-jes-option" onclick="selectJES(this, 'jes-bez-eia')">
+                                <input type="radio" name="jes" value="jes-bez-eia">
                                 <div class="gov-jes-option-content">
                                     <div class="gov-jes-option-title">Jednotné environmentální stanovisko (JES) bez EIA</div>
                                     <div class="gov-jes-option-desc">Sloučené stanovisko k ochraně životního prostředí</div>
@@ -366,7 +381,7 @@
                                         <label>Adresát JES</label>
                                         <select id="adresat-jes-bez-eia" onchange="updateSelectedPreview()">
                                             <option value="">Vyberte adresáta...</option>
-                                            <option value="Krajský úřad Středočeského kraje" selected>Krajský úřad Středočeského kraje</option>
+                                            <option value="Krajský úřad Středočeského kraje">Krajský úřad Středočeského kraje</option>
                                             <option value="MŽP">Ministerstvo životního prostředí</option>
                                         </select>
                                     </div>
@@ -423,7 +438,7 @@
                                         <label>Adresát (HZS)</label>
                                         <select onchange="updateAdresat('pozarni', this.value)">
                                             <option value="">Vyberte...</option>
-                                            <option value="HZS Středočeského kraje" selected>HZS Středočeského kraje</option>
+                                            <option value="HZS Středočeského kraje">HZS Středočeského kraje</option>
                                             <option value="HZS hl. m. Prahy">HZS hl. m. Prahy</option>
                                         </select>
                                     </div>
@@ -437,7 +452,7 @@
                                         <label>Adresát (KHS)</label>
                                         <select onchange="updateAdresat('zdravi', this.value)">
                                             <option value="">Vyberte...</option>
-                                            <option value="KHS Středočeského kraje" selected>KHS Středočeského kraje</option>
+                                            <option value="KHS Středočeského kraje">KHS Středočeského kraje</option>
                                             <option value="Hygienická stanice hl. m. Prahy">Hygienická stanice hl. m. Prahy</option>
                                         </select>
                                     </div>
@@ -764,10 +779,12 @@
         </div>
     </div>
 
+    <script src="../js/app-state.js"></script>
+    <script src="../js/header-helper.js"></script>
     <script>
         // State
         var state = {
-            jes: 'jes-bez-eia',
+            jes: null,
             stanoviska: {}
         };
 
@@ -794,28 +811,18 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadIdentity();
             startAutosaveTimer();
-            applyJESLogic(); // Apply initial JES logic
-            // Pre-select some for demo (only non-JES items since JES is selected)
-            toggleStanovisko('obrana');
-            toggleStanovisko('energetika');
+            updateSelectedPreview(); // Update empty preview
         });
 
         function loadIdentity() {
-            var stored = localStorage.getItem('formIdentifikace');
-            if (stored) {
-                var data = JSON.parse(stored);
-                var osobyDB = { 
-                    'FO': { name: 'Aleš Krupa', type: 'FO', birthDate: '19.04.1968' }, 
-                    'OSVC': { name: 'Ing. Aleš Krupa', type: 'OSVČ', ico: '15104418' }, 
-                    'PO_ALMANI': { name: 'ALMANI s.r.o.', type: 'PO', ico: '28765432' }, 
-                    'PO_PRVNI': { name: 'První projektová a.s.', type: 'PO', ico: '45678901' } 
-                };
-                var osoba = osobyDB[data.identity];
-                if (osoba) {
-                    document.getElementById('headerUserName').textContent = osoba.name.toUpperCase();
-                    document.getElementById('headerUserDetail').textContent = osoba.type + (osoba.ico ? ' · IČO: ' + osoba.ico : ' · Nar.: ' + osoba.birthDate);
-                }
+            // Kontrola přihlášení
+            if (!PortalStavebnika.isLoggedIn()) {
+                window.location.href = '../index.html';
+                return;
             }
+            
+            // Načtení hlavičky přes HeaderHelper
+            HeaderHelper.loadHeaderData();
         }
 
         function selectJES(el, value) {

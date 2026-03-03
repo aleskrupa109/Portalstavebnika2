@@ -69,9 +69,17 @@
         .gov-header-nav { padding: 0 40px; }
         .gov-header-nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; }
         .gov-nav-menu { display: flex; list-style: none; }
-        .gov-nav-link { display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-top: 3px solid transparent; }
+        .gov-nav-link {
+            position: relative; display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-top: 3px solid transparent; }
         .gov-nav-link:hover { background: rgba(255,255,255,0.1); }
         .gov-nav-link.active { border-top-color: #fff; }
+        .gov-nav-link.disabled { color: rgba(255, 255, 255, 0.4); cursor: default; pointer-events: none; }
+        .gov-nav-link[data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #1a1a2e; color: #fff; padding: 10px 14px; border-radius: 6px; font-size: 12px; font-weight: 400; text-transform: none; letter-spacing: 0; white-space: normal; width: 280px; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-top: 8px; }
+        .gov-nav-link[data-tooltip]:hover::before { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-bottom-color: #1a1a2e; margin-top: -4px; z-index: 1001; }
+        .gov-nav-cta { display: flex; align-items: center; gap: 8px; padding: 8px 16px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; position: relative; }
+        .gov-nav-cta svg { width: 18px; height: 18px; }
+        .gov-nav-cta[data-tooltip]:hover::after { content: attr(data-tooltip); position: absolute; top: 100%; right: 0; background: #1a1a2e; color: #fff; padding: 10px 14px; border-radius: 6px; font-size: 12px; font-weight: 400; text-transform: none; letter-spacing: 0; white-space: normal; width: 320px; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-top: 8px; }
+        .gov-nav-cta[data-tooltip]:hover::before { content: ''; position: absolute; top: 100%; right: 20px; border: 6px solid transparent; border-bottom-color: #1a1a2e; margin-top: -4px; z-index: 1001; }
         .gov-nav-cta { display: flex; align-items: center; gap: 8px; padding: 8px 16px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; }
         .gov-nav-cta svg { width: 18px; height: 18px; }
 
@@ -271,13 +279,20 @@
         <nav class="gov-header-nav">
             <div class="gov-header-nav-content">
                 <ul class="gov-nav-menu">
-                    <li><a href="reza_implicitni.html" class="gov-nav-link">Úvod</a></li>
-                    <li><a href="prehled_zameru.html" class="gov-nav-link">Záměry</a></li>
-                    <li><a href="#" class="gov-nav-link">Řízení</a></li>
-                    <li><a href="#" class="gov-nav-link active">Žádosti</a></li>
-                    <li><a href="#" class="gov-nav-link">Stavby</a></li>
-                    <li><a href="#" class="gov-nav-link">Dokumentace</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Úvod</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Záměry</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Řízení</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Žádosti</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Stavby</a></li>
+                    <li><a href="#" class="gov-nav-link disabled">Dokumentace</a></li>
+                    <li><a href="reza_setup.html" class="gov-nav-link" data-tooltip="Simulace administrace elektronických plných mocí v Registru elektronického zastupování (REZA)">Plné moci</a></li>
                 </ul>
+                <a href="form_new.html" class="gov-nav-cta" data-tooltip="Simulace vytvoření nové žádosti o povolení stavby se strukturovanou dokumentací a oddělenou dokladovou částí, nebo hromadné žádosti o stanovisko dotčených orgánů">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    NOVÁ ŽÁDOST
+                </a>
             </div>
         </nav>
     </header>
@@ -502,15 +517,10 @@
         </div>
     </div>
 
+    <script src="../js/app-state.js"></script>
+    <script src="../js/header-helper.js"></script>
     <script>
         // === DATABÁZE ===
-        var osobyDB = {
-            'FO': { type: 'FO', typLabel: 'Fyzická osoba', name: 'Aleš Krupa', birthDate: '19.04.1968', address: 'Nad Štolou 1510/5, Praha 7, 170 00', ds: 'abc1234' },
-            'OSVC': { type: 'OSVČ', typLabel: 'OSVČ', name: 'Ing. Aleš Krupa', ico: '15104418', birthDate: '19.04.1968', address: 'Nad Štolou 1510/5, Praha 7, 170 00', ds: 'abc1234' },
-            'PO_ALMANI': { type: 'PO', typLabel: 'Právnická osoba', name: 'ALMANI s.r.o.', ico: '28765432', address: 'Vodičkova 710/31, Praha 1, 110 00', ds: 'xyz5678' },
-            'PO_PRVNI': { type: 'PO', typLabel: 'Právnická osoba', name: 'První projektová a.s.', ico: '45678901', address: 'Thákurova 531/4, Praha 6, 160 00', ds: 'ppj9012' }
-        };
-
         var zmocniteleDB = {
             'Město Beroun': { type: 'PO', typLabel: 'Právnická osoba', name: 'Město Beroun', ico: '00233129', address: 'Husovo nám. 68, Beroun, 266 01', ds: 'qbebvbr' },
             'ABC Development s.r.o.': { type: 'PO', typLabel: 'Právnická osoba', name: 'ABC Development s.r.o.', ico: '12345678', address: 'Pražská 123, Praha 1, 110 00', ds: 'dev1234' },
@@ -545,11 +555,18 @@
             zamerType: 'existujici',
             selectedZamer: null,
             availableZamery: [],
-            canCreateNew: true
+            canCreateNew: true,
+            currentUserData: null
         };
 
         // === INIT ===
         document.addEventListener('DOMContentLoaded', function() {
+            // Kontrola přihlášení
+            if (!PortalStavebnika.isLoggedIn()) {
+                window.location.href = '../index.html';
+                return;
+            }
+            
             loadIdentifikace();
             renderForm();
             updateDropdownInfo();
@@ -559,24 +576,63 @@
         });
 
         function loadIdentifikace() {
+            // Načtení hlavičky přes HeaderHelper
+            HeaderHelper.loadHeaderData();
+            
+            // Získání dat z centrálního stavu
+            var user = PortalStavebnika.getUser();
+            var identityKey = PortalStavebnika.getCurrentIdentityKey();
+            var identities = PortalStavebnika.getIdentities();
+            
+            // Sestavení dat aktuálního uživatele
+            var userData = {
+                type: 'FO',
+                typLabel: 'Fyzická osoba',
+                name: user.name,
+                birthDate: user.birthDate,
+                address: 'Adresa z registru',
+                ds: null
+            };
+            
+            if (identityKey === 'OSVC' && identities.OSVC) {
+                userData = {
+                    type: 'OSVČ',
+                    typLabel: 'OSVČ',
+                    name: identities.OSVC.name,
+                    ico: identities.OSVC.ico,
+                    birthDate: user.birthDate,
+                    address: identities.OSVC.address,
+                    ds: null
+                };
+            } else if (identityKey.startsWith('po_')) {
+                var company = identities.companies.find(function(c) { return c.id === identityKey; });
+                if (company) {
+                    userData = {
+                        type: 'PO',
+                        typLabel: 'Právnická osoba',
+                        name: company.name,
+                        ico: company.ico,
+                        address: company.address,
+                        ds: null
+                    };
+                }
+            }
+            
+            state.currentUserData = userData;
+            
+            // Načtení formIdentifikace z localStorage (pokud existuje)
             var stored = localStorage.getItem('formIdentifikace');
             if (stored) {
                 state.identifikace = JSON.parse(stored);
             } else {
                 // Default - stavebník sám
                 state.identifikace = {
-                    identity: 'FO',
+                    identity: identityKey,
                     isRepresentative: false,
                     authMethod: null,
                     selectedReza: null,
                     stavebnik: null
                 };
-            }
-            // Update header
-            var osoba = osobyDB[state.identifikace.identity];
-            if (osoba) {
-                document.getElementById('headerUserName').textContent = osoba.name.toUpperCase();
-                document.getElementById('headerUserDetail').textContent = osoba.type + (osoba.ico ? ' · IČO: ' + osoba.ico : ' · Nar.: ' + osoba.birthDate);
             }
         }
 
@@ -617,7 +673,7 @@
                 renderZastupce();
                 
                 // Řetězec zastoupení pro postoupenou PM
-                if (id.authMethod === 'reza' && id.selectedReza && id.selectedReza.jePostoupena) {
+                if (id.authMethod === 'reza' && id.selectedReza && id.selectedReza.postoupena) {
                     renderChain();
                 }
             }
@@ -629,15 +685,43 @@
             var tagsHtml = '';
 
             if (!id.isRepresentative) {
-                // Stavebník = přihlášená osoba
-                stavebnikData = osobyDB[id.identity];
+                // Stavebník = přihlášená osoba (z centrálního stavu)
+                stavebnikData = state.currentUserData;
             } else if (id.authMethod === 'reza' && id.selectedReza) {
                 // Stavebník = zmocnitel (nebo původní zmocnitel u postoupené PM)
                 var reza = id.selectedReza;
-                var stavebnikName = reza.jePostoupena && reza.puvodniZmocnitel ? reza.puvodniZmocnitel.name : reza.zmocnitel.name;
-                stavebnikData = zmocniteleDB[stavebnikName];
+                if (reza.postoupena && reza.puvodniZmocnitel) {
+                    stavebnikData = {
+                        type: reza.puvodniZmocnitel.ico ? 'PO' : 'FO',
+                        typLabel: reza.puvodniZmocnitel.ico ? 'Právnická osoba' : 'Fyzická osoba',
+                        name: reza.puvodniZmocnitel.name,
+                        ico: reza.puvodniZmocnitel.ico,
+                        birthDate: reza.puvodniZmocnitel.birthDate,
+                        address: reza.puvodniZmocnitel.address || 'Adresa z registru',
+                        ds: reza.puvodniZmocnitel.ds
+                    };
+                } else {
+                    stavebnikData = {
+                        type: reza.zmocnitel.ico ? 'PO' : 'FO',
+                        typLabel: reza.zmocnitel.ico ? 'Právnická osoba' : 'Fyzická osoba',
+                        name: reza.zmocnitel.name,
+                        ico: reza.zmocnitel.ico,
+                        birthDate: reza.zmocnitel.birthDate,
+                        address: reza.zmocnitel.address || 'Adresa z registru',
+                        ds: reza.zmocnitel.ds
+                    };
+                }
             } else if (id.stavebnik) {
-                stavebnikData = zmocniteleDB[id.stavebnik.name];
+                // Stavebník z papírového zmocnění
+                stavebnikData = {
+                    type: id.stavebnik.type === 'PO' ? 'PO' : 'FO',
+                    typLabel: id.stavebnik.type === 'PO' ? 'Právnická osoba' : 'Fyzická osoba',
+                    name: id.stavebnik.name,
+                    ico: id.stavebnik.ico,
+                    birthDate: id.stavebnik.birthDate,
+                    address: id.stavebnik.address || 'Adresa z registru',
+                    ds: id.stavebnik.ds
+                };
             }
 
             if (!stavebnikData) return;
@@ -672,18 +756,19 @@
 
         function renderZastupce() {
             var id = state.identifikace;
-            var zastupceData = osobyDB[id.identity];
+            // Zástupce = přihlášená osoba (z centrálního stavu)
+            var zastupceData = state.currentUserData;
             var tagsHtml = '';
             var titleText = 'Identifikační údaje zástupce';
 
             if (id.authMethod === 'reza' && id.selectedReza) {
                 var reza = id.selectedReza;
-                var roleLabel = reza.typZmocneni === 'povereni' ? 'pověřené osoby' : 'zástupce';
+                var roleLabel = reza.type === 'povereni' ? 'pověřené osoby' : 'zástupce';
                 titleText = 'Identifikační údaje ' + roleLabel;
                 
-                tagsHtml = '<span class="gov-tag gov-tag-' + (reza.typZmocneni === 'povereni' ? 'povereni' : 'plna-moc') + '">' + (reza.typZmocneni === 'povereni' ? 'Pověření' : 'Plná moc') + '</span>';
+                tagsHtml = '<span class="gov-tag gov-tag-' + (reza.type === 'povereni' ? 'povereni' : 'plna-moc') + '">' + (reza.type === 'povereni' ? 'Pověření' : 'Plná moc') + '</span>';
                 tagsHtml += '<span class="gov-tag gov-tag-reza">REZA</span>';
-                if (reza.jePostoupena) tagsHtml += '<span class="gov-tag" style="background:#fff3e0;color:#e65100;">Postoupená</span>';
+                if (reza.postoupena) tagsHtml += '<span class="gov-tag" style="background:#fff3e0;color:#e65100;">Postoupená</span>';
             } else if (id.authMethod === 'paper') {
                 var roleLabel = id.repType === 'authorized' ? 'pověřené osoby' : 'zástupce';
                 titleText = 'Identifikační údaje ' + roleLabel;
@@ -692,6 +777,8 @@
 
             document.getElementById('zastupceBlockTitle').textContent = titleText;
             document.getElementById('zastupceTags').innerHTML = tagsHtml;
+
+            if (!zastupceData) return;
 
             // Data grid
             var html = '<div class="gov-data-section"><div class="gov-data-section-title">Údaje z registru</div><div class="gov-data-grid">';
@@ -720,10 +807,11 @@
         function renderChain() {
             var id = state.identifikace;
             var reza = id.selectedReza;
-            if (!reza || !reza.jePostoupena || !reza.puvodniZmocnitel) return;
+            if (!reza || !reza.postoupena || !reza.puvodniZmocnitel) return;
 
             document.getElementById('chainBox').style.display = 'block';
-            var zastupce = osobyDB[id.identity];
+            // Zástupce = přihlášená osoba (z centrálního stavu)
+            var zastupce = state.currentUserData;
             
             var html = '<div class="gov-chain-item"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>' + reza.puvodniZmocnitel.name + '</div>';
             html += '<span class="gov-chain-arrow">→</span>';
@@ -746,11 +834,20 @@
                 state.availableZamery = zameryDB[id.identity] || [];
             } else if (id.authMethod === 'reza' && id.selectedReza) {
                 var reza = id.selectedReza;
-                var stavebnikName = reza.jePostoupena && reza.puvodniZmocnitel ? reza.puvodniZmocnitel.name : reza.zmocnitel.name;
+                var stavebnikName = reza.postoupena && reza.puvodniZmocnitel ? reza.puvodniZmocnitel.name : reza.zmocnitel.name;
                 
                 if (reza.zamery && reza.zamery.length > 0) {
                     state.canCreateNew = false;
-                    state.availableZamery = reza.zamery.map(function(z) { return { id: z.id, nazev: z.nazev, adresa: '-', stav: 'aktivni' }; });
+                    // Záměry jsou uloženy jako stringy "Z/2026/123456 – Název záměru"
+                    state.availableZamery = reza.zamery.map(function(z) {
+                        // Pokud je to string, parsovat
+                        if (typeof z === 'string') {
+                            var parts = z.split(' – ');
+                            return { id: parts[0] || z, nazev: parts[1] || 'Záměr', adresa: '-', stav: 'aktivni' };
+                        }
+                        // Pokud je to objekt, použít přímo
+                        return { id: z.id || z.cislo || '-', nazev: z.nazev || 'Záměr', adresa: z.adresa || '-', stav: 'aktivni' };
+                    });
                 } else {
                     state.availableZamery = zameryDB.stavebnik[stavebnikName] || [];
                 }
@@ -858,17 +955,18 @@
         });
 
         function updateDropdownInfo() {
-            var id = state.identifikace;
-            var osoba = osobyDB[id.identity];
-            if (!osoba) return;
+            // Dropdown info je již načteno přes HeaderHelper v loadIdentifikace()
+            // Tato funkce je ponechána pro zpětnou kompatibilitu
+            var userData = state.currentUserData;
+            if (!userData) return;
             
             var dropdownName = document.getElementById('dropdownName');
             var dropdownDetail = document.getElementById('dropdownDetail');
             var dropdownBadge = document.getElementById('dropdownBadge');
             
-            if (dropdownName) dropdownName.textContent = osoba.name;
-            if (dropdownDetail) dropdownDetail.textContent = osoba.type === 'PO' ? 'IČO: ' + osoba.ico : 'Nar.: ' + osoba.birthDate;
-            if (dropdownBadge) dropdownBadge.textContent = osoba.typLabel;
+            if (dropdownName) dropdownName.textContent = userData.name;
+            if (dropdownDetail) dropdownDetail.textContent = userData.type === 'PO' ? 'IČO: ' + userData.ico : 'Nar.: ' + userData.birthDate;
+            if (dropdownBadge) dropdownBadge.textContent = userData.typLabel;
         }
     </script>
 </body>
