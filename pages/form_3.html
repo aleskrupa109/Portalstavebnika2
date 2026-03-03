@@ -6,7 +6,31 @@
     <title>Typ stavby | Portál stavebníka 2.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .gov-header { background: #2c5a8c; position: sticky; top: 0; z-index: 1000; }
+        :root {
+            --gov-primary: #2c5a8c;
+            --gov-primary-600: #2362a2;
+            --gov-primary-700: #1e5086;
+            --gov-primary-100: #e5eef9;
+            --gov-primary-50: #f3f7fc;
+            --gov-neutral-0: #ffffff;
+            --gov-neutral-50: #f6f6f6;
+            --gov-neutral-100: #e7e7e7;
+            --gov-neutral-200: #d1d1d1;
+            --gov-neutral-300: #b0b0b0;
+            --gov-neutral-400: #888888;
+            --gov-neutral-500: #6d6d6d;
+            --gov-neutral-600: #5a5a5a;
+            --gov-neutral-700: #4f4f4f;
+            --gov-neutral-900: #3b3b3b;
+            --gov-radius: 4px;
+            --gov-radius-lg: 8px;
+            --gov-font: 'Roboto', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--gov-font); background: var(--gov-neutral-50); color: var(--gov-neutral-900); line-height: 1.5; }
+
+        /* ===== HEADER ===== */
+        .gov-header { background: var(--gov-primary); position: sticky; top: 0; z-index: 1000; }
         .gov-header-top { padding: 14px 40px; }
         .gov-header-top-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
         .gov-header-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; }
@@ -36,6 +60,11 @@
         .gov-nav-link { display: block; padding: 14px 20px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; border-top: 3px solid transparent; }
         .gov-nav-link:hover { background: rgba(255,255,255,0.1); }
         .gov-nav-link.disabled { color: rgba(255,255,255,0.4); pointer-events: none; }
+
+        /* ===== PAGE LAYOUT ===== */
+        .gov-page { max-width: 1060px; margin: 0 auto; padding: 32px 24px; }
+        .gov-layout { display: flex; gap: 32px; align-items: flex-start; }
+        .gov-main { flex: 1; min-width: 0; }
 
         /* ===== SIDEBAR ===== */
         .gov-sidebar { width: 320px; flex-shrink: 0; position: sticky; top: 120px; }
@@ -993,11 +1022,12 @@ h1 {
         </nav>
     </header>
     <div class="gov-page">
+        <div class="gov-page-header">
+            <h1>Typ stavby</h1>
+        </div>
+
         <div class="gov-layout">
             <main class="gov-main">
-                <div class="gov-page-header">
-                    <h1>Typ stavby</h1>
-                </div>
                 <div class="gov-card">
                     <div class="section">
     <p class="gov-card-title" style="font-size: 13px; font-weight: 600; color: #2c5a8c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Krok 1: Výběr typu záměru</p>
