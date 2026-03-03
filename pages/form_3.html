@@ -63,15 +63,7 @@
   --gov-font: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 * { box-sizing: border-box; font-style: normal !important; }
-body {
-  font-family: var(--gov-font);
-  background: #f5f5f5;
-  margin: 0;
-  padding: 24px;
-  padding-bottom: 80px;
-  color: var(--gov-neutral-900);
-  line-height: 1.5;
-}
+body { font-family: var(--gov-font); background: var(--gov-neutral-50); color: var(--gov-neutral-900); line-height: 1.5; margin: 0; }
 .container {
   max-width: 900px;
   margin: 0 auto;
@@ -988,14 +980,13 @@ h1 {
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="gov-page">
       <div class="gov-layout">
 <div class="gov-main">
-      <h1>Založení záměru</h1>
-      <p class="subtitle">Krok 2 ze 4 – Typ stavby</p>
+      <h1 style="font-size: 24px; font-weight: 500; margin: 0 0 24px 0;">Typ stavby</h1>
   
       <div class="section">
-    <p class="gov-step-label">Krok 1: Výběr typu záměru</p>
+    <p class="gov-card-title" style="font-size: 13px; font-weight: 600; color: #2c5a8c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Krok 1: Výběr typu záměru</p>
     
     <div class="quick-tags">
       <button class="quick-tag" onclick="selectQuickTag('rd')">
@@ -1121,7 +1112,7 @@ h1 {
     
     <!-- Ruční výběr pro "Jiný záměr" -->
     <div id="manualTypeSection">
-      <p class="gov-step-label" style="margin-top: 16px;">Krok 2: Upřesnění typu stavby</p>
+      <p class="gov-card-title" style="font-size: 13px; font-weight: 600; color: #2c5a8c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;" style="margin-top: 16px;">Krok 2: Upřesnění typu stavby</p>
       
       <!-- Typ stavby -->
       <div class="type-selection">
@@ -1604,7 +1595,7 @@ h1 {
   <!-- Formulář - název a popis -->
   <div id="formFieldsSection">
     <div class="section">
-      <p class="gov-step-label">Krok 3: Základní údaje</p>
+      <p class="gov-card-title" style="font-size: 13px; font-weight: 600; color: #2c5a8c; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Krok 3: Základní údaje</p>
       
       <div class="form-group">
         <label class="label label-required">Název záměru</label>
@@ -1771,29 +1762,6 @@ var appState = {
   currentStep: 1
 };
 
-function {
-  appState.currentStep = step;
-  
-  for (var i = 1; i <= 3; i++) {
-
-    if (!stepEl) continue;
-    
-    stepEl.classList.remove('active', 'completed');
-    
-    if (i < step) {
-      stepEl.classList.add('completed');
-    } else if (i === step) {
-      stepEl.classList.add('active');
-    }
-  }
-}
-
-function {
-
-  if (descEl) {
-    descEl.textContent = text;
-  }
-}
 // Výběr quick tagu
 function selectQuickTag(tagId) {
   var config = quickTagConfig[tagId];
