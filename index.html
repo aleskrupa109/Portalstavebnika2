@@ -710,5 +710,21 @@
             }
         });
     </script>
+
+    <!-- Počítadlo návštěv -->
+    <script>
+    (function() {
+        // Počítat pouze jednou za session
+        if (!sessionStorage.getItem('counted')) {
+            fetch('https://api.countapi.xyz/hit/portal-stavebnika-2-desu/visits')
+                .then(function(r) { return r.json(); })
+                .then(function(data) { 
+                    console.log('Návštěva č.:', data.value);
+                })
+                .catch(function() {});
+            sessionStorage.setItem('counted', '1');
+        }
+    })();
+    </script>
 </body>
 </html>
