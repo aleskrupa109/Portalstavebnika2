@@ -711,20 +711,7 @@
         });
     </script>
 
-    <!-- Počítadlo návštěv -->
-    <script>
-    (function() {
-        // Počítat pouze jednou za session
-        if (!sessionStorage.getItem('counted')) {
-            fetch('https://api.countapi.xyz/hit/portal-stavebnika-2-desu/visits')
-                .then(function(r) { return r.json(); })
-                .then(function(data) { 
-                    console.log('Návštěva č.:', data.value);
-                })
-                .catch(function() {});
-            sessionStorage.setItem('counted', '1');
-        }
-    })();
-    </script>
+    <!-- Počítadlo návštěv (hits.seeyoufarm.com) -->
+    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fdesu-cz.github.io%2Fportal-stavebnika-2%2F&count_bg=%23FFFFFF&title_bg=%23FFFFFF&icon=&icon_color=%23FFFFFF&title=&edge_flat=true" style="display:none" alt="">
 </body>
 </html>
